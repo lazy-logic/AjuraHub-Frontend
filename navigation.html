@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TalentConnect Africa - Navigation Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .logo .material-icons {
+            font-size: 3rem;
+            color: #6366f1;
+        }
+
+        .title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #6b7280;
+            margin-bottom: 8px;
+        }
+
+        .description {
+            font-size: 0.9rem;
+            color: #9ca3af;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .navigation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-top: 40px;
+        }
+
+        .nav-section {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e5e7eb;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .section-title .material-icons {
+            font-size: 1.5rem;
+            color: #6366f1;
+        }
+
+        .nav-links {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 12px 16px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: #4b5563;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            gap: 10px;
+        }
+
+        .nav-link:hover {
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.3);
+        }
+
+        .nav-link .material-icons {
+            font-size: 1.2rem;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-left: auto;
+        }
+
+        .status-ready {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-development {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .footer {
+            margin-top: 40px;
+            text-align: center;
+            padding-top: 24px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .footer-text {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        .server-info {
+            background: #f3f4f6;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .server-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: #059669;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #10b981;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .title {
+                font-size: 2rem;
+            }
+            
+            .navigation-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">
+                <span class="material-icons">hub</span>
+                <div>
+                    <div class="title">TalentConnect Africa</div>
+                </div>
+            </div>
+            <div class="subtitle">Development Navigation Hub</div>
+            <div class="description">
+                Quick access to all application pages for development and testing purposes. 
+                Click on any link below to navigate directly to that page.
+            </div>
+        </div>
+
+        <div class="server-info">
+            <div class="server-status">
+                <span class="status-dot"></span>
+                Development Server Running on http://localhost:8000
+            </div>
+        </div>
+
+        <div class="navigation-grid">
+            <!-- Authentication Pages -->
+            <div class="nav-section">
+                <div class="section-title">
+                    <span class="material-icons">lock</span>
+                    Authentication
+                </div>
+                <div class="nav-links">
+                    <a href="http://localhost:8000/login" class="nav-link" target="_blank">
+                        <span class="material-icons">login</span>
+                        Login Page
+                        <span class="status-badge status-ready">Ready</span>
+                    </a>
+                    <a href="http://localhost:8000/signup" class="nav-link" target="_blank">
+                        <span class="material-icons">person_add</span>
+                        Sign Up Page
+                        <span class="status-badge status-ready">Ready</span>
+                    </a>
+                    <a href="http://localhost:8000/reset-password" class="nav-link" target="_blank">
+                        <span class="material-icons">key</span>
+                        Reset Password
+                        <span class="status-badge status-ready">Ready</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Main Application Pages -->
+            <div class="nav-section">
+                <div class="section-title">
+                    <span class="material-icons">home</span>
+                    Main Pages
+                </div>
+                <div class="nav-links">
+                    <a href="http://localhost:8000/" class="nav-link" target="_blank">
+                        <span class="material-icons">home</span>
+                        Home Page
+                        <span class="status-badge status-ready">Ready</span>
+                    </a>
+                    <a href="http://localhost:8000/about" class="nav-link" target="_blank">
+                        <span class="material-icons">info</span>
+                        About Us
+                        <span class="status-badge status-ready">Ready</span>
+                    </a>
+                    <a href="http://localhost:8000/how-it-works" class="nav-link" target="_blank">
+                        <span class="material-icons">help_outline</span>
+                        How It Works
+                        <span class="status-badge status-ready">Ready</span>
+                    </a>
+                    <a href="http://localhost:8000/contact" class="nav-link" target="_blank">
+                        <span class="material-icons">contact_mail</span>
+                        Contact Us
+                        <span class="status-badge status-ready">Ready</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Job & Search Pages -->
+            <div class="nav-section">
+                <div class="section-title">
+                    <span class="material-icons">work</span>
+                    Jobs & Search
+                </div>
+                <div class="nav-links">
+                    <a href="http://localhost:8000/search" class="nav-link" target="_blank">
+                        <span class="material-icons">search</span>
+                        Search Page
+                        <span class="status-badge status-ready">Ready</span>
+                    </a>
+                    <a href="http://localhost:8000/jobs" class="nav-link" target="_blank">
+                        <span class="material-icons">work</span>
+                        Jobs Listing
+                        <span class="status-badge status-ready">Ready</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Dashboard Pages -->
+            <div class="nav-section">
+                <div class="section-title">
+                    <span class="material-icons">dashboard</span>
+                    Dashboards
+                </div>
+                <div class="nav-links">
+                    <a href="http://localhost:8000/dashboard" class="nav-link" target="_blank">
+                        <span class="material-icons">dashboard</span>
+                        Main Dashboard
+                        <span class="status-badge status-ready">Ready</span>
+                    </a>
+                    <a href="http://localhost:8000/employer/dashboard" class="nav-link" target="_blank">
+                        <span class="material-icons">business</span>
+                        Employer Dashboard
+                        <span class="status-badge status-ready">Ready</span>
+                    </a>
+                    <a href="http://localhost:8000/institution/dashboard" class="nav-link" target="_blank">
+                        <span class="material-icons">school</span>
+                        Institution Dashboard
+                        <span class="status-badge status-development">Dev</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Employer Features -->
+            <div class="nav-section">
+                <div class="section-title">
+                    <span class="material-icons">business</span>
+                    Employer Features
+                </div>
+                <div class="nav-links">
+                    <a href="http://localhost:8000/employer/post-job" class="nav-link" target="_blank">
+                        <span class="material-icons">post_add</span>
+                        Post Job
+                        <span class="status-badge status-ready">Ready</span>
+                    </a>
+                    <a href="http://localhost:8000/employer/job/applications" class="nav-link" target="_blank">
+                        <span class="material-icons">assignment</span>
+                        Application Tracking
+                        <span class="status-badge status-ready">Ready</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Institution Features -->
+            <div class="nav-section">
+                <div class="section-title">
+                    <span class="material-icons">school</span>
+                    Institution Features
+                </div>
+                <div class="nav-links">
+                    <a href="http://localhost:8000/institution/program-listing" class="nav-link" target="_blank">
+                        <span class="material-icons">list_alt</span>
+                        Program Listing
+                        <span class="status-badge status-development">Dev</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- User Features -->
+            <div class="nav-section">
+                <div class="section-title">
+                    <span class="material-icons">person</span>
+                    User Features
+                </div>
+                <div class="nav-links">
+                    <a href="http://localhost:8000/profile" class="nav-link" target="_blank">
+                        <span class="material-icons">account_circle</span>
+                        User Profile
+                        <span class="status-badge status-development">Dev</span>
+                    </a>
+                    <a href="http://localhost:8000/trainee/profile" class="nav-link" target="_blank">
+                        <span class="material-icons">person</span>
+                        Trainee Profile
+                        <span class="status-badge status-development">Dev</span>
+                    </a>
+                    <a href="http://localhost:8000/messages" class="nav-link" target="_blank">
+                        <span class="material-icons">message</span>
+                        Messaging
+                        <span class="status-badge status-ready">Ready</span>
+                    </a>
+                    <a href="http://localhost:8000/settings/notifications" class="nav-link" target="_blank">
+                        <span class="material-icons">notifications</span>
+                        Notification Settings
+                        <span class="status-badge status-ready">Ready</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Admin Features -->
+            <div class="nav-section">
+                <div class="section-title">
+                    <span class="material-icons">admin_panel_settings</span>
+                    Admin Features
+                </div>
+                <div class="nav-links">
+                    <a href="http://localhost:8000/admin/users" class="nav-link" target="_blank">
+                        <span class="material-icons">manage_accounts</span>
+                        User Management
+                        <span class="status-badge status-ready">Ready</span>
+                    </a>
+                    <a href="http://localhost:8000/help" class="nav-link" target="_blank">
+                        <span class="material-icons">help</span>
+                        Help & Support
+                        <span class="status-badge status-ready">Ready</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="footer-text">
+                <strong>TalentConnect Africa Development Hub</strong><br>
+                This navigation page is designed for development and testing purposes.<br>
+                Make sure your development server is running on <code>http://localhost:8000</code>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Add click analytics for development
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                const pageName = this.textContent.trim().replace(/\s+/g, ' ');
+                console.log(`🔗 Navigating to: ${pageName} - ${this.href}`);
+            });
+        });
+
+        // Check if server is running
+        function checkServerStatus() {
+            fetch('http://localhost:8000/')
+                .then(response => {
+                    if (response.ok) {
+                        document.querySelector('.server-status').style.color = '#059669';
+                        document.querySelector('.status-dot').style.background = '#10b981';
+                    }
+                })
+                .catch(() => {
+                    document.querySelector('.server-status').style.color = '#dc2626';
+                    document.querySelector('.status-dot').style.background = '#ef4444';
+                    document.querySelector('.server-status').innerHTML = 
+                        '<span class="status-dot"></span>Development Server Offline - Please start the server';
+                });
+        }
+
+        // Check server status on load
+        checkServerStatus();
+        
+        // Recheck every 30 seconds
+        setInterval(checkServerStatus, 30000);
+    </script>
+</body>
+</html>
