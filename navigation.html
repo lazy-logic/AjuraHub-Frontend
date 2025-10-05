@@ -148,6 +148,17 @@
             color: #92400e;
         }
 
+        .status-new {
+            background: #ddd6fe;
+            color: #5b21b6;
+            animation: pulse-new 2s infinite;
+        }
+
+        @keyframes pulse-new {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
         .footer {
             margin-top: 40px;
             text-align: center;
@@ -233,7 +244,7 @@
             <div class="nav-section">
                 <div class="section-title">
                     <span class="material-icons">lock</span>
-                    Authentication
+                    Authentication & User Management
                 </div>
                 <div class="nav-links">
                     <a href="http://localhost:8000/login" class="nav-link" target="_blank">
@@ -246,10 +257,30 @@
                         Sign Up Page
                         <span class="status-badge status-ready">Ready</span>
                     </a>
+                    <a href="http://localhost:8000/user-registration-1" class="nav-link" target="_blank">
+                        <span class="material-icons">how_to_reg</span>
+                        Registration Step 1
+                        <span class="status-badge status-new">NEW</span>
+                    </a>
+                    <a href="http://localhost:8000/user-registration-2" class="nav-link" target="_blank">
+                        <span class="material-icons">account_circle</span>
+                        Registration Step 2
+                        <span class="status-badge status-new">NEW</span>
+                    </a>
+                    <a href="http://localhost:8000/forgot-password" class="nav-link" target="_blank">
+                        <span class="material-icons">lock_reset</span>
+                        Forgot Password
+                        <span class="status-badge status-new">NEW</span>
+                    </a>
                     <a href="http://localhost:8000/reset-password" class="nav-link" target="_blank">
                         <span class="material-icons">key</span>
                         Reset Password
-                        <span class="status-badge status-ready">Ready</span>
+                        <span class="status-badge status-new">NEW</span>
+                    </a>
+                    <a href="http://localhost:8000/account-verification" class="nav-link" target="_blank">
+                        <span class="material-icons">verified_user</span>
+                        Account Verification
+                        <span class="status-badge status-new">NEW</span>
                     </a>
                 </div>
             </div>
@@ -284,25 +315,7 @@
                 </div>
             </div>
 
-            <!-- Job & Search Pages -->
-            <div class="nav-section">
-                <div class="section-title">
-                    <span class="material-icons">work</span>
-                    Jobs & Search
-                </div>
-                <div class="nav-links">
-                    <a href="http://localhost:8000/search" class="nav-link" target="_blank">
-                        <span class="material-icons">search</span>
-                        Search Page
-                        <span class="status-badge status-ready">Ready</span>
-                    </a>
-                    <a href="http://localhost:8000/jobs" class="nav-link" target="_blank">
-                        <span class="material-icons">work</span>
-                        Jobs Listing
-                        <span class="status-badge status-ready">Ready</span>
-                    </a>
-                </div>
-            </div>
+
 
             <!-- Dashboard Pages -->
             <div class="nav-section">
@@ -364,11 +377,11 @@
                 </div>
             </div>
 
-            <!-- User Features -->
+            <!-- Trainee/Candidate Pages -->
             <div class="nav-section">
                 <div class="section-title">
                     <span class="material-icons">person</span>
-                    User Features
+                    Trainee/Candidate Pages
                 </div>
                 <div class="nav-links">
                     <a href="http://localhost:8000/profile" class="nav-link" target="_blank">
@@ -381,15 +394,140 @@
                         Trainee Profile
                         <span class="status-badge status-development">Dev</span>
                     </a>
+                    <a href="http://localhost:8000/trainee-onboarding-availability" class="nav-link" target="_blank">
+                        <span class="material-icons">schedule</span>
+                        Availability Setup
+                        <span class="status-badge status-new">NEW</span>
+                    </a>
+                    <a href="http://localhost:8000/trainee-onboarding-portfolio" class="nav-link" target="_blank">
+                        <span class="material-icons">folder</span>
+                        Portfolio Upload
+                        <span class="status-badge status-new">NEW</span>
+                    </a>
+                    <a href="http://localhost:8000/application-submission-confirmation" class="nav-link" target="_blank">
+                        <span class="material-icons">check_circle</span>
+                        Application Confirmation
+                        <span class="status-badge status-new">NEW</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Job & Application Management -->
+            <div class="nav-section">
+                <div class="section-title">
+                    <span class="material-icons">work</span>
+                    Job & Application Management
+                </div>
+                <div class="nav-links">
+                    <a href="http://localhost:8000/search" class="nav-link" target="_blank">
+                        <span class="material-icons">search</span>
+                        Search Page
+                        <span class="status-badge status-ready">Ready</span>
+                    </a>
+                    <a href="http://localhost:8000/jobs" class="nav-link" target="_blank">
+                        <span class="material-icons">work</span>
+                        Jobs Listing
+                        <span class="status-badge status-ready">Ready</span>
+                    </a>
+                    <a href="http://localhost:8000/detailed-company-view" class="nav-link" target="_blank">
+                        <span class="material-icons">business</span>
+                        Company Details
+                        <span class="status-badge status-new">NEW</span>
+                    </a>
+                    <a href="http://localhost:8000/training-program-directory" class="nav-link" target="_blank">
+                        <span class="material-icons">school</span>
+                        Training Directory
+                        <span class="status-badge status-new">NEW</span>
+                    </a>
+                    <a href="http://localhost:8000/training-program-application" class="nav-link" target="_blank">
+                        <span class="material-icons">assignment</span>
+                        Training Application
+                        <span class="status-badge status-new">NEW</span>
+                    </a>
+                    <a href="http://localhost:8000/detailed-training-program-view" class="nav-link" target="_blank">
+                        <span class="material-icons">info</span>
+                        Program Details
+                        <span class="status-badge status-new">NEW</span>
+                    </a>
+                    <a href="http://localhost:8000/post-training-program" class="nav-link" target="_blank">
+                        <span class="material-icons">post_add</span>
+                        Post Training Program
+                        <span class="status-badge status-new">NEW</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Communication & Interviews -->
+            <div class="nav-section">
+                <div class="section-title">
+                    <span class="material-icons">message</span>
+                    Communication & Interviews
+                </div>
+                <div class="nav-links">
                     <a href="http://localhost:8000/messages" class="nav-link" target="_blank">
                         <span class="material-icons">message</span>
                         Messaging
                         <span class="status-badge status-ready">Ready</span>
                     </a>
+                    <a href="http://localhost:8000/interview-booking-scheduling" class="nav-link" target="_blank">
+                        <span class="material-icons">event</span>
+                        Interview Scheduling
+                        <span class="status-badge status-new">NEW</span>
+                    </a>
+                    <a href="http://localhost:8000/notification-center" class="nav-link" target="_blank">
+                        <span class="material-icons">notifications</span>
+                        Notification Center
+                        <span class="status-badge status-new">NEW</span>
+                    </a>
+                    <a href="http://localhost:8000/in-app-messaging-interface" class="nav-link" target="_blank">
+                        <span class="material-icons">chat</span>
+                        Enhanced Messaging
+                        <span class="status-badge status-new">NEW</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Experience & Management -->
+            <div class="nav-section">
+                <div class="section-title">
+                    <span class="material-icons">trending_up</span>
+                    Experience & Management
+                </div>
+                <div class="nav-links">
+                    <a href="http://localhost:8000/immersion-experience-feedback" class="nav-link" target="_blank">
+                        <span class="material-icons">feedback</span>
+                        Experience Feedback
+                        <span class="status-badge status-new">NEW</span>
+                    </a>
+                    <a href="http://localhost:8000/immersion-management-tracking" class="nav-link" target="_blank">
+                        <span class="material-icons">track_changes</span>
+                        Management Tracking
+                        <span class="status-badge status-new">NEW</span>
+                    </a>
+                    <a href="http://localhost:8000/edit-staff-details" class="nav-link" target="_blank">
+                        <span class="material-icons">edit</span>
+                        Edit Staff Details
+                        <span class="status-badge status-new">NEW</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- User Settings -->
+            <div class="nav-section">
+                <div class="section-title">
+                    <span class="material-icons">settings</span>
+                    User Settings
+                </div>
+                <div class="nav-links">
                     <a href="http://localhost:8000/settings/notifications" class="nav-link" target="_blank">
                         <span class="material-icons">notifications</span>
                         Notification Settings
                         <span class="status-badge status-ready">Ready</span>
+                    </a>
+                    <a href="http://localhost:8000/user-settings-profile-management" class="nav-link" target="_blank">
+                        <span class="material-icons">manage_accounts</span>
+                        Profile Management
+                        <span class="status-badge status-new">NEW</span>
                     </a>
                 </div>
             </div>
@@ -406,6 +544,16 @@
                         User Management
                         <span class="status-badge status-ready">Ready</span>
                     </a>
+                    <a href="http://localhost:8000/admin-onboarding" class="nav-link" target="_blank">
+                        <span class="material-icons">onboarding</span>
+                        Admin Onboarding
+                        <span class="status-badge status-new">NEW</span>
+                    </a>
+                    <a href="http://localhost:8000/email-template-system" class="nav-link" target="_blank">
+                        <span class="material-icons">email</span>
+                        Email Templates
+                        <span class="status-badge status-new">NEW</span>
+                    </a>
                     <a href="http://localhost:8000/help" class="nav-link" target="_blank">
                         <span class="material-icons">help</span>
                         Help & Support
@@ -415,11 +563,38 @@
             </div>
         </div>
 
+        <!-- Summary Statistics -->
+        <div class="nav-section" style="grid-column: 1 / -1; margin-top: 20px;">
+            <div class="section-title">
+                <span class="material-icons">analytics</span>
+                Development Statistics
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-top: 16px;">
+                <div style="background: #f0fdf4; padding: 16px; border-radius: 12px; text-align: center; border: 1px solid #bbf7d0;">
+                    <div style="font-size: 2rem; font-weight: 700; color: #166534;">17</div>
+                    <div style="font-size: 0.9rem; color: #166534;">New Pages Created</div>
+                </div>
+                <div style="background: #fef3c7; padding: 16px; border-radius: 12px; text-align: center; border: 1px solid #fde68a;">
+                    <div style="font-size: 2rem; font-weight: 700; color: #92400e;">5</div>
+                    <div style="font-size: 0.9rem; color: #92400e;">Authentication Pages</div>
+                </div>
+                <div style="background: #ddd6fe; padding: 16px; border-radius: 12px; text-align: center; border: 1px solid #c4b5fd;">
+                    <div style="font-size: 2rem; font-weight: 700; color: #5b21b6;">8</div>
+                    <div style="font-size: 0.9rem; color: #5b21b6;">Application Management</div>
+                </div>
+                <div style="background: #e0f2fe; padding: 16px; border-radius: 12px; text-align: center; border: 1px solid #b3e5fc;">
+                    <div style="font-size: 2rem; font-weight: 700; color: #0277bd;">4</div>
+                    <div style="font-size: 0.9rem; color: #0277bd;">Admin & Settings</div>
+                </div>
+            </div>
+        </div>
+
         <div class="footer">
             <div class="footer-text">
                 <strong>TalentConnect Africa Development Hub</strong><br>
                 This navigation page is designed for development and testing purposes.<br>
-                Make sure your development server is running on <code>http://localhost:8000</code>
+                Make sure your development server is running on <code>http://localhost:8000</code><br>
+                <span style="color: #5b21b6; font-weight: 600;">🆕 17 New Pages Added - Look for the "NEW" badges!</span>
             </div>
         </div>
     </div>

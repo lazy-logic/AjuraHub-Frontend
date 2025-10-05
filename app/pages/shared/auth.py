@@ -4,7 +4,7 @@ Authentication page for TalentConnect Africa, matching the provided template.
 
 from nicegui import ui
 
-def auth_page(initial_tab: str = 'login'):
+def auth_page(initial_tab: str = 'login', role: str = 'candidate'):
     """Creates a single, tabbed authentication page for Login and Sign Up."""
     ui.add_head_html('''
         <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -259,7 +259,7 @@ def auth_page(initial_tab: str = 'login'):
                         _create_login_form()
 
                     with ui.tab_panel('signup').classes('p-0'):
-                        _create_signup_form(tabs)
+                        _create_signup_form(tabs, role)
 
 def _create_login_form():
     """Creates the modern login form with navigation."""
@@ -298,7 +298,7 @@ def _create_login_form():
             ui.label("Don't have an account?").classes('button-label brand-slate')
             ui.link('Sign Up', '/signup').classes('button-label brand-primary hover:opacity-80 transition-all duration-200')
 
-def _create_signup_form(tabs):
+def _create_signup_form(tabs, role='candidate'):
     """Creates the modern signup form with user type selection."""
     with ui.column().classes('w-full px-8 py-6 gap-4 pt-1'):
         # Welcome message
@@ -308,13 +308,13 @@ def _create_signup_form(tabs):
         # User type selection tabs
         with ui.column().classes('w-full mb-6'):
             ui.label('I am a:').classes('button-label brand-charcoal mb-3')
-            with ui.tabs().props('model-value=candidate').classes('w-full brand-light-mist rounded-xl p-1') as user_type_tabs:
+            with ui.tabs().props(f'model-value={role}').classes('w-full brand-light-mist rounded-xl p-1') as user_type_tabs:
                 candidate_tab = ui.tab('candidate', 'Candidate').classes('flex-1 button-label brand-slate')
                 employer_tab = ui.tab('employer', 'Employer').classes('flex-1 button-label brand-slate')
                 institution_tab = ui.tab('institution', 'Institution').classes('flex-1 button-label brand-slate')
             
             # Tab panels for different user types
-            with ui.tab_panels(user_type_tabs, value='candidate').classes('w-full'):
+            with ui.tab_panels(user_type_tabs, value=role).classes('w-full'):
                 # Candidate signup form
                 with ui.tab_panel('candidate'):
                     _create_candidate_form()
