@@ -1,7 +1,9 @@
 from nicegui import ui
-from app.state import app_state
+from app.services.auth_utils import is_authenticated, get_current_user, logout
 
-def header(current_page='/'):
+def add_global_styles():
+    """Add global styles - call this once per page that needs it"""
+    ui.add_head_html('<script src="https://cdn.tailwindcss.com"></script>')
     ui.add_head_html('''
     <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -196,8 +198,8 @@ def header(current_page='/'):
         .nav-dropdown-btn {
             background: transparent !important;
             border: none !important;
-            color: #4b5563 !important;
-            font-weight: 500 !important;
+            color: #334155 !important; /* slate-700 */
+            font-weight: 600 !important;
             font-family: 'Raleway', sans-serif !important;
             padding: 8px 12px !important;
             border-radius: 6px !important;
@@ -205,8 +207,8 @@ def header(current_page='/'):
         }
 
         .nav-dropdown-btn:hover {
-            color: #1f2937 !important;
-            background-color: #f9fafb !important;
+            color: #0f172a !important; /* slate-900 */
+            background-color: #f8fafb !important;
         }
 
         .dropdown-toggle {
@@ -237,9 +239,24 @@ def header(current_page='/'):
         }
 
         /* Active navigation states */
+        /* Top-level link styles */
+        .top-nav-link {
+            color: #334155 !important;
+            font-weight: 600 !important;
+            padding: 6px 10px !important;
+            border-radius: 6px !important;
+            text-decoration: none !important;
+            transition: color .2s ease, background .2s ease !important;
+        }
+
+        .top-nav-link:hover {
+            color: #0f172a !important;
+            background: #f8fafb !important;
+        }
+
         .nav-active {
             color: #0055B8 !important;
-            font-weight: 600 !important;
+            font-weight: 700 !important;
             position: relative;
         }
 
@@ -249,9 +266,9 @@ def header(current_page='/'):
             bottom: -8px;
             left: 0;
             right: 0;
-            height: 2px;
+            height: 3px;
             background-color: #0055B8;
-            border-radius: 1px;
+            border-radius: 2px;
         }
 
         .dropdown-active {
@@ -273,148 +290,98 @@ def header(current_page='/'):
         }
     </style>
     ''')
+
+def header(current_page: str = ''):
+    add_global_styles()
     with ui.element('header').classes('fixed top-0 left-0 right-0 z-50 w-full h-16 px-4 shadow-md border-b').style('background-color: rgba(255, 255, 255, 0.95) !important; backdrop-filter: blur(8px) !important; border-bottom: 1px solid #e5e7eb !important; height: 64px !important; display: flex !important; align-items: center !important; justify-content: space-between !important;'):
         
-        # Left: Logo section
-        with ui.row().classes('items-center gap-3'):
+        # Left: Logo section (clickable -> Home)
+        with ui.row().classes('items-center gap-3 cursor-pointer').on('click', lambda: ui.navigate.to('/')):
             ui.icon('hub', size='2rem').style('color: #0055B8 !important;')
-            ui.label('TalentConnect').classes('text-xl font-semibold').style('color: #1A1A1A !important; font-family: "Raleway", sans-serif;')
+            ui.label('Dompell').classes('text-xl font-semibold').style('color: #1A1A1A !important; font-family: "Raleway", sans-serif;')
         
         # Center: Hover dropdown navigation menus 
-        with ui.row().classes('flex items-center gap-3').style('position: absolute; left: 50%; transform: translateX(-50%);'):
-            # Determine active states based on current page
-            candidates_active = current_page.startswith('/candidates') or current_page.startswith('/training-programs') or current_page == '/dashboard' or (current_page == '/jobs' and not current_page.startswith('/employer'))
-            employers_active = current_page.startswith('/employer') 
-            institutions_active = current_page.startswith('/institution') or current_page == '/post-training-program'
-            
-            # Candidates hover dropdown
-            candidates_classes = 'dropdown-hover dropdown-active' if candidates_active else 'dropdown-hover'
-            with ui.element('div').classes(candidates_classes).style('padding: 8px 12px;'):
-                label_style = 'font-family: "Raleway", sans-serif; font-weight: 600; color: #0055B8;' if candidates_active else 'font-family: "Raleway", sans-serif; font-weight: 500; color: #4b5563;'
-                icon_style = 'color: #0055B8; font-size: 20px;' if candidates_active else 'color: #4b5563; font-size: 20px;'
-                
-                with ui.row().classes('items-center gap-1 cursor-pointer').style('color: #4b5563; font-weight: 500; font-family: "Raleway", sans-serif;'):
-                    ui.label('Candidates').style(label_style)
-                    ui.icon('arrow_drop_down').classes('dropdown-icon').style(icon_style)
-                
-                with ui.element('div').classes('dropdown-content'):
-                    browse_active = 'class="active"' if current_page == '/candidates/browse' else ''
-                    training_active = 'class="active"' if current_page == '/training-programs' else ''
-                    stories_active = 'class="active"' if current_page == '/candidates/success-stories' else ''
-                    join_active = 'class="active"' if current_page == '/register?role=trainee' else ''
-                    
-                    dashboard_candidate_active = 'class="active"' if current_page == '/dashboard' else ''
-                    jobs_active = 'class="active"' if current_page == '/jobs' else ''
-                    
-                    ui.html(f'''
-                        <a href="/candidates/browse" {browse_active}>Browse Profiles</a>
-                        <a href="/jobs" {jobs_active}>Find Jobs</a>
-                        <a href="/training-programs" {training_active}>Training Programs</a>
-                        <a href="/dashboard" {dashboard_candidate_active}>My Dashboard</a>
-                        <a href="/candidates/success-stories" {stories_active}>Success Stories</a>
-                        <a href="/register?role=trainee" {join_active}>Join as Candidate</a>
-                    ''')
-            
-            # Employers hover dropdown
-            employers_classes = 'dropdown-hover dropdown-active' if employers_active else 'dropdown-hover'
-            with ui.element('div').classes(employers_classes).style('padding: 8px 12px;'):
-                label_style = 'font-family: "Raleway", sans-serif; font-weight: 600; color: #0055B8;' if employers_active else 'font-family: "Raleway", sans-serif; font-weight: 500; color: #4b5563;'
-                icon_style = 'color: #0055B8; font-size: 20px;' if employers_active else 'color: #4b5563; font-size: 20px;'
-                
-                with ui.row().classes('items-center gap-1 cursor-pointer').style('color: #4b5563; font-weight: 500; font-family: "Raleway", sans-serif;'):
-                    ui.label('Employers').style(label_style)
-                    ui.icon('arrow_drop_down').classes('dropdown-icon').style(icon_style)
-                
-                with ui.element('div').classes('dropdown-content'):
-                    post_active = 'class="active"' if current_page == '/employer/post-job' else ''
-                    browse_candidates_active = 'class="active"' if current_page == '/employer/browse-candidates' else ''
-                    dashboard_active = 'class="active"' if current_page == '/employer/dashboard' else ''
-                    pricing_active = 'class="active"' if current_page == '/employer/pricing' else ''
-                    join_employer_active = 'class="active"' if current_page == '/register?role=employer' else ''
-                    
-                    jobs_employer_active = 'class="active"' if current_page == '/jobs' else ''
-                    applications_active = 'class="active"' if current_page == '/employer/job/applications' else ''
-                    
-                    ui.html(f'''
-                        <a href="/employer/post-job" {post_active}>Post a Job</a>
-                        <a href="/employer/browse-candidates" {browse_candidates_active}>Browse Candidates</a>
-                        <a href="/employer/job/applications" {applications_active}>Manage Applications</a>
-                        <a href="/jobs" {jobs_employer_active}>Job Market</a>
-                        <a href="/employer/dashboard" {dashboard_active}>Employer Dashboard</a>
-                        <a href="/employer/pricing" {pricing_active}>Pricing Plans</a>
-                        <a href="/register?role=employer" {join_employer_active}>Join as Employer</a>
-                    ''')
-            
-            # Institutions hover dropdown
-            institutions_classes = 'dropdown-hover dropdown-active' if institutions_active else 'dropdown-hover'
-            with ui.element('div').classes(institutions_classes).style('padding: 8px 12px;'):
-                label_style = 'font-family: "Raleway", sans-serif; font-weight: 600; color: #0055B8;' if institutions_active else 'font-family: "Raleway", sans-serif; font-weight: 500; color: #4b5563;'
-                icon_style = 'color: #0055B8; font-size: 20px;' if institutions_active else 'color: #4b5563; font-size: 20px;'
-                
-                with ui.row().classes('items-center gap-1 cursor-pointer').style('color: #4b5563; font-weight: 500; font-family: "Raleway", sans-serif;'):
-                    ui.label('Institutions').style(label_style)
-                    ui.icon('arrow_drop_down').classes('dropdown-icon').style(icon_style)
-                
-                with ui.element('div').classes('dropdown-content'):
-                    programs_active = 'class="active"' if current_page == '/institutions/programs' else ''
-                    inst_dashboard_active = 'class="active"' if current_page == '/institution/dashboard' else ''
-                    students_active = 'class="active"' if current_page == '/institution/students' else ''
-                    analytics_active = 'class="active"' if current_page == '/institution/analytics' else ''
-                    join_inst_active = 'class="active"' if current_page == '/register?role=institution' else ''
-                    
-                    program_listing_active = 'class="active"' if current_page == '/institution/program-listing' else ''
-                    post_program_active = 'class="active"' if current_page == '/post-training-program' else ''
-                    
-                    ui.html(f'''
-                        <a href="/institutions/programs" {programs_active}>Partner Programs</a>
-                        <a href="/institution/program-listing" {program_listing_active}>My Programs</a>
-                        <a href="/post-training-program" {post_program_active}>Post New Program</a>
-                        <a href="/institution/dashboard" {inst_dashboard_active}>Institution Dashboard</a>
-                        <a href="/institution/students" {students_active}>Student Management</a>
-                        <a href="/institution/analytics" {analytics_active}>Analytics & Reports</a>
-                        <a href="/register?role=institution" {join_inst_active}>Join as Institution</a>
-                    ''')
+        with ui.row().classes('flex items-center gap-4').style('position: absolute; left: 50%; transform: translateX(-50%);'):
+            pass
+        
+        # Static links and buttons
+        with ui.row().classes('flex items-center gap-4'):
+            # Determine active states for static links
+            home_active = current_page == '/'
+            about_active = current_page == '/about'
+            jobs_active = current_page.startswith('/jobs')
+            how_active = current_page.startswith('/how-it-works')
+            contact_active = current_page.startswith('/contact')
+            # Resources should not be active on standalone top links like About or How
+            resources_active = (current_page.startswith('/help-and-support') or current_page.startswith('/resources'))
 
-        # Right: Navigation links and auth buttons
-        with ui.row().classes('flex items-center gap-6'):
-            # General navigation links with active states
-            home_classes = 'nav-active' if current_page == '/' else 'text-gray-600 hover:text-gray-900 font-medium'
-            
-            ui.link('Home', '/').classes(home_classes).style('text-decoration: none;')
-            
-            # Resources dropdown
-            resources_active = current_page in ['/about', '/how-it-works', '/help', '/contact', '/search', '/messages']
+            home_classes = 'nav-active' if home_active else ''
+            about_classes = 'nav-active' if about_active else ''
+            jobs_classes = 'nav-active' if jobs_active else ''
+            how_classes = 'nav-active' if how_active else ''
+            contact_classes = 'nav-active' if contact_active else ''
+
+            ui.link('Home', '/').classes(f'top-nav-link {home_classes}')
+            ui.link('About Us', '/about').classes(f'top-nav-link {about_classes}')
+            ui.link('Browse Jobs', '/jobs').classes(f'top-nav-link {jobs_classes}')
+            ui.link('How it works', '/how-it-works').classes(f'top-nav-link {how_classes}')
+
+            # Resources hover dropdown
             resources_classes = 'dropdown-hover dropdown-active' if resources_active else 'dropdown-hover'
-            with ui.element('div').classes(resources_classes).style('padding: 8px 12px;'):
+            with ui.element('div').classes(resources_classes).style('padding: 8px 16px;'):
                 label_style = 'font-family: "Raleway", sans-serif; font-weight: 600; color: #0055B8;' if resources_active else 'font-family: "Raleway", sans-serif; font-weight: 500; color: #4b5563;'
                 icon_style = 'color: #0055B8; font-size: 20px;' if resources_active else 'color: #4b5563; font-size: 20px;'
-                
-                with ui.row().classes('items-center gap-1 cursor-pointer').style('color: #4b5563; font-weight: 500; font-family: "Raleway", sans-serif;'):
+
+                with ui.row().classes('items-center gap-1 cursor-pointer'):
                     ui.label('Resources').style(label_style)
                     ui.icon('arrow_drop_down').classes('dropdown-icon').style(icon_style)
                 
                 with ui.element('div').classes('dropdown-content'):
-                    about_active = 'class="active"' if current_page == '/about' else ''
-                    how_it_works_active = 'class="active"' if current_page == '/how-it-works' else ''
-                    help_active = 'class="active"' if current_page == '/help' else ''
-                    contact_active = 'class="active"' if current_page == '/contact' else ''
-                    
-                    search_active = 'class="active"' if current_page == '/search' else ''
-                    messages_active = 'class="active"' if current_page == '/messages' else ''
-                    
-                    ui.html(f'''
-                        <a href="/about" {about_active}>About Us</a>
-                        <a href="/how-it-works" {how_it_works_active}>How It Works</a>
-                        <a href="/help" {help_active}>Help & Support</a>
-                        <a href="/contact" {contact_active}>Contact Us</a>
-                        <a href="/search" {search_active}>Search Platform</a>
-                        <a href="/messages" {messages_active}>Messages</a>
-                    ''')
+                    resource_links = [
+                        {'name': 'Contact Us', 'path': '/contact'},
+                        {'name': 'Trainings/Bootcamps', 'path': '/training-program-directory'},
+                        {'name': 'Help & Support', 'path': '/help-and-support'},
+                    ]
+                    ui.html(
+                        f'''
+                        <div class="flex flex-col p-2">
+                            {(''.join(f'<a href="{link["path"]}" class="nav-dropdown-btn {"active" if current_page == link["path"] else ""}">{link["name"]}</a>' for link in resource_links))}
+                        </div>
+                        ''', sanitize=lambda s: s)
 
-            # Auth buttons
-            with ui.row().classes('items-center gap-2'):
-                if app_state.is_authenticated():
-                    ui.button('Sign Out', on_click=lambda: app_state.logout()).classes('px-4 py-2 rounded-md text-white').style('background-color: #dc2626 !important; color: white !important; font-family: "Raleway", sans-serif !important; font-weight: 600 !important;')
-                else:
-                    ui.button('Register', on_click=lambda: ui.navigate.to('/login?tab=Sign+Up')).classes('px-4 py-2 rounded-md text-white').style('background-color: #0055B8 !important; color: white !important; font-family: "Raleway", sans-serif !important; font-weight: 600 !important;')
-                    ui.button('Sign In', on_click=lambda: ui.navigate.to('/login')).classes('px-4 py-2 rounded-md').style('background-color: #f3f4f6 !important; color: #1f2937 !important; font-family: "Raleway", sans-serif !important; font-weight: 600 !important;')
+            # Contact link removed (now available under Resources dropdown)
+
+            # about_classes = 'nav-active' if about_active else ''
+            # ui.link('About', '/about').classes(about_classes).style('text-decoration: none;')
+
+            # Conditional buttons based on authentication state
+            if not is_authenticated():
+                ui.button('Login', on_click=lambda: ui.navigate.to('/login')).classes('bg-white border').style('color: #0055B8 !important; border-color: #0055B8 !important;')
+                ui.button('Register', on_click=lambda: ui.navigate.to('/login?tab=Sign+Up')).classes('bg-blue-600 text-white')
+            else:
+                # Show dashboard and profile links for authenticated users
+                user = get_current_user()
+                user_name = user.get('name', user.get('email', 'User')) if user else 'User'
+                user_role = user.get('role', 'USER') if user else 'USER'
+                
+                with ui.row().classes('items-center gap-4'):
+                    ui.icon('notifications', size='1.5rem').classes('cursor-pointer text-gray-600 hover:text-blue-600')
+                    
+                    with ui.menu() as menu:
+                        # Role-based menu items (avoid generic duplicate 'Dashboard')
+
+                        if user_role == 'ADMIN':
+                            ui.menu_item('Admin Dashboard', on_click=lambda: ui.navigate.to('/admin/dashboard'))
+                        elif user_role == 'TRAINEE':
+                            ui.menu_item('My Dashboard', on_click=lambda: ui.navigate.to('/candidates/dashboard'))
+                            ui.menu_item('My Applications', on_click=lambda: ui.navigate.to('/application-tracking'))
+                        elif user_role == 'EMPLOYER':
+                            ui.menu_item('Employer Dashboard', on_click=lambda: ui.navigate.to('/employers/dashboard'))
+                            ui.menu_item('Job Postings', on_click=lambda: ui.navigate.to('/employer/job-posting'))
+                        
+                        # Common menu items for all authenticated users
+                        ui.menu_item('Profile Settings', on_click=lambda: ui.navigate.to('/settings/profile'))
+                        ui.separator()
+                        ui.menu_item(f'Logout ({user_name})', on_click=logout)
+
+                    ui.icon('account_circle', size='1.5rem').classes('cursor-pointer text-gray-600 hover:text-blue-600').on('click', menu.open)

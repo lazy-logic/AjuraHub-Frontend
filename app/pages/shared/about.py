@@ -1,7 +1,7 @@
 from nicegui import ui
 
 def about_page():
-    """Creates the About Us page for TalentConnect Africa."""
+    """Creates the About Us page for Dompell."""
     
     # Add brand guidelines
     ui.add_head_html('''
@@ -36,25 +36,63 @@ def about_page():
     ''')
     
     with ui.column().classes('w-full brand-light-mist'):
-        # Hero Section
-        _create_about_hero()
-        
-        # Mission & Vision
-        _create_mission_vision()
-        
-        # Our Story
-        _create_our_story()
-        
-        # What We Do
-        _create_what_we_do()
-        
-        # Our Values
+        # Modernized Hero with improved overlay and responsive text
+        with ui.element('section').classes('relative w-full min-h-[480px] flex items-center justify-center bg-gradient-to-br from-[#003366] to-[#001a33] overflow-hidden'):
+            # Background image
+            ui.image('https://images.pexels.com/photos/9301758/pexels-photo-9301758.jpeg?auto=compress&cs=tinysrgb&w=1080&h=850&dpr=1').classes('absolute inset-0 w-full h-full object-cover opacity-40')
+            # Semi-transparent dark overlay for contrast
+            ui.html('<div style="position:absolute;inset:0;width:100%;height:100%;background:rgba(10,20,40,0.55);z-index:1;"></div>', sanitize=lambda s: s)
+            # Content
+            with ui.column().classes('relative z-10 max-w-3xl mx-auto text-center py-24 px-4'):
+                ui.label('About Us').classes('hero-text text-white mb-6').style('font-size:clamp(40px,8vw,80px);font-weight:900;letter-spacing:-0.03em;line-height:1.05;')
+                ui.label('Bridging the gap between skilled African talent and global opportunities.') \
+                    .classes('heading-2 text-white font-extrabold mb-4').style('font-size:clamp(18px,3vw,32px);font-weight:700;line-height:1.2;')
+                # Optional: Add a call-to-action button (uncomment if needed)
+                # ui.button('Join Dompell', on_click=lambda: ui.navigate.to('/login?tab=Sign+Up')).classes('mt-6 px-8 py-4 bg-white brand-primary button-label rounded-lg hover:bg-gray-100 transition-all shadow-xl')
+        # Our Story - modern split
+        with ui.element('section').classes('py-24 brand-light-mist'):
+            with ui.row().classes('mx-auto max-w-7xl px-6 grid grid-cols-1 md:grid-cols-2 gap-16 items-center'):
+                with ui.column().classes('gap-6 order-2 md:order-1'):
+                    ui.image('https://images.pexels.com/photos/8554068/pexels-photo-8554068.jpeg?auto=compress&w=600').classes('rounded-2xl shadow-xl w-full h-80 object-cover')
+                with ui.column().classes('gap-6 order-1 md:order-2'):
+                    ui.label('Our Story').classes('heading-2 brand-charcoal mb-4')
+                    ui.html('<div class="w-16 h-1 brand-primary-bg mb-8"></div>', sanitize=lambda s: s)
+                    ui.label('Dompell was born from a simple yet powerful vision: to unlock the immense potential of Africa\'s workforce by connecting talented professionals with opportunities that match their skills and aspirations.').classes('body-text brand-slate')
+                    ui.label('Founded in 2024, we recognized that while Africa is home to millions of skilled and ambitious professionals, many face barriers in accessing quality employment opportunities. At the same time, employers struggle to find the right talent to drive their businesses forward.').classes('body-text brand-slate')
+                    ui.label('We set out to bridge this gap by creating a comprehensive platform that serves trainees, employers, and educational institutions across the continent.').classes('body-text brand-slate')
+        # What We Do - flat, no card, deep blue background
+        with ui.element('section').classes('py-32').style('background: #003366; position: relative; overflow: hidden;'):
+            ui.html('''
+            <div class="absolute top-0 left-0 w-96 h-96 opacity-10 z-0">
+                <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                    <pattern id="dots-wwd-flat" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                        <circle cx="2" cy="2" r="2" fill="#ffffff"/>
+                    </pattern>
+                    <rect width="100" height="100" fill="url(#dots-wwd-flat)"/>
+                </svg>
+            </div>
+            ''', sanitize=lambda s: s)
+            ui.label('What We Do').classes('heading-1 text-white text-center mb-4').style('font-size: 48px; font-weight: 900;')
+            ui.label('Empowering trainees, employers, and institutions with opportunity, growth, and connection.').classes('sub-heading-2 text-white text-center mb-20').style('font-size: 22px; font-weight: 600;')
+            with ui.row().classes('grid grid-cols-1 md:grid-cols-3 gap-12 max-w-6xl mx-auto z-10'):
+                _what_we_do_flat(
+                    'https://images.pexels.com/photos/9301253/pexels-photo-9301253.jpeg',
+                    'For Trainees',
+                    'We provide access to diverse training programs, jobs, and career development resources. Dompell helps you build your professional profile, connect with mentors, and find jobs that match your skills.'
+                )
+                _what_we_do_flat(
+                    'https://images.pexels.com/photos/3183198/pexels-photo-3183198.jpeg',
+                    'For Employers',
+                    'We connect you with a vast pool of skilled African talent. Our efficient recruitment tools help you find, assess, and hire the right candidates while contributing to local economic development.'
+                )
+                _what_we_do_flat(
+                    'https://images.pexels.com/photos/3184306/pexels-photo-3184306.jpeg',
+                    'For Institutions',
+                    'We help educational institutions showcase their programs, connect students with employers, and build strategic partnerships that enhance learning outcomes and employability.'
+                )
+        # Our Values - keep as is for contrast
         _create_our_values()
-        
-        # Team Section
-        _create_team_section()
-        
-        # CTA Section
+        # CTA Section - keep as is
         _create_about_cta()
 
 
@@ -62,8 +100,8 @@ def _create_about_hero():
     """Hero section for About page"""
     with ui.element('section').classes('py-24 brand-primary-bg text-white relative overflow-hidden'):
         # Decorative elements
-        ui.html('<div class="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>')
-        ui.html('<div class="absolute bottom-0 left-0 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>')
+        ui.html('<div class="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>', sanitize=lambda s: s)
+        ui.html('<div class="absolute bottom-0 left-0 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>', sanitize=lambda s: s)
         
         with ui.column().classes('mx-auto max-w-4xl px-6 text-center relative z-10'):
             ui.label('About Us').classes('heading-1 text-white mb-6')
@@ -78,24 +116,24 @@ def _create_mission_vision():
                 # Mission
                 with ui.card().classes('p-10 bg-blue-50 border-2 border-blue-200 rounded-2xl'):
                     with ui.row().classes('items-center gap-3 mb-6'):
-                        ui.icon('flag').classes('text-5xl brand-primary')
+
                         ui.label('Our Mission').classes('heading-3 brand-charcoal')
                     ui.label('To empower African professionals by connecting them with meaningful opportunities, fostering economic growth, and building a skilled workforce that drives the continent\'s development.').classes('body-text brand-slate')
                 
                 # Vision
                 with ui.card().classes('p-10 bg-blue-50 border-2 border-blue-200 rounded-2xl'):
                     with ui.row().classes('items-center gap-3 mb-6'):
-                        ui.icon('visibility').classes('text-5xl brand-primary')
+
                         ui.label('Our Vision').classes('heading-3 brand-charcoal')
                     ui.label('To be Africa\'s leading talent platform, recognized for transforming careers, empowering businesses, and creating a thriving ecosystem where talent meets opportunity.').classes('body-text brand-slate')
 
 
 def _create_our_story():
-    """Our Story section"""
+    """Our Story section (Dompell)"""
     with ui.element('section').classes('py-24 brand-light-mist'):
         with ui.column().classes('mx-auto max-w-6xl px-6'):
             ui.label('Our Story').classes('heading-2 brand-charcoal text-center mb-6')
-            ui.html('<div class="w-16 h-1 brand-primary-bg mx-auto mb-12"></div>')
+            ui.html('<div class="w-16 h-1 brand-primary-bg mx-auto mb-12"></div>', sanitize=lambda s: s)
             
             with ui.column().classes('space-y-6'):
                 ui.label('TalentConnect Africa was born from a simple yet powerful vision: to unlock the immense potential of Africa\'s workforce by connecting talented professionals with opportunities that match their skills and aspirations.').classes('body-text brand-slate text-center')
@@ -107,43 +145,53 @@ def _create_our_story():
 
 def _create_what_we_do():
     """What We Do section"""
-    with ui.element('section').classes('py-24 bg-white'):
-        with ui.column().classes('mx-auto max-w-7xl px-6'):
-            ui.label('What We Do').classes('heading-2 brand-charcoal text-center mb-6')
-            ui.html('<div class="w-16 h-1 brand-primary-bg mx-auto mb-16"></div>')
-            
-            with ui.row().classes('grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto'):
-                _what_we_do_card('school', 'For Trainees', 'We provide access to diverse training programs, job opportunities, and career development resources. Our platform helps you build your professional profile, connect with mentors, and find opportunities that match your skills.')
-                _what_we_do_card('business_center', 'For Employers', 'We connect you with a vast pool of skilled African talent. Our efficient recruitment tools help you find, assess, and hire the right candidates while contributing to local economic development.')
-                _what_we_do_card('account_balance', 'For Institutions', 'We help educational institutions showcase their programs, connect students with employers, and build strategic partnerships that enhance learning outcomes and employability.')
+    # (Obsolete: replaced by new What We Do section in about_page)
+    pass
 
 
-def _what_we_do_card(icon: str, title: str, description: str):
-    """Card for What We Do section"""
-    with ui.card().classes('p-8 bg-gradient-to-br from-white to-gray-50 border-2 border-gray-100 hover:border-blue-300 hover:shadow-xl transition-all rounded-xl text-center'):
-        ui.icon(icon).classes('text-5xl mb-4 mx-auto brand-primary')
-        ui.label(title).classes('sub-heading brand-charcoal mb-4')
-        ui.label(description).classes('body-text brand-slate')
+
+# Modern card with image for What We Do
+
+# New modern card for What We Do section
+
+
+
+
+# Flat, no card, for What We Do section
+def _what_we_do_flat(img_url: str, title: str, description: str):
+    with ui.column().classes('items-center text-center'):
+        ui.image(img_url).classes('w-full h-56 object-cover rounded-2xl border-0 mb-6')
+        ui.label(title).classes('heading-2 text-white mb-3').style('font-size: 26px; font-weight: 800;')
+        ui.label(description).classes('body-text text-white').style('font-size: 16px; font-weight: 500; line-height: 1.5;')
 
 
 def _create_our_values():
-    """Our Values section"""
-    with ui.element('section').classes('py-24 bg-gray-900 text-white'):
+    """Mission & Vision section (two cards)"""
+    with ui.element('section').classes('py-24 bg-white text-gray-900'):
         with ui.column().classes('mx-auto max-w-7xl px-6'):
-            ui.label('Our Core Values').classes('heading-2 text-white text-center mb-6')
-            ui.html('<div class="w-16 h-1 brand-primary-bg mx-auto mb-16"></div>')
-            
-            with ui.row().classes('grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6'):
-                _value_card('verified_user', 'Trust', 'We verify all employers and maintain the highest standards of integrity.')
-                _value_card('diversity_3', 'Inclusion', 'We celebrate diversity and create opportunities for everyone.')
-                _value_card('lightbulb', 'Innovation', 'We continuously improve our platform with cutting-edge technology.')
-                _value_card('favorite', 'Excellence', 'We strive for excellence in everything we do.')
+        
+            ui.html('<div class="w-16 h-1 brand-primary-bg mx-auto mb-16"></div>', sanitize=lambda s: s)
+            with ui.row().classes('grid grid-cols-1 md:grid-cols-2 gap-8 px-4 md:px-16'):
+                _mission_vision_card_dark(
+                    'Our Mission',
+                    'To empower African talents by connecting them with opportunities, fostering economic growth, and building a skilled workforce that drives the continent\'s development.'
+                )
+                _mission_vision_card_dark(
+                    'Our Vision',
+                    'To be Africa\'s leading talent platform, recognized for transforming careers, empowering businesses, and creating a thriving ecosystem where talent meets opportunity.'
+                )
+
+# Card for Mission & Vision in dark section
+def _mission_vision_card_dark(title: str, description: str):
+    with ui.card().classes('bg-gray-800 border border-blue-400 rounded-xl p-8 text-center'):
+        ui.html(f'<div class="heading-2 text-white mb-4" style="font-size: 28px; font-weight: 800;">{title}</div>', sanitize=lambda s: s)
+        ui.label(description).classes('body-text text-gray-200').style('font-size: 16px; font-weight: 500; line-height: 1.5;')
 
 
 def _value_card(icon: str, title: str, description: str):
     """Card for values"""
     with ui.card().classes('p-6 bg-gray-800 border border-gray-700 hover:border-blue-400 transition-all rounded-lg text-center'):
-        ui.icon(icon).classes('text-4xl mb-3 text-blue-400')
+
         ui.label(title).classes('sub-heading-2 text-white mb-2')
         ui.label(description).classes('button-label text-gray-400')
 
@@ -166,7 +214,7 @@ def _create_team_section():
 def _stat_card(value: str, label: str, icon: str):
     """Stat card"""
     with ui.card().classes('p-8 bg-blue-50 border-2 border-blue-200 rounded-xl text-center'):
-        ui.icon(icon).classes('text-5xl mb-4 brand-primary')
+
         ui.label(value).classes('heading-2 brand-charcoal mb-2')
         ui.label(label).classes('button-label brand-slate')
 

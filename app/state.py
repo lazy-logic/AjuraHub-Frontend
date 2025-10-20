@@ -1,8 +1,8 @@
 """
-Global state management for TalentConnect Africa
+Global state management for Dompell Africa
 """
 
-from nicegui import ui
+from nicegui import ui, app
 
 class AppState:
     """Global application state"""
@@ -27,5 +27,54 @@ class AppState:
         """Check if user is authenticated"""
         return self.current_user is not None
 
+class Events:
+    """A simple event handling class."""
+    def __init__(self):
+        self.callbacks = {}
+
+    def on(self, event_type):
+        """Decorator to register a callback for an event."""
+        def decorator(callback):
+            if event_type not in self.callbacks:
+                self.callbacks[event_type] = []
+            self.callbacks[event_type].append(callback)
+            return callback
+        return decorator
+
+    def trigger(self, event_type, *args, **kwargs):
+        if event_type in self.callbacks:
+            for callback in self.callbacks[event_type]:
+                callback(*args, **kwargs)
+
 # Global state instance
 app_state = AppState()
+
+# Create a global instance of the event handler
+auth_events = Events()
+
+@auth_events.on('login')
+def handle_login(user_data: dict, token: str):
+    """Handle user login state."""
+    app.storage.user.update({
+        'is_authenticated': True,
+        'user_data': user_data,
+        'token': token,
+    })
+    # Set the token in the API service for subsequent requests
+    from .services.api_service import api_service
+    api_service.set_auth_token(token)
+    print(f"User {user_data.get('email')} logged in.")
+
+@auth_events.on('logout')
+def handle_logout():
+    """Handle user logout state."""
+    # Clear the token from the API service
+    from .services.api_service import api_service
+    api_service.clear_auth_token()
+    
+    # Clear user session
+    app.storage.user.clear()
+    app.storage.user['is_authenticated'] = False
+    
+    print("User logged out.")
+    ui.navigate.to('/login')

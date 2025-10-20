@@ -47,7 +47,7 @@ def _create_metric_card(title, value, change, icon, color):
     """Creates a metric card with icon and change indicator."""
     with ui.card().classes('p-6 bg-white border border-gray-200'):
         with ui.row().classes('items-center justify-between mb-4'):
-            ui.icon(icon).classes(f'text-2xl').style(f'color: {color}')
+
             with ui.column().classes('text-right'):
                 ui.label(change).classes('text-sm font-medium text-green-600')
         

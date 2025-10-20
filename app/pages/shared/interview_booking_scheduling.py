@@ -1,5 +1,5 @@
 """
-Interview Booking & Scheduling - TalentConnect Africa
+Interview Booking & Scheduling - Dompell Africa
 Interview scheduling system with calendar integration and video call setup using brand guidelines.
 """
 
@@ -141,7 +141,7 @@ def interview_booking_scheduling_page():
                 # Interview information
                 with ui.card().classes('interview-card'):
                     with ui.row().classes('flex items-center mb-6'):
-                        ui.icon('work', size='2rem').classes('brand-primary')
+
                         ui.label('Interview Details').classes('sub-heading brand-charcoal ml-3')
                     
                     with ui.row().classes('items-center mb-4'):
@@ -153,38 +153,38 @@ def interview_booking_scheduling_page():
                     
                     with ui.row().classes('items-center gap-6 mb-4'):
                         with ui.row().classes('items-center'):
-                            ui.icon('schedule', size='1rem').classes('brand-slate mr-2')
+
                             ui.label('Duration: 60 minutes').classes('caption brand-slate')
                         
                         with ui.row().classes('items-center'):
-                            ui.icon('person', size='1rem').classes('brand-slate mr-2')
+
                             ui.label('Interviewer: Jane Doe').classes('caption brand-slate')
 
                 # Interview type selection
                 with ui.card().classes('interview-card'):
                     with ui.row().classes('flex items-center mb-6'):
-                        ui.icon('videocam', size='2rem').classes('brand-primary')
+
                         ui.label('Interview Format').classes('sub-heading brand-charcoal ml-3')
                     
                     with ui.row().classes('gap-4'):
                         # Video interview
                         with ui.element('div').classes('interview-type-card selected flex-1'):
                             with ui.column().classes('text-center'):
-                                ui.icon('videocam', size='3rem').classes('brand-primary mb-3')
+
                                 ui.label('Video Interview').classes('body-text font-semibold brand-charcoal mb-2')
                                 ui.label('Online video call via platform').classes('caption brand-slate')
                         
                         # Phone interview
                         with ui.element('div').classes('interview-type-card flex-1'):
                             with ui.column().classes('text-center'):
-                                ui.icon('phone', size='3rem').classes('brand-slate mb-3')
+
                                 ui.label('Phone Interview').classes('body-text font-semibold brand-charcoal mb-2')
                                 ui.label('Traditional phone conversation').classes('caption brand-slate')
                         
                         # In-person interview
                         with ui.element('div').classes('interview-type-card flex-1'):
                             with ui.column().classes('text-center'):
-                                ui.icon('business', size='3rem').classes('brand-slate mb-3')
+
                                 ui.label('In-Person').classes('body-text font-semibold brand-charcoal mb-2')
                                 ui.label('Meet at company office').classes('caption brand-slate')
 
@@ -192,7 +192,7 @@ def interview_booking_scheduling_page():
                 with ui.card().classes('interview-card'):
                     with ui.row().classes('flex items-center justify-between mb-6'):
                         with ui.row().classes('items-center'):
-                            ui.icon('calendar_today', size='2rem').classes('brand-primary')
+
                             ui.label('Select Date').classes('sub-heading brand-charcoal ml-3')
                         
                         with ui.row().classes('gap-2'):
@@ -222,7 +222,7 @@ def interview_booking_scheduling_page():
                 # Time slot selection
                 with ui.card().classes('interview-card'):
                     with ui.row().classes('flex items-center mb-6'):
-                        ui.icon('access_time', size='2rem').classes('brand-primary')
+
                         ui.label('Available Time Slots').classes('sub-heading brand-charcoal ml-3')
                     
                     ui.label('Tuesday, October 15, 2024').classes('body-text font-semibold brand-charcoal mb-4')
@@ -262,25 +262,25 @@ def interview_booking_scheduling_page():
                     
                     with ui.column().classes('gap-3'):
                         with ui.row().classes('items-center'):
-                            ui.icon('event', size='1.5rem').classes('brand-slate mr-3')
+
                             with ui.column():
                                 ui.label('Date & Time').classes('caption brand-slate')
                                 ui.label('Oct 15, 2024 at 10:00 AM').classes('body-text brand-charcoal')
                         
                         with ui.row().classes('items-center'):
-                            ui.icon('videocam', size='1.5rem').classes('brand-slate mr-3')
+
                             with ui.column():
                                 ui.label('Format').classes('caption brand-slate')
                                 ui.label('Video Interview').classes('body-text brand-charcoal')
                         
                         with ui.row().classes('items-center'):
-                            ui.icon('schedule', size='1.5rem').classes('brand-slate mr-3')
+
                             with ui.column():
                                 ui.label('Duration').classes('caption brand-slate')
                                 ui.label('60 minutes').classes('body-text brand-charcoal')
                         
                         with ui.row().classes('items-center'):
-                            ui.icon('location_on', size='1.5rem').classes('brand-slate mr-3')
+
                             with ui.column():
                                 ui.label('Platform').classes('caption brand-slate')
                                 ui.label('Google Meet').classes('body-text brand-charcoal')
@@ -297,11 +297,11 @@ def interview_booking_scheduling_page():
                     
                     with ui.column().classes('gap-2'):
                         with ui.row().classes('items-center'):
-                            ui.icon('email', size='1rem').classes('brand-slate mr-2')
+
                             ui.label('jane.doe@techstart.co.ke').classes('caption brand-slate')
                         
                         with ui.row().classes('items-center'):
-                            ui.icon('phone', size='1rem').classes('brand-slate mr-2')
+
                             ui.label('+254 712 345 678').classes('caption brand-slate')
 
                 # Preparation tips
@@ -319,13 +319,13 @@ def interview_booking_scheduling_page():
                     with ui.column().classes('gap-2'):
                         for tip in tips:
                             with ui.row().classes('items-start'):
-                                ui.icon('check_circle', size='1rem').classes('text-green-600 mr-2 mt-1')
+
                                 ui.label(tip).classes('caption brand-slate')
 
                 # Reschedule options
                 with ui.card().classes('interview-card bg-amber-50 border border-amber-200'):
                     with ui.row().classes('items-center mb-3'):
-                        ui.icon('info', size='2rem').classes('text-amber-600')
+
                         ui.label('Need to Reschedule?').classes('body-text font-semibold text-amber-800 ml-3')
                     
                     ui.label('You can reschedule up to 24 hours before your interview time.').classes('caption text-amber-700 mb-4')

@@ -103,7 +103,7 @@ def post_training_program_page():
                 # Basic information
                 with ui.card().classes('form-card'):
                     with ui.row().classes('flex items-center mb-6'):
-                        ui.icon('info', size='2rem').classes('brand-primary')
+
                         ui.label('Basic Information').classes('sub-heading brand-charcoal ml-3')
                     
                     ui.label('Program Title *').classes('body-text font-semibold brand-charcoal mb-2')
@@ -134,7 +134,7 @@ def post_training_program_page():
                 # Curriculum
                 with ui.card().classes('form-card'):
                     with ui.row().classes('flex items-center mb-6'):
-                        ui.icon('menu_book', size='2rem').classes('brand-primary')
+
                         ui.label('Curriculum').classes('sub-heading brand-charcoal ml-3')
                     
                     ui.label('Program Learning Outcomes *').classes('body-text font-semibold brand-charcoal mb-2')
@@ -156,7 +156,7 @@ def post_training_program_page():
                 # Prerequisites & Requirements
                 with ui.card().classes('form-card'):
                     with ui.row().classes('flex items-center mb-6'):
-                        ui.icon('checklist', size='2rem').classes('brand-primary')
+
                         ui.label('Prerequisites & Requirements').classes('sub-heading brand-charcoal ml-3')
                     
                     ui.label('Prerequisites').classes('body-text font-semibold brand-charcoal mb-2')
@@ -171,7 +171,7 @@ def post_training_program_page():
                 # Instructors
                 with ui.card().classes('form-card'):
                     with ui.row().classes('flex items-center mb-6'):
-                        ui.icon('school', size='2rem').classes('brand-primary')
+
                         ui.label('Instructors').classes('sub-heading brand-charcoal ml-3')
                     
                     for i in range(2):
@@ -198,14 +198,14 @@ def post_training_program_page():
                     # Program image
                     ui.label('Program Image').classes('body-text font-semibold brand-charcoal mb-2')
                     with ui.element('div').classes('upload-zone mb-4'):
-                        ui.icon('image', size='3rem').classes('brand-primary mb-2')
+
                         ui.label('Upload program image').classes('body-text brand-charcoal mb-1')
                         ui.label('JPG, PNG (Max 5MB)').classes('caption brand-slate')
                     
                     # Video preview
                     ui.label('Program Video (Optional)').classes('body-text font-semibold brand-charcoal mb-2')
                     with ui.element('div').classes('upload-zone mb-4'):
-                        ui.icon('videocam', size='3rem').classes('brand-primary mb-2')
+
                         ui.label('Upload preview video').classes('body-text brand-charcoal mb-1')
                         ui.label('MP4, AVI (Max 50MB)').classes('caption brand-slate')
 

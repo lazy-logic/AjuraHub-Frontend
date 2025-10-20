@@ -50,7 +50,7 @@ def _create_student_stat_card(title, value, icon, color):
     """Creates a student statistics card."""
     with ui.card().classes('p-6 bg-white border border-gray-200'):
         with ui.row().classes('items-center justify-between mb-2'):
-            ui.icon(icon).classes(f'text-2xl').style(f'color: {color}')
+            pass  # Stat icon was removed
         
         ui.label(value).classes('text-3xl font-bold text-gray-900 mb-1')
         ui.label(title).classes('text-sm font-medium text-gray-500')

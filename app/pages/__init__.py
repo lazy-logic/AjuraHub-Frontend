@@ -1,3 +1,3 @@
 """
-Page modules for TalentConnect Africa
+Page modules for Dompell Africa
 """

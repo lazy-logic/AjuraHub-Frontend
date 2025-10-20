@@ -1,5 +1,5 @@
 """
-Training Program Application Form - TalentConnect Africa
+Training Program Application Form - Dompell Africa
 Multi-step training application with document uploads and eligibility checks using brand guidelines.
 """
 
@@ -120,7 +120,7 @@ def training_program_application_page():
                 # Step 1
                 with ui.element('div').classes('step'):
                     with ui.element('div').classes('step-circle completed'):
-                        ui.icon('check', size='1.5rem')
+                        pass  # Step icon was removed
                     ui.label('Personal Info').classes('caption brand-charcoal font-semibold')
                 
                 ui.element('div').classes('step-line completed')
@@ -146,7 +146,7 @@ def training_program_application_page():
                 # Document upload section
                 with ui.card().classes('application-card'):
                     with ui.row().classes('flex items-center mb-6'):
-                        ui.icon('upload_file', size='2rem').classes('brand-primary')
+
                         ui.label('Required Documents').classes('sub-heading brand-charcoal ml-3')
                     
                     # Resume/CV
@@ -154,7 +154,7 @@ def training_program_application_page():
                     ui.label('Upload your latest resume or CV').classes('caption brand-slate mb-3')
                     
                     with ui.row().classes('items-center p-4 border-2 border-dashed border-gray-300 rounded-lg mb-6'):
-                        ui.icon('description', size='2rem').classes('brand-primary mr-4')
+
                         with ui.column().classes('flex-1'):
                             ui.label('Drag & drop your resume or click to browse').classes('body-text brand-charcoal')
                             ui.label('Supported formats: PDF, DOC, DOCX (Max 5MB)').classes('caption brand-slate')
@@ -176,7 +176,7 @@ def training_program_application_page():
                 # Eligibility questions
                 with ui.card().classes('application-card'):
                     with ui.row().classes('flex items-center mb-6'):
-                        ui.icon('quiz', size='2rem').classes('brand-primary')
+
                         ui.label('Eligibility Questions').classes('sub-heading brand-charcoal ml-3')
                     
                     # Previous experience
@@ -209,25 +209,25 @@ def training_program_application_page():
                     
                     with ui.column().classes('gap-3'):
                         with ui.row().classes('items-center'):
-                            ui.icon('school', size='1.5rem').classes('brand-slate mr-3')
+
                             with ui.column():
                                 ui.label('Institution').classes('caption brand-slate')
                                 ui.label('Moringa School').classes('body-text brand-charcoal')
                         
                         with ui.row().classes('items-center'):
-                            ui.icon('schedule', size='1.5rem').classes('brand-slate mr-3')
+
                             with ui.column():
                                 ui.label('Duration').classes('caption brand-slate')
                                 ui.label('15 weeks').classes('body-text brand-charcoal')
                         
                         with ui.row().classes('items-center'):
-                            ui.icon('event', size='1.5rem').classes('brand-slate mr-3')
+
                             with ui.column():
                                 ui.label('Start Date').classes('caption brand-slate')
                                 ui.label('January 15, 2024').classes('body-text brand-charcoal')
                         
                         with ui.row().classes('items-center'):
-                            ui.icon('payments', size='1.5rem').classes('brand-slate mr-3')
+
                             with ui.column():
                                 ui.label('Cost').classes('caption brand-slate')
                                 ui.label('KSh 120,000').classes('body-text brand-charcoal')
@@ -235,7 +235,7 @@ def training_program_application_page():
                 # Application deadline
                 with ui.card().classes('application-card bg-amber-50 border border-amber-200'):
                     with ui.row().classes('items-center mb-3'):
-                        ui.icon('schedule', size='2rem').classes('text-amber-600')
+
                         ui.label('Application Deadline').classes('body-text font-semibold text-amber-800 ml-3')
                     
                     ui.label('December 31, 2023').classes('sub-heading text-amber-800 mb-2')
@@ -253,9 +253,9 @@ def training_program_application_page():
                     ]:
                         with ui.row().classes('items-center mb-2'):
                             if completed:
-                                ui.icon('check_circle', size='1rem').classes('text-green-600 mr-3')
+                                pass  # Check icon was removed
                             else:
-                                ui.icon('radio_button_unchecked', size='1rem').classes('text-gray-400 mr-3')
+                                pass  # Close icon was removed
                             ui.label(req).classes('caption brand-slate')
 
         # Navigation buttons

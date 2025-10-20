@@ -1,5 +1,5 @@
 """
-Admin User Management page for TalentConnect Africa, modernized with brand guidelines.
+Admin User Management page for Dompell Africa, modernized with brand guidelines.
 """
 
 from nicegui import ui
@@ -94,7 +94,7 @@ def _create_user_table():
         {'name': 'Adebayo Okoro', 'type': 'Employer', 'email': 'adebayo.o@techsolutions.ng', 'org': 'TechSolutions Ltd.', 'status': 'Active', 'last_login': '2023-10-26 10:15 AM'},
         {'name': 'Chidinma Nwosu', 'type': 'Trainee', 'email': 'chidinma.n@university.edu', 'org': 'University of Lagos', 'status': 'Suspended', 'last_login': '2023-09-12 03:30 PM'},
         {'name': 'Innovate Kenya Hub', 'type': 'Institution', 'email': 'contact@innovateke.org', 'org': 'Innovate Kenya', 'status': 'Pending', 'last_login': 'N/A'},
-        {'name': 'Fatima Aliyu', 'type': 'Admin', 'email': 'fatima.a@talentconnect.africa', 'org': 'TalentConnect Africa', 'status': 'Active', 'last_login': '2023-10-27 09:00 AM'},
+        {'name': 'Fatima Aliyu', 'type': 'Admin', 'email': 'fatima.a@dompell.africa', 'org': 'Dompell Africa', 'status': 'Active', 'last_login': '2023-10-27 09:00 AM'},
     ]
 
     table = ui.table(columns=columns, rows=rows, row_key='name').classes('w-full body-text')

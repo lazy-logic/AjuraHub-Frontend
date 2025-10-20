@@ -118,13 +118,14 @@ def _create_classic_sidenav():
         with ui.column().classes('flex-1'):
             # Brand Header
             with ui.row().classes('flex items-center gap-3 p-6').style('border-bottom: 1px solid rgba(0, 85, 184, 0.1);'):
-                # ui.icon('hub', size='2rem').style('color: #0055B8 !important;')
+
                 # ui.label('TalentConnect').classes('sub-heading brand-charcoal')
             
                 # Navigation Menu
                 with ui.column().classes('p-6 gap-2'):
                     _classic_nav_link('Dashboard', 'dashboard', active=True)
                     _classic_nav_link('Profile', 'person')
+                    _classic_nav_link('My Documents', 'folder', url='/trainee/documents')
                     _classic_nav_link('Applications', 'description')
                     _classic_nav_link('Learning Progress', 'school')
                     _classic_nav_link('Job Matches', 'work')
@@ -141,14 +142,17 @@ def _create_classic_sidenav():
                     ui.label('Software Developer').classes('caption brand-slate')
                 ui.button().props('icon=more_vert flat round size=sm').classes('brand-slate')
 
-def _classic_nav_link(text: str, icon: str, active: bool = False):
+def _classic_nav_link(text: str, icon: str, active: bool = False, url: str = None):
     """Creates a classic navigation link following brand guidelines."""
     link_class = 'classic-nav-link brand-charcoal'
     if active:
         link_class += ' active'
     
-    with ui.row().classes(link_class):
-        ui.icon(icon, size='1.2rem')
+    def navigate():
+        if url:
+            ui.navigate.to(url)
+    
+    with ui.row().classes(link_class).on('click', navigate):
         ui.label(text).classes('body-text')
 
 def _create_classic_dashboard_content():
@@ -165,6 +169,7 @@ def _create_classic_dashboard_content():
             
             with ui.row().classes('gap-3'):
                 ui.button('Quick Apply', icon='flash_on').classes('brand-primary-bg text-white px-6 py-3 rounded button-label')
+                ui.button('My Documents', icon='folder', on_click=lambda: ui.navigate.to('/trainee/documents')).classes('brand-primary-bg text-white px-6 py-3 rounded button-label')
                 ui.button().props('icon=notifications outline round').classes('p-3 brand-primary')
 
         # Stats Overview Cards
@@ -210,7 +215,7 @@ def _create_classic_dashboard_content():
                                     </div>
                                 </div>
                             </div>
-                        ''')
+                        ''', sanitize=lambda s: s)
                     
                     with ui.column().classes('gap-3'):
                         _classic_skill_progress_item('JavaScript Mastery', 90, '#0055B8')
@@ -233,7 +238,7 @@ def _create_classic_dashboard_content():
 def _create_classic_stat_card(title, value, icon, change):
     """Creates a classic statistics card following brand guidelines."""
     with ui.card().classes('classic-card p-6 text-center'):
-        ui.icon(icon).classes('text-4xl brand-primary mb-3')
+
         ui.label(value).classes('heading-2 brand-charcoal')
         ui.label(title).classes('caption brand-slate mb-2')
         ui.label(change).classes('caption brand-primary')
@@ -267,7 +272,7 @@ def _classic_skill_progress_item(skill, percentage, color):
                     <div class="h-2 rounded-full transition-all duration-300" 
                          style="width: {percentage}%; background-color: {color};"></div>
                 </div>
-            ''')
+            ''', sanitize=lambda s: s)
 
 
 def _classic_job_card(title, company, location, salary, skills):
@@ -283,8 +288,8 @@ def _classic_job_card(title, company, location, salary, skills):
             ui.label(company).classes('body-text brand-primary')
             
             with ui.row().classes('items-center gap-4 caption brand-slate'):
-                ui.html(f'<i class="material-icons text-sm">location_on</i> {location}')
-                ui.html(f'<i class="material-icons text-sm">attach_money</i> {salary}')
+                ui.html(f'<i class="material-icons text-sm">location_on</i> {location}', sanitize=lambda s: s)
+                ui.html(f'<i class="material-icons text-sm">attach_money</i> {salary}', sanitize=lambda s: s)
             
             # Skills Tags
             with ui.row().classes('gap-2 flex-wrap'):

@@ -1,4 +1,4 @@
 """
-TalentConnect Africa Platform
+Dompell Africa Platform
 Main application package
 """

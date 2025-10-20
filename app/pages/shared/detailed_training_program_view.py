@@ -142,7 +142,7 @@ def detailed_training_program_view_page():
                 with ui.row().classes('items-start gap-8'):
                     # Program logo/image
                     with ui.element('div').classes('w-32 h-32 bg-white bg-opacity-20 rounded-lg flex items-center justify-center'):
-                        ui.icon('school', size='4rem').classes('text-white')
+                        pass  # Program logo was removed
                     
                     with ui.column().classes('flex-1'):
                         # Program title and basic info
@@ -152,15 +152,15 @@ def detailed_training_program_view_page():
                         # Program stats
                         with ui.row().classes('gap-6 mb-4'):
                             with ui.row().classes('items-center'):
-                                ui.icon('star', size='1.5rem').classes('text-yellow-300 mr-2')
+
                                 ui.label('4.8 (847 reviews)').classes('body-text')
                             
                             with ui.row().classes('items-center'):
-                                ui.icon('groups', size='1.5rem').classes('text-white mr-2')
+
                                 ui.label('2,847 students').classes('body-text')
                             
                             with ui.row().classes('items-center'):
-                                ui.icon('schedule', size='1.5rem').classes('text-white mr-2')
+
                                 ui.label('15 weeks').classes('body-text')
                         
                         # Badges
@@ -182,7 +182,7 @@ def detailed_training_program_view_page():
                 # About the program
                 with ui.card().classes('program-card'):
                     with ui.row().classes('flex items-center mb-6'):
-                        ui.icon('info', size='2rem').classes('brand-primary')
+
                         ui.label('About This Program').classes('sub-heading brand-charcoal ml-3')
                     
                     ui.label('''Transform your career with our comprehensive 15-week Full Stack Web Development Bootcamp. This intensive program is designed to take you from beginner to job-ready developer, covering both frontend and backend technologies.
@@ -208,13 +208,13 @@ By the end of this program, you'll have built a portfolio of projects and gained
                     with ui.column().classes('gap-2'):
                         for skill in skills:
                             with ui.row().classes('items-start'):
-                                ui.icon('check_circle', size='1.5rem').classes('text-green-600 mr-3 mt-1')
+
                                 ui.label(skill).classes('body-text brand-slate')
 
                 # Curriculum
                 with ui.card().classes('program-card'):
                     with ui.row().classes('flex items-center mb-6'):
-                        ui.icon('menu_book', size='2rem').classes('brand-primary')
+
                         ui.label('Curriculum (15 Weeks)').classes('sub-heading brand-charcoal ml-3')
                     
                     curriculum = [
@@ -249,7 +249,7 @@ By the end of this program, you'll have built a portfolio of projects and gained
                         with ui.element('div').classes('curriculum-item'):
                             with ui.row().classes('items-center justify-between mb-2'):
                                 ui.label(f"{module['week']}: {module['title']}").classes('body-text font-semibold brand-charcoal')
-                                ui.icon('expand_more', size='1.5rem').classes('brand-slate')
+
                             
                             with ui.row().classes('flex-wrap gap-2'):
                                 for topic in module['topics']:
@@ -259,7 +259,7 @@ By the end of this program, you'll have built a portfolio of projects and gained
                 # Instructors
                 with ui.card().classes('program-card'):
                     with ui.row().classes('flex items-center mb-6'):
-                        ui.icon('school', size='2rem').classes('brand-primary')
+
                         ui.label('Meet Your Instructors').classes('sub-heading brand-charcoal ml-3')
                     
                     with ui.row().classes('gap-6'):
@@ -295,11 +295,11 @@ By the end of this program, you'll have built a portfolio of projects and gained
                 # Video preview
                 with ui.card().classes('program-card'):
                     with ui.row().classes('flex items-center mb-6'):
-                        ui.icon('play_circle', size='2rem').classes('brand-primary')
+
                         ui.label('Program Preview').classes('sub-heading brand-charcoal ml-3')
                     
                     with ui.element('div').classes('video-thumbnail w-full mb-4'):
-                        ui.icon('play_circle_filled', size='4rem').classes('brand-primary')
+                        pass  # Video thumbnail icon was removed
                     
                     ui.label('Watch: A Day in the Life of a Bootcamp Student').classes('body-text font-semibold brand-charcoal mb-2')
                     ui.label('See what it\'s like to be part of our intensive bootcamp program').classes('caption brand-slate')
@@ -312,31 +312,31 @@ By the end of this program, you'll have built a portfolio of projects and gained
                     
                     with ui.column().classes('gap-4'):
                         with ui.row().classes('items-center'):
-                            ui.icon('schedule', size='1.5rem').classes('brand-slate mr-3')
+
                             with ui.column():
                                 ui.label('Duration').classes('caption brand-slate')
                                 ui.label('15 weeks (375 hours)').classes('body-text brand-charcoal')
                         
                         with ui.row().classes('items-center'):
-                            ui.icon('event', size='1.5rem').classes('brand-slate mr-3')
+
                             with ui.column():
                                 ui.label('Next Cohort').classes('caption brand-slate')
                                 ui.label('January 15, 2024').classes('body-text brand-charcoal')
                         
                         with ui.row().classes('items-center'):
-                            ui.icon('access_time', size='1.5rem').classes('brand-slate mr-3')
+
                             with ui.column():
                                 ui.label('Schedule').classes('caption brand-slate')
                                 ui.label('Mon-Fri, 9 AM - 5 PM').classes('body-text brand-charcoal')
                         
                         with ui.row().classes('items-center'):
-                            ui.icon('location_on', size='1.5rem').classes('brand-slate mr-3')
+
                             with ui.column():
                                 ui.label('Format').classes('caption brand-slate')
                                 ui.label('Hybrid (Online + On-site)').classes('body-text brand-charcoal')
                         
                         with ui.row().classes('items-center'):
-                            ui.icon('payments', size='1.5rem').classes('brand-slate mr-3')
+
                             with ui.column():
                                 ui.label('Tuition').classes('caption brand-slate')
                                 ui.label('KSh 120,000').classes('body-text brand-charcoal font-semibold')
@@ -356,13 +356,13 @@ By the end of this program, you'll have built a portfolio of projects and gained
                     with ui.column().classes('gap-2'):
                         for prereq in prerequisites:
                             with ui.row().classes('items-start'):
-                                ui.icon('check', size='1rem').classes('text-green-600 mr-3 mt-1')
+
                                 ui.label(prereq).classes('caption brand-slate')
 
                 # Application deadline
                 with ui.card().classes('program-card bg-red-50 border border-red-200'):
                     with ui.row().classes('items-center mb-3'):
-                        ui.icon('schedule', size='2rem').classes('text-red-600')
+
                         ui.label('Application Deadline').classes('body-text font-semibold text-red-800 ml-3')
                     
                     ui.label('December 31, 2023').classes('sub-heading text-red-800 mb-2')
@@ -397,7 +397,7 @@ By the end of this program, you'll have built a portfolio of projects and gained
                                     ui.label(testimonial['name']).classes('caption font-semibold brand-charcoal')
                                     with ui.row().classes('gap-1'):
                                         for i in range(testimonial['rating']):
-                                            ui.icon('star', size='1rem').classes('rating-star')
+                                            pass  # Star icon was removed
                             
                             ui.label(testimonial['comment']).classes('caption brand-slate mb-1')
                             ui.label(testimonial['date']).classes('caption text-gray-400')
@@ -428,7 +428,7 @@ By the end of this program, you'll have built a portfolio of projects and gained
                     for program in similar_programs:
                         with ui.card().classes('flex-1 p-4 border'):
                             with ui.element('div').classes('w-full h-32 bg-gray-100 rounded-lg mb-4 flex items-center justify-center'):
-                                ui.icon('school', size='3rem').classes('text-gray-400')
+                                pass  # Program thumbnail icon was removed
                             
                             ui.label(program).classes('body-text font-semibold brand-charcoal mb-2')
                             ui.label('Moringa School').classes('caption brand-slate mb-3')

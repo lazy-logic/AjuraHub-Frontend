@@ -1,5 +1,5 @@
 """
-Sample data for TalentConnect Africa
+Sample data for Dompell Africa
 This will be replaced with database queries later
 """
 

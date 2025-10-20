@@ -171,7 +171,7 @@ def trainee_onboarding_availability_page():
                 # Working days
                 with ui.card().classes('availability-card'):
                     with ui.row().classes('flex items-center mb-6'):
-                        ui.icon('calendar_today', size='2rem').classes('brand-primary')
+
                         ui.label('Preferred Working Days').classes('sub-heading brand-charcoal ml-3')
                     
                     ui.label('Select the days you\'re available to work or attend training').classes('body-text brand-slate mb-4')
@@ -186,7 +186,7 @@ def trainee_onboarding_availability_page():
                 # Working hours
                 with ui.card().classes('availability-card'):
                     with ui.row().classes('flex items-center mb-6'):
-                        ui.icon('schedule', size='2rem').classes('brand-primary')
+
                         ui.label('Preferred Working Hours').classes('sub-heading brand-charcoal ml-3')
                     
                     ui.label('What time of day works best for you?').classes('body-text brand-slate mb-4')
@@ -221,7 +221,7 @@ def trainee_onboarding_availability_page():
                 # Location preferences
                 with ui.card().classes('availability-card'):
                     with ui.row().classes('flex items-center mb-6'):
-                        ui.icon('location_on', size='2rem').classes('brand-primary')
+
                         ui.label('Location Preferences').classes('sub-heading brand-charcoal ml-3')
                     
                     ui.label('Where are you comfortable working or attending training?').classes('body-text brand-slate mb-4')
@@ -230,36 +230,36 @@ def trainee_onboarding_availability_page():
                     with ui.element('div').classes('location-option selected'):
                         with ui.row().classes('items-center justify-between'):
                             with ui.row().classes('items-center'):
-                                ui.icon('home', size='1.5rem').classes('brand-primary mr-4')
+
                                 with ui.column():
                                     ui.label('Remote Work').classes('body-text font-semibold brand-charcoal')
                                     ui.label('Work from home or any location with internet').classes('caption brand-slate')
-                            ui.icon('check_circle', size='1.5rem').classes('text-green-600')
+
                     
                     # On-site work
                     with ui.element('div').classes('location-option'):
                         with ui.row().classes('items-center justify-between'):
                             with ui.row().classes('items-center'):
-                                ui.icon('business', size='1.5rem').classes('brand-slate mr-4')
+
                                 with ui.column():
                                     ui.label('On-site Work').classes('body-text font-semibold brand-charcoal')
                                     ui.label('Work at company offices or training centers').classes('caption brand-slate')
-                            ui.icon('radio_button_unchecked', size='1.5rem').classes('text-gray-400')
+
                     
                     # Hybrid work
                     with ui.element('div').classes('location-option'):
                         with ui.row().classes('items-center justify-between'):
                             with ui.row().classes('items-center'):
-                                ui.icon('swap_horiz', size='1.5rem').classes('brand-slate mr-4')
+
                                 with ui.column():
                                     ui.label('Hybrid Work').classes('body-text font-semibold brand-charcoal')
                                     ui.label('Combination of remote and on-site work').classes('caption brand-slate')
-                            ui.icon('radio_button_unchecked', size='1.5rem').classes('text-gray-400')
+
 
                 # Travel preferences
                 with ui.card().classes('availability-card'):
                     with ui.row().classes('flex items-center mb-6'):
-                        ui.icon('flight', size='2rem').classes('brand-primary')
+
                         ui.label('Travel & Relocation').classes('sub-heading brand-charcoal ml-3')
                     
                     ui.label('Are you open to travel or relocation for opportunities?').classes('body-text brand-slate mb-4')
@@ -293,19 +293,19 @@ def trainee_onboarding_availability_page():
                     
                     with ui.element('div').classes('availability-summary'):
                         with ui.row().classes('items-center mb-3'):
-                            ui.icon('schedule', size='1.5rem').classes('brand-primary mr-3')
+
                             ui.label('40 hours/week').classes('body-text font-semibold brand-charcoal')
                         
                         with ui.row().classes('items-center mb-3'):
-                            ui.icon('calendar_today', size='1.5rem').classes('brand-primary mr-3')
+
                             ui.label('Mon - Fri').classes('body-text font-semibold brand-charcoal')
                         
                         with ui.row().classes('items-center mb-3'):
-                            ui.icon('access_time', size='1.5rem').classes('brand-primary mr-3')
+
                             ui.label('9:00 AM - 5:00 PM').classes('body-text font-semibold brand-charcoal')
                         
                         with ui.row().classes('items-center'):
-                            ui.icon('home', size='1.5rem').classes('brand-primary mr-3')
+
                             ui.label('Remote Preferred').classes('body-text font-semibold brand-charcoal')
 
                 # Additional preferences
@@ -347,14 +347,14 @@ def trainee_onboarding_availability_page():
                     
                     with ui.column().classes('gap-3'):
                         with ui.row().classes('items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50'):
-                            ui.icon('event', size='2rem').classes('brand-primary mr-4')
+
                             with ui.column().classes('flex-1'):
                                 ui.label('Google Calendar').classes('body-text font-semibold brand-charcoal')
                                 ui.label('Sync with Google Calendar').classes('caption brand-slate')
                             ui.button('Connect').props('flat').style('color: #0055B8; font-family: "Raleway", sans-serif; font-weight: 600;')
                         
                         with ui.row().classes('items-center p-3 border border-gray-200 rounded-lg cursor-pointer hover:bg-gray-50'):
-                            ui.icon('email', size='2rem').classes('brand-slate mr-4')
+
                             with ui.column().classes('flex-1'):
                                 ui.label('Outlook Calendar').classes('body-text font-semibold brand-charcoal')
                                 ui.label('Sync with Outlook Calendar').classes('caption brand-slate')

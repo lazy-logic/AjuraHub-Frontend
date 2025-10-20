@@ -164,7 +164,7 @@ def company_billing_subscription_page():
                 with ui.card().classes('billing-card'):
                     with ui.row().classes('flex items-center justify-between mb-6'):
                         with ui.row().classes('items-center'):
-                            ui.icon('workspace_premium', size='2rem').classes('brand-primary')
+
                             ui.label('Current Subscription').classes('sub-heading brand-charcoal ml-3')
                         
                         ui.element('div').classes('plan-badge').add(ui.label('ACTIVE'))
@@ -183,7 +183,7 @@ def company_billing_subscription_page():
                                 'Custom branding options'
                             ]:
                                 with ui.row().classes('items-center mb-1'):
-                                    ui.icon('check_circle', size='1rem').classes('feature-check mr-2')
+
                                     ui.label(feature).classes('caption brand-slate')
                         
                         with ui.column().classes('text-right'):
@@ -195,7 +195,7 @@ def company_billing_subscription_page():
                 # Available plans
                 with ui.card().classes('billing-card'):
                     with ui.row().classes('flex items-center mb-6'):
-                        ui.icon('plans', size='2rem').classes('brand-primary')
+
                         ui.label('Available Plans').classes('sub-heading brand-charcoal ml-3')
                     
                     with ui.row().classes('gap-6'):
@@ -213,7 +213,7 @@ def company_billing_subscription_page():
                                 'Standard features'
                             ]:
                                 with ui.row().classes('items-center mb-2'):
-                                    ui.icon('check', size='1rem').classes('feature-check mr-2')
+
                                     ui.label(feature).classes('caption brand-slate')
                             
                             ui.button('Downgrade').props('outlined').classes('w-full mt-4').style('border-color: #0055B8; color: #0055B8; font-family: "Raleway", sans-serif; font-weight: 600;')
@@ -235,7 +235,7 @@ def company_billing_subscription_page():
                                 'Custom branding'
                             ]:
                                 with ui.row().classes('items-center mb-2'):
-                                    ui.icon('check', size='1rem').classes('feature-check mr-2')
+
                                     ui.label(feature).classes('caption brand-slate')
                             
                             ui.button('Current Plan').props('flat disabled').classes('w-full mt-4').style('font-family: "Raleway", sans-serif; font-weight: 600;')
@@ -254,7 +254,7 @@ def company_billing_subscription_page():
                                 'Full customization'
                             ]:
                                 with ui.row().classes('items-center mb-2'):
-                                    ui.icon('check', size='1rem').classes('feature-check mr-2')
+
                                     ui.label(feature).classes('caption brand-slate')
                             
                             ui.button('Upgrade').classes('w-full mt-4').style('background-color: #0055B8; color: white; font-family: "Raleway", sans-serif; font-weight: 600;')
@@ -263,7 +263,7 @@ def company_billing_subscription_page():
                 with ui.card().classes('billing-card'):
                     with ui.row().classes('flex items-center justify-between mb-6'):
                         with ui.row().classes('items-center'):
-                            ui.icon('payment', size='2rem').classes('brand-primary')
+
                             ui.label('Payment Methods').classes('sub-heading brand-charcoal ml-3')
                         
                         ui.button('Add Method').props('flat').style('color: #0055B8; font-family: "Raleway", sans-serif; font-weight: 600;')
@@ -271,7 +271,7 @@ def company_billing_subscription_page():
                     # Credit card
                     with ui.element('div').classes('payment-method active'):
                         with ui.row().classes('items-center'):
-                            ui.icon('credit_card', size='2rem').classes('brand-primary mr-4')
+
                             with ui.column():
                                 ui.label('Visa ending in 4242').classes('body-text font-semibold brand-charcoal')
                                 ui.label('Expires 12/2026').classes('caption brand-slate')
@@ -283,7 +283,7 @@ def company_billing_subscription_page():
                     # Bank account
                     with ui.element('div').classes('payment-method'):
                         with ui.row().classes('items-center'):
-                            ui.icon('account_balance', size='2rem').classes('brand-slate mr-4')
+
                             with ui.column():
                                 ui.label('Bank Account ending in 7890').classes('body-text font-semibold brand-charcoal')
                                 ui.label('Chase Bank').classes('caption brand-slate')
@@ -345,14 +345,14 @@ def company_billing_subscription_page():
                     with ui.column().classes('gap-3'):
                         # Usage alert
                         with ui.row().classes('items-start p-3 bg-amber-50 border border-amber-200 rounded-lg'):
-                            ui.icon('warning', size='1.5rem').classes('text-amber-600 mr-3 mt-1')
+
                             with ui.column():
                                 ui.label('High Usage Alert').classes('body-text font-semibold text-amber-800')
                                 ui.label('You\'ve used 92% of your job posting limit this month.').classes('caption text-amber-700')
                         
                         # Payment reminder
                         with ui.row().classes('items-start p-3 bg-blue-50 border border-blue-200 rounded-lg'):
-                            ui.icon('schedule', size='1.5rem').classes('text-blue-600 mr-3 mt-1')
+
                             with ui.column():
                                 ui.label('Payment Due Soon').classes('body-text font-semibold text-blue-800')
                                 ui.label('Next payment of $299 due on March 15, 2024.').classes('caption text-blue-700')

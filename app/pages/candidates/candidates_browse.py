@@ -74,7 +74,7 @@ def _create_candidate_card(candidate):
                 ui.label(candidate['name']).classes('text-xl font-bold text-gray-900 mb-1')
                 ui.label(candidate['title']).classes('text-lg text-gray-600 mb-2')
                 with ui.row().classes('items-center text-sm text-gray-500'):
-                    ui.icon('location_on').classes('text-sm mr-1')
+
                     ui.label(candidate['location'])
 
         # Bio/Summary

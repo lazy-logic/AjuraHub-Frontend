@@ -87,13 +87,13 @@ def _create_new_hero_section():
                 <rect width="100" height="100" fill="url(#dots)"/>
             </svg>
         </div>
-        ''')
+        ''', sanitize=lambda s: s)
         
         with ui.row().classes('w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-16 px-6 relative z-10'):
             # Left side content
             with ui.column().classes('text-left space-y-8 fade-in-up'):
                 # Accent line
-                ui.html('<div class="w-20 h-2 brand-primary-bg rounded-full mb-6 accent-line"></div>')
+                ui.html('<div class="w-20 h-2 brand-primary-bg rounded-full mb-6 accent-line"></div>', sanitize=lambda s: s)
                 
                 ui.label('Connecting African Talent').classes('hero-text brand-charcoal mb-2')
                 ui.label('to Global Opportunities').classes('hero-text brand-primary mb-6')
@@ -109,7 +109,6 @@ def _create_new_hero_section():
                 # Search bar
                 with ui.card().classes('mt-10 p-3 shadow-xl border-2 border-gray-100'):
                     with ui.row().classes('items-center gap-3 w-full'):
-                        ui.icon('search').classes('text-xl brand-primary')
                         ui.input(placeholder='Search jobs, skills, or companies...').classes('flex-grow border-0 focus:ring-0 text-base')
                         ui.button('Search', on_click=lambda: ui.navigate.to('/search')).classes('px-6 py-2 brand-primary-bg text-white button-label rounded-lg hover:opacity-90 transition-all whitespace-nowrap')
                 
@@ -128,7 +127,6 @@ def _create_new_hero_section():
                 # Floating badge
                 with ui.card().classes('absolute -bottom-6 -left-6 bg-white p-6 shadow-2xl'):
                     with ui.row().classes('items-center gap-4'):
-                        ui.icon('verified').classes('text-5xl brand-primary')
                         with ui.column().classes('gap-0'):
                             ui.label('Trusted Platform').classes('sub-heading-2 brand-charcoal')
                             ui.label('Join 50K+ professionals').classes('button-label brand-slate')
@@ -141,43 +139,44 @@ def _create_minimal_stat(value: str, label: str):
 
 
 def _create_new_about_section():
-    with ui.element('section').classes('py-24 brand-light-mist relative overflow-hidden'):
-        
-        with ui.row().classes('mx-auto max-w-7xl px-6 items-center grid grid-cols-1 md:grid-cols-2 gap-16 relative z-10'):
-            # Image side with overlay card
-            with ui.column().classes('relative order-2 md:order-1'):
-                ui.image('https://images.pexels.com/photos/9301758/pexels-photo-9301758.jpeg?auto=compress&cs=tinysrgb&w=1080&h=850&dpr=1').classes('rounded-2xl shadow-2xl w-full')
-                
-                # Overlay stats card
-                with ui.card().classes('absolute -bottom-8 -right-8 brand-primary-bg text-white p-8 shadow-2xl'):
-                    with ui.column().classes('gap-4'):
-                        with ui.row().classes('items-center gap-3'):
-                            ui.icon('trending_up', color='white').classes('text-4xl')
-                            with ui.column().classes('gap-0'):
-                                ui.label('98%').classes('heading-2 text-white')
-                                ui.label('Success Rate').classes('button-label text-white opacity-90')
-                        ui.html('<div class="w-full h-px bg-white/30"></div>')
-                        ui.label('Trusted by thousands across Africa').classes('button-label text-white')
-            
-            # Content side
-            with ui.column().classes('text-left space-y-6 order-1 md:order-2'):
+    with ui.element('section').classes('py-28 bg-white relative overflow-hidden'):
+        # Decorative background dots
+        ui.html('''
+        <div class="absolute top-0 left-0 w-96 h-96 opacity-5 z-0">
+            <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                <pattern id="dots2" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                    <circle cx="2" cy="2" r="2" fill="#0055B8"/>
+                </pattern>
+                <rect width="100" height="100" fill="url(#dots2)"/>
+            </svg>
+        </div>
+        ''', sanitize=lambda s: s)
+        with ui.row().classes('mx-auto max-w-7xl px-6 grid grid-cols-1 md:grid-cols-2 gap-20 items-center relative z-10'):
+            # Left: Modern image grid
+            with ui.column().classes('gap-6 relative order-2 md:order-1'):
+                with ui.row().classes('grid grid-cols-2 gap-4'):
+                    ui.image('https://images.pexels.com/photos/9301253/pexels-photo-9301253.jpeg').classes('rounded-2xl shadow-lg col-span-2 h-80 object-cover')
+                    ui.image('https://images.pexels.com/photos/1181355/pexels-photo-1181355.jpeg?w=400').classes('rounded-2xl shadow-lg h-48 object-cover')
+                    ui.image('https://images.pexels.com/photos/8554068/pexels-photo-8554068.jpeg?w=400').classes('rounded-2xl shadow-lg h-48 object-cover')
+                # Floating badge
+                with ui.card().classes('absolute -bottom-8 -right-8 bg-white p-6 shadow-2xl border-2 border-blue-100'):
+                    with ui.column().classes('gap-0'):
+                        ui.label('Modern, Global, African').classes('sub-heading-2 brand-primary')
+                        ui.label('Diverse Talent, Real Impact').classes('button-label brand-slate')
+            # Right: Content
+            with ui.column().classes('text-left space-y-7 order-1 md:order-2'):
                 # Small badge
                 with ui.row().classes('inline-flex items-center gap-2 bg-blue-50 px-4 py-2 rounded-full w-fit'):
-                    ui.icon('info').classes('text-sm brand-primary')
                     ui.label('About Us').classes('button-label brand-primary')
-                
-                ui.label('Empowering Africa\'s Workforce').classes('heading-1 brand-charcoal')
-                ui.label('A Catalyst for Growth and Opportunity').classes('sub-heading-2 brand-primary')
-                
-                ui.label('TalentConnect Africa is committed to bridging gaps and fostering development across the continent. We connect African trainees, employers, and institutions to global opportunities and a skilled workforce, driving economic growth and empowering a new generation of professionals.').classes('body-text brand-slate')
-                
-                # Feature list
-                with ui.column().classes('gap-3 mt-4'):
-                    _create_about_feature('Pan-African reach connecting 15+ countries')
-                    _create_about_feature('Verified employers and quality job listings')
-                    _create_about_feature('Skills development and training programs')
-                   
-                
+                ui.label('Empowering Africa’s Workforce').classes('heading-1 brand-charcoal')
+                ui.label('A Modern Platform for Growth & Opportunity').classes('sub-heading-2 brand-primary')
+                ui.label('TalentConnect Africa is bridging gaps and fostering development across the continent. We connect trainees, employers, and institutions to global opportunities and a skilled workforce, driving economic growth and empowering a new generation of professionals.').classes('body-text brand-slate')
+                # Modern feature grid
+                with ui.row().classes('grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4'):
+                    _create_about_feature('Pan-African reach: 15+ countries')
+                    _create_about_feature('Verified employers & quality jobs')
+                    _create_about_feature('Skills development & training')
+                    _create_about_feature('Strategic partnerships')
                 with ui.row().classes('gap-4 mt-8'):
                     ui.button('Learn More About Us →', on_click=lambda: ui.navigate.to('/about')).classes('px-6 py-3 brand-primary-bg text-white button-label rounded-lg hover:opacity-90 transition-all')
                     ui.button('Contact Us', on_click=lambda: ui.navigate.to('/contact')).classes('px-6 py-3 border-2 border-gray-300 bg-white brand-charcoal button-label rounded-lg hover:border-gray-400 transition-all')
@@ -185,7 +184,6 @@ def _create_new_about_section():
 def _create_about_feature(text: str):
     """Creates a feature item with checkmark"""
     with ui.row().classes('items-start gap-3'):
-        ui.icon('check_circle').classes('text-xl mt-0.5 brand-primary')
         ui.label(text).classes('body-text brand-slate')
 
 def _create_new_features_section():
@@ -194,7 +192,6 @@ def _create_new_features_section():
             # Section header
             with ui.column().classes('mb-16'):
                 with ui.row().classes('inline-flex items-center gap-2 bg-blue-50 px-4 py-2 rounded-full mx-auto mb-4'):
-                    # ui.icon('stars').classes('text-sm brand-primary')
                     ui.label('Who We Serve').classes('button-label brand-primary')
                 
                 ui.label('Built for Everyone').classes('heading-1 brand-charcoal')
@@ -209,11 +206,11 @@ def _create_new_features_section():
 def _new_feature_card(icon: str, title: str, items: list, button_text: str):
     with ui.card().classes('relative flex flex-col items-center p-5 bg-gradient-to-br from-white to-gray-50 rounded-xl border-2 border-gray-100 hover:border-emerald-300 hover:shadow-xl transition-all duration-300 overflow-hidden'):
         # Decorative corner element
-        ui.html('<div class="absolute top-0 right-0 w-16 h-16 bg-blue-50 rounded-bl-full"></div>')
+        ui.html('<div class="absolute top-0 right-0 w-16 h-16 bg-blue-50 rounded-bl-full"></div>', sanitize=lambda s: s)
         
-        # Icon
+        # Icon removed
         with ui.row().classes('relative z-10 mb-3 w-full justify-center'):
-            ui.icon(icon).classes('text-3xl mx-auto brand-primary')
+            pass
         
         # Title
         ui.label(title).classes('sub-heading-2 brand-charcoal mb-3 text-center w-full')
@@ -231,7 +228,7 @@ def _create_how_it_works_section():
         with ui.column().classes('mx-auto max-w-7xl px-6'):
             # Section header
             with ui.column().classes('text-center mb-16'):
-                ui.html('<div class="w-16 h-1 brand-primary-bg mx-auto mb-6"></div>')
+                ui.html('<div class="w-16 h-1 brand-primary-bg mx-auto mb-6"></div>', sanitize=lambda s: s)
                 ui.label('How It Works').classes('heading-2 brand-charcoal mb-4')
                 ui.label('Three simple steps to launch your career').classes('sub-heading-2 brand-slate')
             
@@ -246,8 +243,7 @@ def _how_it_works_step(number: str, title: str, description: str, icon: str):
         # Number
         ui.label(number).classes('heading-2 brand-primary mb-4')
         
-        # Icon
-        ui.icon(icon).classes('text-3xl mb-3 brand-slate')
+        # Icon removed
         
         # Content
         ui.label(title).classes('sub-heading-2 brand-charcoal mb-2')
@@ -258,7 +254,7 @@ def _create_why_choose_us_section():
         with ui.column().classes('mx-auto max-w-7xl px-6'):
             # Section header
             with ui.column().classes('text-center mb-12'):
-                ui.html('<div class="w-16 h-1 brand-primary-bg mx-auto mb-6"></div>')
+                ui.html('<div class="w-16 h-1 brand-primary-bg mx-auto mb-6"></div>', sanitize=lambda s: s)
                 ui.label('Why Choose TalentConnect Africa').classes('heading-2 text-white mb-4')
                 ui.label('We connect talented professionals with leading companies across Africa, providing a secure, efficient, and supportive platform for career growth. Our commitment to quality, safety, and success sets us apart.').classes('sub-heading-2 text-gray-300 max-w-4xl mx-auto')
             
@@ -277,26 +273,21 @@ def _create_why_choose_us_section():
 
 def _why_stat_redesigned(value: str, label: str, icon: str):
     with ui.column().classes('text-center px-4'):
-        ui.icon(icon).classes('text-4xl mb-3 text-blue-400')
         ui.label(value).classes('heading-2 text-white mb-1')
         ui.label(label).classes('button-label text-gray-400')
 
 def _why_feature_detailed(icon: str, title: str, description: str):
     with ui.card().classes('bg-gray-800 p-8 border border-gray-700 rounded-lg hover:border-blue-400 hover:shadow-xl transition-all'):
-        ui.icon(icon).classes('text-5xl mb-4 text-blue-400')
         ui.label(title).classes('sub-heading brand-light-mist mb-4')
         ui.label(description).classes('body-text text-gray-300')
 
 def _create_cta_section():
     with ui.element('section').classes('py-24 brand-primary-bg text-white relative overflow-hidden'):
         # Decorative elements
-        ui.html('<div class="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>')
-        ui.html('<div class="absolute bottom-0 left-0 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>')
+        ui.html('<div class="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>', sanitize=lambda s: s)
+        ui.html('<div class="absolute bottom-0 left-0 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>', sanitize=lambda s: s)
         
         with ui.column().classes('mx-auto max-w-4xl px-6 text-center relative z-10'):
-            # Icon
-            with ui.row().classes('w-20 h-20 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mx-auto mb-6'):
-                ui.icon('rocket_launch', color='white').classes('text-5xl')
             
             ui.label('Ready to Get Started?').classes('heading-1 text-white')
             ui.label('Join TalentConnect Africa today and unlock a world of opportunities. Connect with top employers, access training programs, and build your career.').classes('mt-6 sub-heading-2 text-white opacity-90 max-w-2xl mx-auto')
@@ -308,11 +299,8 @@ def _create_cta_section():
             # Trust indicators
             with ui.row().classes('mt-12 gap-8 justify-center flex-wrap opacity-80'):
                 with ui.row().classes('items-center gap-2'):
-                    ui.icon('verified', color='white').classes('text-2xl')
                     ui.label('Verified Employers').classes('button-label text-white')
                 with ui.row().classes('items-center gap-2'):
-                    ui.icon('security', color='white').classes('text-2xl')
                     ui.label('Secure Platform').classes('button-label text-white')
                 with ui.row().classes('items-center gap-2'):
-                    ui.icon('support', color='white').classes('text-2xl')
                     ui.label('24/7 Support').classes('button-label text-white')

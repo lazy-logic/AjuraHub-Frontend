@@ -3,10 +3,145 @@ Trainee Onboarding - Portfolio Upload - TalentConnect Africa
 Portfolio upload with file management and project showcases using brand guidelines.
 """
 
-from nicegui import ui
+from nicegui import ui, app
+import asyncio
 
 def trainee_onboarding_portfolio_page():
-    """Creates the trainee onboarding portfolio upload page with brand guidelines and icon fixes."""
+    """Creates the trainee onboarding portfolio upload page with brand guidelines and functionality."""
+    
+    # Get user data from session
+    user = app.storage.user.get('user', {})
+    user_id = user.get('id')
+    token = app.storage.user.get('token')
+    
+    if not user_id or not token:
+        ui.notify('Please log in to continue', type='warning')
+        ui.navigate.to('/auth?tab=login')
+        return
+    
+    # Initialize API service
+    from app.services.api_service import api_service
+    api_service.set_auth_token(token)
+    
+    # State management
+    form_data = {
+        'projects': [],
+        'uploaded_files': [],
+        'cv_url': '',
+        'certificates': [],
+        'skills': [],
+        'selected_category': 'Projects'
+    }
+    
+    current_project = {
+        'title': '',
+        'description': '',
+        'technologies': '',
+        'github_url': '',
+        'demo_url': '',
+        'category': 'Web Development'
+    }
+    
+    # File upload handler
+    async def upload_file_to_s3(file_content, file_name, file_type):
+        """Upload file to S3 via API."""
+        try:
+            print(f"[ONBOARDING] Uploading: {file_name}")
+            files = {'file': (file_name, file_content, file_type)}
+            response = api_service._make_request('POST', '/upload', files=files)
+            
+            if response.ok:
+                # Construct S3 URL (backend doesn't return it)
+                import time
+                timestamp = int(time.time() * 1000)
+                file_extension = file_name.split('.')[-1] if '.' in file_name else 'pdf'
+                file_url = f"https://dompell-uploads.s3.amazonaws.com/trainee-files/{user_id}/{timestamp}.{file_extension}"
+                print(f"[ONBOARDING] File uploaded: {file_url}")
+                return file_url
+            return None
+        except Exception as e:
+            print(f"[ONBOARDING] Upload error: {e}")
+            return None
+    
+    # Handle file uploads
+    async def handle_file_upload(e):
+        try:
+            ui.notify(f'Uploading {e.name}...', type='info')
+            file_url = await upload_file_to_s3(e.content, e.name, e.type)
+            
+            if file_url:
+                file_info = {
+                    'name': e.name,
+                    'url': file_url,
+                    'size': len(e.content) if hasattr(e.content, '__len__') else 'Unknown',
+                    'category': form_data['selected_category']
+                }
+                form_data['uploaded_files'].append(file_info)
+                
+                # Update specific lists
+                if form_data['selected_category'] == 'Resume/CV':
+                    form_data['cv_url'] = file_url
+                elif form_data['selected_category'] == 'Certificates':
+                    form_data['certificates'].append(file_url)
+                
+                ui.notify(f'{e.name} uploaded successfully!', type='positive')
+                files_container.refresh()
+                stats_container.refresh()
+            else:
+                ui.notify('Upload failed', type='negative')
+        except Exception as ex:
+            print(f"[ERROR] File upload: {ex}")
+            ui.notify('Upload error', type='negative')
+    
+    # Add project
+    def add_project():
+        if not current_project['title'] or not current_project['description']:
+            ui.notify('Please fill in project title and description', type='warning')
+            return
+        
+        form_data['projects'].append(current_project.copy())
+        ui.notify('Project added!', type='positive')
+        
+        # Reset form
+        current_project['title'] = ''
+        current_project['description'] = ''
+        current_project['technologies'] = ''
+        current_project['github_url'] = ''
+        current_project['demo_url'] = ''
+        
+        title_input.set_value('')
+        desc_input.set_value('')
+        tech_input.set_value('')
+        github_input.set_value('')
+        demo_input.set_value('')
+        
+        stats_container.refresh()
+    
+    # Skip onboarding
+    def skip_onboarding():
+        ui.notify('Onboarding skipped. You can complete it later from your profile.', type='info')
+        ui.navigate.to('/candidates/dashboard')
+    
+    # Complete onboarding
+    def complete_onboarding():
+        completion = calculate_completion()
+        if completion < 50:
+            ui.notify('Please upload at least your CV and add one project to continue', type='warning')
+            return
+        
+        ui.notify('Profile setup complete! Redirecting to dashboard...', type='positive')
+        ui.navigate.to('/candidates/dashboard')
+    
+    # Calculate completion percentage
+    def calculate_completion():
+        score = 0
+        if form_data['cv_url']: score += 25
+        if len(form_data['projects']) >= 1: score += 25
+        if len(form_data['projects']) >= 2: score += 15
+        if len(form_data['certificates']) >= 1: score += 15
+        if any(p.get('demo_url') or p.get('github_url') for p in form_data['projects']): score += 10
+        if all(p.get('description') and len(p['description']) > 50 for p in form_data['projects']): score += 10
+        return score
     
     # Add brand fonts and icon protection
     ui.add_head_html('''
@@ -188,12 +323,12 @@ def trainee_onboarding_portfolio_page():
                 # File upload section
                 with ui.card().classes('portfolio-card'):
                     with ui.row().classes('flex items-center mb-6'):
-                        ui.icon('cloud_upload', size='2rem').classes('brand-primary')
+
                         ui.label('Upload Portfolio Items').classes('sub-heading brand-charcoal ml-3')
                     
                     # Upload zone
                     with ui.element('div').classes('upload-zone mb-6'):
-                        ui.icon('file_upload', size='3rem').classes('brand-primary mb-4')
+
                         ui.label('Drag & drop files here or click to browse').classes('body-text font-semibold brand-charcoal mb-2')
                         ui.label('Supported formats: PDF, DOC, PNG, JPG, GIF, ZIP (Max 10MB each)').classes('caption brand-slate')
                         ui.button('Choose Files').classes('mt-4 px-6 py-2').style('background-color: #0055B8; color: white; font-family: "Raleway", sans-serif; font-weight: 600;')
@@ -215,13 +350,13 @@ def trainee_onboarding_portfolio_page():
                         for category, icon in categories:
                             with ui.element('div').classes('project-category'):
                                 with ui.row().classes('items-center'):
-                                    ui.icon(icon, size='1rem').classes('brand-slate mr-2')
+
                                     ui.label(category).classes('caption font-semibold')
 
                 # Project details form
                 with ui.card().classes('portfolio-card'):
                     with ui.row().classes('flex items-center mb-6'):
-                        ui.icon('assignment', size='2rem').classes('brand-primary')
+
                         ui.label('Project Details').classes('sub-heading brand-charcoal ml-3')
                     
                     ui.label('Project Title *').classes('body-text font-semibold brand-charcoal mb-2')
@@ -256,7 +391,7 @@ def trainee_onboarding_portfolio_page():
                 with ui.card().classes('portfolio-card'):
                     with ui.row().classes('flex items-center justify-between mb-6'):
                         with ui.row().classes('items-center'):
-                            ui.icon('folder', size='2rem').classes('brand-primary')
+
                             ui.label('Uploaded Files').classes('sub-heading brand-charcoal ml-3')
                         ui.label('3 files uploaded').classes('caption brand-slate')
                     
@@ -269,12 +404,13 @@ def trainee_onboarding_portfolio_page():
                         with ui.element('div').classes('file-item'):
                             with ui.row().classes('items-center flex-1'):
                                 # File type icon
+                                # File type handling (icons removed)
                                 if 'zip' in filename:
-                                    ui.icon('folder_zip', size='1.5rem').classes('brand-primary mr-3')
+                                    pass  # zip icon was removed
                                 elif 'pdf' in filename:
-                                    ui.icon('picture_as_pdf', size='1.5rem').classes('text-red-600 mr-3')
+                                    pass  # pdf icon was removed
                                 else:
-                                    ui.icon('insert_drive_file', size='1.5rem').classes('brand-slate mr-3')
+                                    pass  # generic file icon was removed
                                 
                                 with ui.column():
                                     ui.label(filename).classes('body-text font-semibold brand-charcoal')
@@ -310,9 +446,9 @@ def trainee_onboarding_portfolio_page():
                     ]:
                         with ui.row().classes('items-center mb-2'):
                             if completed:
-                                ui.icon('check_circle', size='1rem').classes('text-green-600 mr-3')
+                                pass  # check icon was removed
                             else:
-                                ui.icon('radio_button_unchecked', size='1rem').classes('text-gray-400 mr-3')
+                                pass  # close icon was removed
                             ui.label(item).classes('caption brand-slate')
 
                 # Portfolio preview
@@ -353,7 +489,7 @@ def trainee_onboarding_portfolio_page():
                         'Show problem-solving and creative thinking'
                     ]):
                         with ui.row().classes('items-start mb-3'):
-                            ui.icon('lightbulb', size='1rem').classes('text-amber-500 mr-3 mt-1')
+
                             ui.label(tip).classes('caption brand-slate')
 
                 # Quick actions

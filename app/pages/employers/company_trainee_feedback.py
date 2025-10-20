@@ -120,7 +120,7 @@ def company_trainee_feedback_page():
                 # Trainee selection
                 with ui.card().classes('feedback-card'):
                     with ui.row().classes('flex items-center mb-6'):
-                        ui.icon('person', size='2rem').classes('brand-primary')
+
                         ui.label('Select Trainee').classes('sub-heading brand-charcoal ml-3')
                     
                     ui.select([
@@ -141,7 +141,7 @@ def company_trainee_feedback_page():
                 # Overall rating
                 with ui.card().classes('feedback-card'):
                     with ui.row().classes('flex items-center mb-6'):
-                        ui.icon('star', size='2rem').classes('brand-primary')
+
                         ui.label('Overall Rating').classes('sub-heading brand-charcoal ml-3')
                     
                     with ui.row().classes('items-center gap-4 mb-4'):
@@ -149,7 +149,7 @@ def company_trainee_feedback_page():
                         # Star rating
                         with ui.row().classes('gap-1'):
                             for i in range(5):
-                                ui.icon('star', size='2rem').classes('rating-star')
+
                         ui.label('(5.0)').classes('body-text brand-slate ml-2')
                     
                     ui.textarea('Overall feedback summary...').props('outlined').classes('w-full').props('rows=3')
@@ -157,7 +157,7 @@ def company_trainee_feedback_page():
                 # Performance categories
                 with ui.card().classes('feedback-card'):
                     with ui.row().classes('flex items-center mb-6'):
-                        ui.icon('assessment', size='2rem').classes('brand-primary')
+
                         ui.label('Performance Assessment').classes('sub-heading brand-charcoal ml-3')
                     
                     # Technical skills
@@ -195,7 +195,7 @@ def company_trainee_feedback_page():
                 # Detailed feedback sections
                 with ui.card().classes('feedback-card'):
                     with ui.row().classes('flex items-center mb-6'):
-                        ui.icon('comment', size='2rem').classes('brand-primary')
+
                         ui.label('Detailed Feedback').classes('sub-heading brand-charcoal ml-3')
                     
                     ui.label('Strengths').classes('body-text font-semibold brand-charcoal mb-2')
@@ -227,9 +227,9 @@ def company_trainee_feedback_page():
                                 with ui.row().classes('gap-1'):
                                     for j in range(5):
                                         if j < 4:
-                                            ui.icon('star', size='1rem').classes('text-amber-500')
+
                                         else:
-                                            ui.icon('star_border', size='1rem').classes('text-gray-300')
+
                                 ui.label('4.2').classes('caption brand-slate ml-2')
                             
                             ui.label('Excellent technical skills and great team player...').classes('caption brand-slate')
@@ -248,7 +248,7 @@ def company_trainee_feedback_page():
                     ]:
                         with ui.row().classes('w-full justify-between items-center p-3 border rounded-lg mb-2 cursor-pointer hover:bg-gray-50'):
                             ui.label(template).classes('body-text brand-slate')
-                            ui.icon('arrow_forward', size='1rem').classes('brand-primary')
+
 
                 # Feedback statistics
                 with ui.card().classes('feedback-card'):

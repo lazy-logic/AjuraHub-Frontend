@@ -1,5 +1,5 @@
 """
-Job Application Tracking page for TalentConnect Africa.
+Job Application Tracking page for Dompell Africa.
 """
 
 from nicegui import ui

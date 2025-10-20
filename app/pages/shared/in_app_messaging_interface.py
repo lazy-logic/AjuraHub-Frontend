@@ -1,5 +1,5 @@
 """
-In-App Messaging Interface - TalentConnect Africa
+In-App Messaging Interface - Dompell Africa
 Enhanced messaging interface with file sharing, threading, and video calls using brand guidelines.
 """
 
@@ -174,10 +174,10 @@ def in_app_messaging_interface_page():
                             'online': True,
                             'active': False
                         }
-                    ]
+                    ] 
                     
                     for conv in conversations:
-                        with ui.element('div').classes(f'conversation-item {"active" if conv["active"] else ""}'):
+                        with ui.element('div').classes(f'conversation-item {"active" if conv["active"] else ""}') :
                             with ui.row().classes('items-start gap-3'):
                                 # Avatar with online status
                                 with ui.element('div').classes('relative'):
@@ -213,11 +213,11 @@ def in_app_messaging_interface_page():
                         # Action buttons
                         with ui.row().classes('gap-2'):
                             with ui.button().props('flat round').classes('brand-primary'):
-                                ui.icon('videocam', size='1.5rem')
+                                pass  # Icon was removed
                             with ui.button().props('flat round').classes('brand-primary'):
-                                ui.icon('phone', size='1.5rem')
+                                pass  # Icon was removed
                             with ui.button().props('flat round').classes('brand-slate'):
-                                ui.icon('more_vert', size='1.5rem')
+                                pass  # Icon was removed
                     
                     # Messages area
                     with ui.column().classes('flex-1 p-4 overflow-y-auto'):
@@ -248,7 +248,7 @@ def in_app_messaging_interface_page():
                                 'content': 'Perfect! I\'d like to schedule an interview. Are you available tomorrow at 10 AM?',
                                 'time': '11:00 AM'
                             }
-                        ]
+                        ] 
                         
                         for msg in messages:
                             with ui.column().classes('mb-4'):
@@ -263,12 +263,12 @@ def in_app_messaging_interface_page():
                                 ui.label('I\'ve attached the job description and company information.').classes('body-text')
                                 
                                 with ui.element('div').classes('file-attachment mt-2'):
-                                    ui.icon('description', size='1.5rem').classes('text-red-600')
+
                                     with ui.column():
                                         ui.label('Job_Description_Developer.pdf').classes('caption font-semibold')
                                         ui.label('245 KB').classes('caption text-gray-500')
                                     with ui.button().props('flat round size=sm'):
-                                        ui.icon('download', size='1rem')
+                                        pass  # Download icon was removed
                             
                             ui.label('11:05 AM').classes('caption brand-slate')
                     
@@ -276,7 +276,7 @@ def in_app_messaging_interface_page():
                     with ui.row().classes('items-end gap-3 p-4 border-t border-gray-200'):
                         # File attachment button
                         with ui.button().props('flat round').classes('brand-slate'):
-                            ui.icon('attach_file', size='1.5rem')
+                            pass  # Attachment icon was removed
                         
                         # Text input
                         with ui.column().classes('flex-1'):
@@ -284,7 +284,8 @@ def in_app_messaging_interface_page():
                         
                         # Send button
                         with ui.button().props('round').classes('bg-blue-600 text-white'):
-                            ui.icon('send', size='1.5rem')
+                            pass  # Send icon was removed
+
 
         # Quick actions
         with ui.row().classes('w-full max-w-7xl mx-auto px-6 mb-12'):

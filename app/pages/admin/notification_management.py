@@ -1,5 +1,5 @@
 """
-Notification Management page for TalentConnect Africa with brand guidelines.
+Notification Management page for Dompell Africa with brand guidelines.
 """
 
 from nicegui import ui
@@ -67,14 +67,14 @@ def notification_management_page():
 def _create_notification_content():
     with ui.column().classes('p-10 w-full bg-white rounded-xl border-2 border-slate-100 shadow-lg'):
         ui.label('Notification Preferences').classes('heading-2 brand-charcoal mb-2')
-        ui.label('Manage how you receive updates from TalentConnect Africa.').classes('body-text brand-slate mb-10')
+        ui.label('Manage how you receive updates from Dompell Africa.').classes('body-text brand-slate mb-10')
         
         with ui.column().classes('gap-6'):
             _notification_toggle('Job Alerts', 'Receive notifications about new job opportunities matching your profile.', True)
             _notification_toggle('New Messages', 'Get alerted when you receive new messages from employers or institutions.', True)
             _notification_toggle('Application Status Updates', 'Stay informed about changes to your job or program application status.', True)
             _notification_toggle('Program Updates', 'Receive news and updates about programs you are enrolled in or interested in.', False)
-            _notification_toggle('Platform Announcements', 'General announcements and important updates from TalentConnect Africa.', False)
+            _notification_toggle('Platform Announcements', 'General announcements and important updates from Dompell Africa.', False)
 
         with ui.row().classes('mt-10 flex justify-end w-full'):
             ui.button('Save Changes', on_click=lambda: ui.notify('Settings saved!')).classes('brand-primary-bg text-white h-12 px-6 button-label rounded-lg hover:opacity-90 transition-all')

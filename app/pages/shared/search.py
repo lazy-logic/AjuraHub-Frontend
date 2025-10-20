@@ -1,5 +1,5 @@
 """
-Search page for TalentConnect Africa with brand guidelines.
+Search page for Dompell Africa with brand guidelines.
 """
 
 from nicegui import ui
@@ -162,7 +162,7 @@ def _result_card(title: str, company: str, location: str, tags: list, descriptio
         ui.label(title).classes('sub-heading-2 brand-charcoal')
         ui.label(company).classes('body-text brand-primary')
         with ui.row().classes('flex items-center gap-2 brand-slate'):
-            ui.icon('location_on', size='sm').classes('brand-slate')
+
             ui.label(location).classes('button-label')
         with ui.row().classes('flex flex-wrap gap-2'):
             for tag in tags:

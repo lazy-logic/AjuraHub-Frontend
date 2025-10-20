@@ -1,117 +1,168 @@
 """
 Candidates Success Stories
-Showcase of successful candidates and their career journeys through TalentConnect Africa.
+Showcase of successful candidates and their career journeys through Dompell Africa.
 """
 
 from nicegui import ui
 
+def create_story_card(story: dict, index: int):
+    """Create a large testimonial-style story card"""
+    # Alternate background colors
+    bg_color = "#FFFFFF" if index % 2 == 0 else "#F8FAFC"
+    
+    with ui.card().classes("p-8 mb-6 border-l-4").style(
+        f"background-color: {bg_color} !important; border-left-color: #0055B8 !important; box-shadow: 0 1px 3px rgba(0,0,0,0.1);"
+    ):
+        # Quote section - large and prominent
+        with ui.column().classes("mb-6"):
+            ui.label('"').classes("text-6xl font-bold").style("color: #0055B8 !important; line-height: 0.5; margin-bottom: 8px;")
+            if "quote" in story:
+                ui.label(story["quote"]).classes("text-xl italic leading-relaxed").style("color: #1A1A1A !important; font-weight: 400;")
+        
+        # Divider line
+        ui.element('div').classes('w-full h-px bg-gray-200 my-6')
+        
+        # Person info and metrics in two columns
+        with ui.row().classes("justify-between items-start gap-8"):
+            # Left: Person details
+            with ui.column().classes("flex-1"):
+                ui.label(story["name"]).classes("text-2xl font-bold mb-2").style("color: #1A1A1A !important;")
+                ui.label(story['position']).classes("text-lg mb-1").style("color: #4D4D4D !important;")
+                ui.label(story['company']).classes("text-lg font-semibold").style("color: #0055B8 !important;")
+            
+            # Right: Metrics
+            with ui.row().classes("gap-8"):
+                if 'duration' in story:
+                    with ui.column().classes("text-center"):
+                        ui.label(story['duration']).classes("text-3xl font-bold").style("color: #0055B8 !important;")
+                        ui.label('Duration').classes("text-sm").style("color: #6B7280 !important;")
+                
+                if 'salary_increase' in story:
+                    with ui.column().classes("text-center"):
+                        ui.label(story['salary_increase']).classes("text-3xl font-bold").style("color: #10B981 !important;")
+                        ui.label('Salary Increase').classes("text-sm").style("color: #6B7280 !important;")
+        
+        # Program tag at bottom
+        with ui.row().classes("mt-6"):
+            ui.label(f"Program: {story['program']}").classes("px-4 py-2").style(
+                "background-color: #EBF4FF; color: #0055B8; font-weight: 600; border-radius: 4px;"
+            )
+
+def view_story(name: str):
+    """View full success story"""
+    ui.notify(f"Opening full story for {name}", type="info")
+
 def candidates_success_stories_page():
     """Creates the candidates success stories page."""
-    with ui.column().classes('w-full'):
-        # Outer container for the "boxed" layout similar to notification-center
-        with ui.column().classes('relative flex h-auto min-h-screen w-full flex-col bg-slate-50'):
-            # Add top spacing
-            ui.element('div').classes('h-6 w-full')
-            
-            # Inner container (the "box")
-            with ui.element('div').classes('flex-1 mx-4 sm:mx-8 lg:mx-16 bg-white rounded-lg shadow-sm border border-gray-200'):
-                with ui.element('main').classes('flex-1 px-4 sm:px-10 py-12'):
-                    # Page Header
-                    with ui.column().classes('text-center mb-12'):
-                        ui.label('Success Stories').classes('text-4xl font-black leading-tight tracking-[-0.033em] mb-4')
-                        ui.label('Inspiring journeys of candidates who transformed their careers through TalentConnect Africa').classes('text-lg font-normal leading-normal text-gray-600 max-w-3xl mx-auto')
+    ui.add_head_html('''
+        <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <style>
+            body { font-family: 'Raleway', sans-serif !important; background: #F2F7FB !important; color: #1A1A1A !important; }
+            .stories-hero {
+                background: linear-gradient(135deg, #1A1A1A 0%, #0055B8 100%);
+                color: white;
+                padding: 64px 20px 48px 20px;
+                text-align: center;
+                border-radius: 0 0 32px 32px;
+                position: relative;
+                overflow: hidden;
+            }
+            .stories-hero::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-image: 
+                    radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                    radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                    radial-gradient(circle at 40% 20%, rgba(255, 255, 255, 0.08) 2px, transparent 2px);
+                background-size: 50px 50px, 80px 80px, 100px 100px;
+                background-position: 0 0, 40px 60px, 20px 30px;
+                opacity: 0.4;
+                z-index: 1;
+            }
+            .stories-hero::after {
+                content: '';
+                position: absolute;
+                top: -50%;
+                right: -10%;
+                width: 500px;
+                height: 500px;
+                background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+                border-radius: 50%;
+                z-index: 1;
+            }
+            .stories-hero h1,
+            .stories-hero p {
+                position: relative;
+                z-index: 2;
+            }
+            .stories-hero h1 { font-size: 56px; font-weight: 900; margin-bottom: 24px; letter-spacing: -0.03em; }
+            .stories-hero p { font-size: 22px; font-weight: 400; opacity: 0.95; max-width: 800px; margin: 0 auto; line-height: 1.6; }
+            .stories-main { max-width: 1000px; margin: 48px auto 0 auto; padding: 0 20px; }
+            @media (max-width: 900px) {
+                .stories-main { padding: 0 8px; }
+            }
+        </style>
+    ''')
 
-                    # Success Metrics
-                    with ui.row().classes('grid grid-cols-1 md:grid-cols-4 gap-6 mb-12'):
-                        _create_success_metric('8,247', 'Candidates Placed', 'people', '#3B82F6')
-                        _create_success_metric('92%', 'Success Rate', 'trending_up', '#10B981')
-                        _create_success_metric('$65K', 'Avg. Starting Salary', 'payments', '#F59E0B')
-                        _create_success_metric('456', 'Partner Companies', 'business', '#8B5CF6')
+    # Hero Section
+    ui.html('''
+    <section class="stories-hero">
+        <h1>Real Stories, Real Impact</h1>
+        <p>Meet the professionals who transformed their careers through Dompell Africa. Their journeys prove that with the right training and determination, anything is possible.</p>
+    </section>
+    ''', sanitize=lambda s: s)
 
-                    # Featured Success Stories
-                    ui.label('Featured Success Stories').classes('text-2xl font-bold text-gray-900 mb-8')
-                    
-                    # Story Grid
-                    with ui.row().classes('grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12'):
-                        for story in _get_featured_stories():
-                            _create_story_card(story)
+    with ui.column().classes("stories-main"):
+        # Impact numbers - simple text layout
+        with ui.row().classes("justify-between mb-12 py-8 border-y-2").style("border-color: #E5E7EB;"):
+            with ui.column().classes("text-center flex-1"):
+                ui.label("8,247").classes("text-5xl font-black mb-2").style("color: #1A1A1A !important;")
+                ui.label("Candidates Placed").classes("text-sm font-semibold").style("color: #6B7280 !important; text-transform: uppercase; letter-spacing: 0.05em;")
+            with ui.column().classes("text-center flex-1"):
+                ui.label("92%").classes("text-5xl font-black mb-2").style("color: #1A1A1A !important;")
+                ui.label("Success Rate").classes("text-sm font-semibold").style("color: #6B7280 !important; text-transform: uppercase; letter-spacing: 0.05em;")
+            with ui.column().classes("text-center flex-1"):
+                ui.label("$65K").classes("text-5xl font-black mb-2").style("color: #1A1A1A !important;")
+                ui.label("Avg. Salary").classes("text-sm font-semibold").style("color: #6B7280 !important; text-transform: uppercase; letter-spacing: 0.05em;")
+            with ui.column().classes("text-center flex-1"):
+                ui.label("456").classes("text-5xl font-black mb-2").style("color: #1A1A1A !important;")
+                ui.label("Companies").classes("text-sm font-semibold").style("color: #6B7280 !important; text-transform: uppercase; letter-spacing: 0.05em;")
+        
+        # Simple filter bar
+        with ui.row().classes("gap-4 mb-8 pb-6 border-b").style("border-color: #E5E7EB;"):
+            ui.label("Filter by:").classes("text-lg font-semibold").style("color: #1A1A1A !important;")
+            ui.select(["All Programs", "Software Development", "Data Science", "Digital Marketing", "Cybersecurity", "UI/UX Design"], value="All Programs").classes("flex-1").props("outlined dense")
+            ui.select(["All Industries", "Technology", "Finance", "Healthcare", "E-commerce"], value="All Industries").classes("flex-1").props("outlined dense")
+        
+        # Section heading
+        ui.label("Featured Stories").classes("text-4xl font-black mb-8").style("color: #1A1A1A !important;")
+        
+        # Story cards in 2-column grid
+        stories = _get_featured_stories() + _get_all_stories_formatted()
+        with ui.element('div').classes('grid grid-cols-1 lg:grid-cols-2 gap-6'):
+            for index, story in enumerate(stories):
+                create_story_card(story, index)
 
-                    # All Success Stories
-                    ui.label('More Success Stories').classes('text-2xl font-bold text-gray-900 mb-8')
-                    
-                    # Filters
-                    with ui.row().classes('grid grid-cols-1 md:grid-cols-3 gap-4 mb-8'):
-                        ui.select(['All Programs', 'Software Development', 'Data Science', 'Digital Marketing', 'Cybersecurity', 'UI/UX Design'], 
-                                value='All Programs').props('outlined dense').classes('w-full')
-                        ui.select(['All Industries', 'Technology', 'Finance', 'Healthcare', 'E-commerce', 'Consulting'], 
-                                value='All Industries').props('outlined dense').classes('w-full')
-                        ui.select(['All Locations', 'Kenya', 'Nigeria', 'South Africa', 'Ghana', 'Tanzania'], 
-                                value='All Locations').props('outlined dense').classes('w-full')
-
-                    # Story List
-                    with ui.row().classes('grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6'):
-                        for story in _get_all_stories():
-                            _create_compact_story_card(story)
-
-def _create_success_metric(value, label, icon, color):
-    """Creates a success metric card."""
-    with ui.card().classes('p-6 bg-white border border-gray-200 text-center'):
-        ui.icon(icon).classes(f'text-3xl mb-3').style(f'color: {color}')
-        ui.label(value).classes('text-3xl font-bold text-gray-900 mb-1')
-        ui.label(label).classes('text-sm font-medium text-gray-500')
-
-def _create_story_card(story):
-    """Creates a featured story card."""
-    with ui.card().classes('p-8 bg-white border border-gray-200 hover:shadow-lg transition-shadow'):
-        # Header with photo and basic info
-        with ui.row().classes('items-center mb-6'):
-            ui.label(story['avatar']).classes('text-4xl mr-4')
-            with ui.column():
-                ui.label(story['name']).classes('text-xl font-bold text-gray-900')
-                ui.label(f"{story['position']} at {story['company']}").classes('text-lg text-gray-600')
-                ui.label(f"From: {story['program']}").classes('text-sm text-blue-600 font-medium')
-
-        # Quote/Story
-        with ui.element('div').classes('bg-gray-50 p-4 rounded-lg mb-6'):
-            ui.label(f'"{story["quote"]}"').classes('text-gray-700 italic text-lg leading-relaxed')
-
-        # Journey highlights
-        with ui.row().classes('grid grid-cols-2 gap-4 mb-6'):
-            with ui.column().classes('text-center'):
-                ui.label(story['duration']).classes('text-2xl font-bold text-blue-600')
-                ui.label('Program Duration').classes('text-sm text-gray-500')
-            with ui.column().classes('text-center'):
-                ui.label(story['salary_increase']).classes('text-2xl font-bold text-green-600')
-                ui.label('Salary Increase').classes('text-sm text-gray-500')
-
-        # Skills gained
-        ui.label('Key Skills Gained:').classes('text-sm font-medium text-gray-700 mb-2')
-        with ui.row().classes('flex-wrap gap-2'):
-            for skill in story['skills']:
-                ui.label(skill).classes('px-3 py-1 bg-blue-100 text-blue-800 text-xs rounded-full')
-
-def _create_compact_story_card(story):
-    """Creates a compact story card for the grid."""
-    with ui.card().classes('p-6 bg-white border border-gray-200 hover:shadow-md transition-shadow'):
-        # Header
-        with ui.row().classes('items-center mb-4'):
-            ui.label(story['avatar']).classes('text-3xl mr-3')
-            with ui.column():
-                ui.label(story['name']).classes('font-bold text-gray-900')
-                ui.label(story['position']).classes('text-sm text-gray-600')
-                ui.label(story['company']).classes('text-sm text-blue-600')
-
-        # Brief quote
-        ui.label(f'"{story["brief_quote"]}"').classes('text-gray-700 italic text-sm mb-4')
-
-        # Metrics
-        with ui.row().classes('justify-between text-center'):
-            with ui.column():
-                ui.label(story['program_short']).classes('text-xs font-medium text-gray-700')
-                ui.label('Program').classes('text-xs text-gray-500')
-            with ui.column():
-                ui.label(story['timeline']).classes('text-xs font-medium text-gray-700')
-                ui.label('Timeline').classes('text-xs text-gray-500')
+def _get_all_stories_formatted():
+    """Format compact stories to match featured format."""
+    compact_stories = _get_all_stories()
+    formatted = []
+    for story in compact_stories:
+        formatted.append({
+            'name': story['name'],
+            'avatar': story['avatar'],
+            'position': story['position'],
+            'company': story['company'],
+            'program': story['program_short'],
+            'quote': story['brief_quote'],
+            'duration': story['timeline']
+        })
+    return formatted
 
 def _get_featured_stories():
     """Returns featured success stories data."""
@@ -125,7 +176,8 @@ def _get_featured_stories():
             'quote': 'TalentConnect Africa completely changed my life. I went from working retail to landing my dream job as a software developer at Safaricom. The hands-on training and mentorship were incredible.',
             'duration': '6 months',
             'salary_increase': '400%',
-            'skills': ['React', 'Node.js', 'Python', 'AWS', 'Agile', 'Git']
+            'skills': ['React', 'Node.js', 'Python', 'AWS', 'Agile', 'Git'],
+            'brief_quote': 'TalentConnect Africa completely changed my life'
         },
         {
             'name': 'Michael Adebayo',
@@ -136,7 +188,8 @@ def _get_featured_stories():
             'quote': 'The program gave me both technical skills and industry connections. Within 3 months of graduation, I had multiple job offers and chose to join Flutterwave as a Data Scientist.',
             'duration': '8 months',
             'salary_increase': '300%',
-            'skills': ['Python', 'Machine Learning', 'SQL', 'Tableau', 'Statistics', 'TensorFlow']
+            'skills': ['Python', 'Machine Learning', 'SQL', 'Tableau', 'Statistics', 'TensorFlow'],
+            'brief_quote': 'The program gave me both technical skills and industry connections'
         }
     ]
 

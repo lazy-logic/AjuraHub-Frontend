@@ -1,7 +1,6 @@
 """
-Immersion Experience Feedback - TalentConnect Africa
-Experience feedback system     with ui.column().classes('relative flex h-auto min-h-screen w-full flex-col brand-light-mist pt-20'):
-        with ui.column().classes('w-full max-w-6xl mx-auto p-6'):ith rating forms, detailed assessments, and feedback tracking using brand guidelines.
+Immersion Experience Feedback - Dompell Africa
+Experience feedback system with rating forms, detailed assessments, and feedback tracking using brand guidelines.
 """
 
 from nicegui import ui
@@ -93,8 +92,8 @@ def immersion_experience_feedback_page():
             with ui.row().classes('w-full max-w-6xl mx-auto px-6 mb-8'):
                 with ui.row().classes('w-full items-center justify-between'):
                     with ui.column():
-                        ui.html('<h1 class="heading-2 brand-charcoal mb-2">Immersion Experience Feedback</h1>')
-                        ui.html('<p class="body-text brand-slate">Share your immersion experience and provide valuable feedback</p>')
+                        ui.html('<h1 class="heading-2 brand-charcoal mb-2">Immersion Experience Feedback</h1>', sanitize=lambda s: s)
+                        ui.html('<p class="body-text brand-slate">Share your immersion experience and provide valuable feedback</p>', sanitize=lambda s: s)
                 
                 with ui.button('View Previous Feedback', icon='history').classes('bg-blue-600 text-white px-6 py-3'):
                     pass
@@ -105,28 +104,28 @@ def immersion_experience_feedback_page():
             with ui.card().classes('w-full mb-6 feedback-card'):
                 with ui.card_section().classes('p-6'):
                     with ui.row().classes('w-full items-center justify-between mb-4'):
-                        ui.html('<h2 class="sub-heading brand-charcoal">Current Immersion Program</h2>')
+                        ui.html('<h2 class="sub-heading brand-charcoal">Current Immersion Program</h2>', sanitize=lambda s: s)
                         ui.chip('In Progress', color='green').classes('text-white')
                     
                     with ui.grid(columns=3).classes('gap-6 mb-6'):
                         # Program info
                         with ui.column():
-                            ui.html('<div class="caption brand-slate mb-1">Program</div>')
-                            ui.html('<div class="body-text brand-charcoal font-medium">Software Development Bootcamp</div>')
+                            ui.html('<div class="caption brand-slate mb-1">Program</div>', sanitize=lambda s: s)
+                            ui.html('<div class="body-text brand-charcoal font-medium">Software Development Bootcamp</div>', sanitize=lambda s: s)
                         
                         with ui.column():
-                            ui.html('<div class="caption brand-slate mb-1">Company</div>')
-                            ui.html('<div class="body-text brand-charcoal font-medium">TechCorp Solutions</div>')
+                            ui.html('<div class="caption brand-slate mb-1">Company</div>', sanitize=lambda s: s)
+                            ui.html('<div class="body-text brand-charcoal font-medium">TechCorp Solutions</div>', sanitize=lambda s: s)
                         
                         with ui.column():
-                            ui.html('<div class="caption brand-slate mb-1">Duration</div>')
-                            ui.html('<div class="body-text brand-charcoal font-medium">3 months (Week 8/12)</div>')
+                            ui.html('<div class="caption brand-slate mb-1">Duration</div>', sanitize=lambda s: s)
+                            ui.html('<div class="body-text brand-charcoal font-medium">3 months (Week 8/12)</div>', sanitize=lambda s: s)
                     
                     # Progress indicator
                     with ui.row().classes('w-full items-center gap-4'):
-                        ui.html('<div class="body-text brand-slate">Overall Progress:</div>')
+                        ui.html('<div class="body-text brand-slate">Overall Progress:</div>', sanitize=lambda s: s)
                         ui.linear_progress(0.67).classes('flex-grow')
-                        ui.html('<div class="body-text brand-primary font-medium">67%</div>')
+                        ui.html('<div class="body-text brand-primary font-medium">67%</div>', sanitize=lambda s: s)
         
         # Feedback sections
         with ui.row().classes('w-full gap-6'):
@@ -135,20 +134,20 @@ def immersion_experience_feedback_page():
                 # Overall experience rating
                 with ui.card().classes('w-full mb-6 feedback-card'):
                     with ui.card_section().classes('p-6 feedback-section'):
-                        ui.html('<h3 class="sub-heading brand-charcoal mb-4">Overall Experience Rating</h3>')
+                        ui.html('<h3 class="sub-heading brand-charcoal mb-4">Overall Experience Rating</h3>', sanitize=lambda s: s)
                         
                         with ui.column().classes('space-y-4'):
                             # Star rating
                             with ui.row().classes('items-center gap-4 mb-4'):
-                                ui.html('<div class="body-text brand-slate">Rate your experience:</div>')
+                                ui.html('<div class="body-text brand-slate">Rate your experience:</div>', sanitize=lambda s: s)
                                 with ui.row().classes('rating-container'):
                                     for i in range(5):
                                         star_class = 'star-rating' if i < 4 else 'star-rating inactive'
-                                        ui.html(f'<i class="material-icons {star_class}">star</i>')
-                                ui.html('<div class="body-text brand-primary font-medium">4.0/5.0</div>')
+                                        ui.html(f'<i class="material-icons {star_class}">star</i>', sanitize=lambda s: s)
+                                ui.html('<div class="body-text brand-primary font-medium">4.0/5.0</div>', sanitize=lambda s: s)
                             
                             # Quick feedback options
-                            ui.html('<div class="body-text brand-slate mb-3">What stood out the most?</div>')
+                            ui.html('<div class="body-text brand-slate mb-3">What stood out the most?</div>', sanitize=lambda s: s)
                             with ui.row().classes('flex-wrap gap-2'):
                                 feedback_options = [
                                     'Excellent mentorship', 'Great team culture', 'Challenging projects',
@@ -193,16 +192,16 @@ def immersion_experience_feedback_page():
                     with ui.card().classes('w-full mb-6 feedback-card'):
                         with ui.card_section().classes('p-6'):
                             with ui.row().classes('items-center gap-3 mb-4'):
-                                ui.icon(category['icon']).classes('text-blue-600 text-2xl')
-                                ui.html(f'<h3 class="sub-heading brand-charcoal">{category["title"]}</h3>')
+
+                                ui.html(f'<h3 class="sub-heading brand-charcoal">{category["title"]}</h3>', sanitize=lambda s: s)
                             
                             for question in category['questions']:
                                 with ui.column().classes('mb-4'):
-                                    ui.html(f'<div class="body-text brand-slate mb-2">{question}</div>')
+                                    ui.html(f'<div class="body-text brand-slate mb-2">{question}</div>', sanitize=lambda s: s)
                                     with ui.row().classes('rating-container mb-2'):
                                         for i in range(5):
                                             star_class = 'star-rating' if i < 3 else 'star-rating inactive'
-                                            ui.html(f'<i class="material-icons {star_class}" style="font-size: 20px;">star</i>')
+                                            ui.html(f'<i class="material-icons {star_class}" style="font-size: 20px;">star</i>', sanitize=lambda s: s)
                                     ui.textarea(placeholder='Add specific feedback or comments...').classes('w-full')
             
             # Sidebar with feedback summary
@@ -210,7 +209,7 @@ def immersion_experience_feedback_page():
                 # Feedback summary
                 with ui.card().classes('w-full mb-6 feedback-card'):
                     with ui.card_section().classes('p-6'):
-                        ui.html('<h3 class="sub-heading brand-charcoal mb-4">Feedback Summary</h3>')
+                        ui.html('<h3 class="sub-heading brand-charcoal mb-4">Feedback Summary</h3>', sanitize=lambda s: s)
                         
                         # Rating breakdown
                         rating_items = [
@@ -223,13 +222,13 @@ def immersion_experience_feedback_page():
                         
                         for item, rating, color in rating_items:
                             with ui.row().classes('w-full items-center justify-between mb-3'):
-                                ui.html(f'<div class="caption brand-slate">{item}</div>')
-                                ui.html(f'<div class="caption font-medium" style="color: {color};">{rating}/5.0</div>')
+                                ui.html(f'<div class="caption brand-slate">{item}</div>', sanitize=lambda s: s)
+                                ui.html(f'<div class="caption font-medium" style="color: {color};">{rating}/5.0</div>', sanitize=lambda s: s)
                 
                 # Previous feedback
                 with ui.card().classes('w-full mb-6 feedback-card'):
                     with ui.card_section().classes('p-6'):
-                        ui.html('<h3 class="sub-heading brand-charcoal mb-4">Previous Feedback</h3>')
+                        ui.html('<h3 class="sub-heading brand-charcoal mb-4">Previous Feedback</h3>', sanitize=lambda s: s)
                         
                         feedback_history = [
                             {'week': 'Week 6', 'rating': 3.8, 'date': 'Oct 1, 2025'},
@@ -240,9 +239,9 @@ def immersion_experience_feedback_page():
                         for feedback in feedback_history:
                             with ui.row().classes('w-full items-center justify-between mb-3 p-3 bg-gray-50 rounded-lg'):
                                 with ui.column():
-                                    ui.html(f'<div class="body-text brand-charcoal font-medium">{feedback["week"]}</div>')
-                                    ui.html(f'<div class="caption brand-slate">{feedback["date"]}</div>')
-                                ui.html(f'<div class="caption brand-primary font-medium">{feedback["rating"]}/5</div>')
+                                    ui.html(f'<div class="body-text brand-charcoal font-medium">{feedback["week"]}</div>', sanitize=lambda s: s)
+                                    ui.html(f'<div class="caption brand-slate">{feedback["date"]}</div>', sanitize=lambda s: s)
+                                ui.html(f'<div class="caption brand-primary font-medium">{feedback["rating"]}/5</div>', sanitize=lambda s: s)
                 
                 # Action buttons
                 with ui.column().classes('w-full space-y-3'):

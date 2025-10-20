@@ -51,6 +51,7 @@ def employer_pricing_page():
         .pricing-card.featured {
             border-color: #0055B8;
             transform: scale(1.02);
+            background: linear-gradient(135deg, #EBF4FF 0%, #F0F8FF 100%) !important;
         }
         
         .pricing-card.featured:hover {
@@ -76,6 +77,52 @@ def employer_pricing_page():
             font-size: 18px;
         }
         
+        /* Hero section */
+        .pricing-hero {
+            background: linear-gradient(135deg, #1A1A1A 0%, #0055B8 100%);
+            color: white;
+            padding: 64px 20px 48px 20px;
+            text-align: center;
+            border-radius: 0 0 32px 32px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 48px;
+        }
+        .pricing-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 1px, transparent 1px),
+                radial-gradient(circle at 40% 20%, rgba(255, 255, 255, 0.08) 2px, transparent 2px);
+            background-size: 50px 50px, 80px 80px, 100px 100px;
+            background-position: 0 0, 40px 60px, 20px 30px;
+            opacity: 0.4;
+            z-index: 1;
+        }
+        .pricing-hero::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 1;
+        }
+        .pricing-hero h1,
+        .pricing-hero p {
+            position: relative;
+            z-index: 2;
+        }
+        .pricing-hero h1 { font-size: 48px; font-weight: 900; margin-bottom: 16px; letter-spacing: -0.02em; }
+        .pricing-hero p { font-size: 20px; font-weight: 400; opacity: 0.95; max-width: 700px; margin: 0 auto; }
+        
         /* Responsive adjustments */
         @media (max-width: 1024px) {
             .pricing-card {
@@ -93,12 +140,15 @@ def employer_pricing_page():
     </style>
     ''')
     
-    with ui.column().classes('w-full min-h-screen').style('padding-top: 5rem; background: linear-gradient(135deg, #F2F7FB 0%, #ffffff 100%);'):
-        
-        # Header Section
-        with ui.column().classes('w-full max-w-6xl mx-auto px-6 text-center mb-16'):
-            ui.label('Choose Your Plan').classes('heading-1 mb-4')
-            ui.label('Flexible pricing options designed to grow with your business. Find the perfect plan to connect with top talent.').classes('body-text max-w-2xl mx-auto')
+    # Hero Section with page title
+    ui.html('''
+    <section class="pricing-hero">
+        <h1>Employer Pricing Plans</h1>
+        <p>Flexible pricing options designed to grow with your business. Find the perfect plan to connect with top talent across Africa.</p>
+    </section>
+    ''', sanitize=lambda s: s)
+    
+    with ui.column().classes('w-full min-h-screen').style('background: linear-gradient(135deg, #F2F7FB 0%, #ffffff 100%);'):
         
         # Pricing Cards
         with ui.row().classes('w-full max-w-7xl mx-auto px-4 gap-6 justify-center items-stretch flex-nowrap'):
@@ -136,7 +186,7 @@ def employer_pricing_page():
                             <span>Standard job visibility</span>
                         </li>
                     </ul>
-                    ''')
+                    ''', sanitize=lambda s: s)
                 
                 ui.button('Get Started', on_click=lambda: ui.navigate.to('/register?role=employer')).classes('w-full h-12 button-label').style('background-color: #0055B8 !important; color: white !important; border-radius: 8px; font-weight: 600;')
             

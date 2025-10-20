@@ -1,5 +1,5 @@
 """
-Messaging page for TalentConnect Africa.
+Messaging page for Dompell Africa.
 """
 
 from nicegui import ui
@@ -59,7 +59,7 @@ def messaging_page():
             }
             
             /* Override all colors to brand colors */
-            [class*="text-gray"], [class*="text-slate"], .text-\[\#47709e\], .text-\[\#0d141c\] {
+            [class*="text-gray"], [class*="text-slate"], .text-\\[\\#47709e\\], .text-\\[\\#0d141c\\] {
                 color: #4D4D4D !important;
             }
             
@@ -136,16 +136,16 @@ def _create_chat_window():
 
         # Messages Area
         with ui.column().classes('flex-grow p-6 overflow-y-auto space-y-6 w-full'):
-            _message('Hi! I saw your profile on TalentConnect and was very impressed with your experience in UX design.', '10:28 AM', 'https://lh3.googleusercontent.com/aida-public/AB6AXuA6ln0XvzmAEKl5wtYrrofCnQW9CKVoESWIseyOjr7ZNv9NwZijNT71ysT-ZtCPZ8n4TwejjT56VhYO18D8ZA0YfLI-x0Jk4b5bP7J-hQZwGeaJsmo_-EZQXK5Bb7wuBlGB8BYU0NsEibPoeSMHXGixxfU5olHo9LqZmtET_4ewB3pfMnPcHZXadXewNDmG6SM13hmcNF8HCFkj72RYWNA9a1LCVEf8k3lNRCag7B6-CLKVHy7FMm8y-0zAVWcv1K6C_kxRywQbzA', sent=False)
+            _message('Hi! I saw your profile on Dompell and was very impressed with your experience in UX design.', '10:28 AM', 'https://lh3.googleusercontent.com/aida-public/AB6AXuA6ln0XvzmAEKl5wtYrrofCnQW9CKVoESWIseyOjr7ZNv9NwZijNT71ysT-ZtCPZ8n4TwejjT56VhYO18D8ZA0YfLI-x0Jk4b5bP7J-hQZwGeaJsmo_-EZQXK5Bb7wuBlGB8BYU0NsEibPoeSMHXGixxfU5olHo9LqZmtET_4ewB3pfMnPcHZXadXewNDmG6SM13hmcNF8HCFkj72RYWNA9a1LCVEf8k3lNRCag7B6-CLKVHy7FMm8y-0zAVWcv1K6C_kxRywQbzA', sent=False)
             _message('Hey, are you available to chat?', '10:30 AM', 'https://lh3.googleusercontent.com/aida-public/AB6AXuAppycY9-vzGsgUsExM5zUL8cyq8YoCXlpycwxyydQWIOzg_Y418m3EPJUhWaccITHN1H7_gAtcfZXphrtzseLQ6i8sdOFUt3pP78UIeKvNNyHS2Sg_ORuWDJO1_UDG9uJn-BCszRoCSocv2Z1uwhMKS3zgpCjnjYIWSRdWJVQVjXSbNf9QEnUTzsKfM1DjbpvUN1MedZCZK0iqrBJstjfHvDz2U8VarZM59_OPd_Jlv-d4nxyMdJ05WysaljpXeDxrZVICDLc2Eg', sent=False)
             _message('Hello! Thanks for reaching out. Yes, I\'m available to chat now. What did you want to discuss?', '10:32 AM', 'https://lh3.googleusercontent.com/aida-public/AB6AXuDSvX1sEwRIqBBVBhUfdlTFrqzxcUuRjtyaiqdasFCQIH_Rl7BbehSqub4m6KXzF7-Jk8_Rtzl_wDN8-K7hW0-xKnfAMPr5IDkl0_l_0egdMS56V83tjRc6S6rYbneY6P5LPKGJfDHaJAyZVh3WwNqVhE0KC83JJpdeks4x0IkrRzpFD8uM5hVivNii89hnmvX01kl8FT-rcxxrcBLIVl77AhzkWMBySGSE8eQ_ywTjZ5Xr0ZTQgkK3DdMmoBfBh1uC3mr-3v98Pg', sent=True)
             # Typing Indicator
             with ui.row().classes('flex items-start gap-3'):
                 ui.image('https://lh3.googleusercontent.com/aida-public/AB6AXuD7eC4atG7Zcyfp5HuI5eQ9cnnrLMIvpqzWzjdKfqRiks--5l6NyOLsZTY50I4QycQyFp9dAP5lFvc5BsLVsWBetLzaNc3vfQ9-xagGQ4a4auEQo4iNEDexj_f8GivEmhvk7TPZijTgSzU3xQPameRi_4qQV-npS4YKUrTWx3jnarh-dAg22qhJvwqeeTM6GhXEYixAwP4rOoBrvP1KJkPTx72cLNsBmq0q5WD0wzp52EEPyPufGMZywt8BzQxaatjFWk5ilJ9O9g').classes('size-10 rounded-full')
                 with ui.row().classes('items-center gap-2 p-3 rounded-xl rounded-tl-none bg-white'):
-                    ui.html('<span class="h-2 w-2 bg-slate-400 rounded-full animate-pulse [animation-delay:-0.3s]"></span>')
-                    ui.html('<span class="h-2 w-2 bg-slate-400 rounded-full animate-pulse [animation-delay:-0.15s]"></span>')
-                    ui.html('<span class="h-2 w-2 bg-slate-400 rounded-full animate-pulse"></span>')
+                    ui.html('<span class="h-2 w-2 bg-slate-400 rounded-full animate-pulse [animation-delay:-0.3s]"></span>', sanitize=lambda s: s)
+                    ui.html('<span class="h-2 w-2 bg-slate-400 rounded-full animate-pulse [animation-delay:-0.15s]"></span>', sanitize=lambda s: s)
+                    ui.html('<span class="h-2 w-2 bg-slate-400 rounded-full animate-pulse"></span>', sanitize=lambda s: s)
 
         # Message Input
         with ui.row().classes('p-6 w-full').style('background-color: #FFFFFF !important; border-top: 2px solid rgba(77, 77, 77, 0.2) !important;'):
@@ -156,7 +156,7 @@ def _create_chat_window():
                 ui.button(icon='send').props('flat round dense').classes('rounded-lg p-2 transition-all').style('background-color: #0055B8 !important; color: white !important;')
 
 def _message(text: str, time: str, avatar: str, sent: bool):
-    with ui.row().classes(f'flex items-start gap-4 {"justify-end" if sent else ""}'):
+    with ui.row().classes(f'flex items-start gap-4 {"justify-end" if sent else ""}') :
         if not sent:
             ui.image(avatar).classes('size-10 rounded-full')
         with ui.column().classes(f'items-{"end" if sent else "start"} gap-2'):

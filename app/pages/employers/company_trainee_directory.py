@@ -144,7 +144,7 @@ def company_trainee_directory_page():
             with ui.column().classes('w-80'):
                 with ui.card().classes('filter-sidebar'):
                     with ui.row().classes('flex items-center mb-6'):
-                        ui.icon('filter_list', size='2rem').classes('icon-primary')
+
                         ui.label('Filters').classes('sub-heading brand-charcoal ml-3')
                     
                     # Search input
@@ -192,8 +192,7 @@ def company_trainee_directory_page():
                         ui.select(['Relevance', 'Name (A-Z)', 'Experience Level', 'Recently Added'], value='Relevance').classes('w-48')
                         
                         with ui.row().classes('gap-1'):
-                            ui.icon('view_list', size='1.5rem').classes('icon-primary cursor-pointer')
-                            ui.icon('view_module', size='1.5rem').classes('icon-secondary cursor-pointer')
+                            pass  # View toggle icons were removed
 
                 # Trainee cards
                 for i in range(6):
@@ -213,20 +212,20 @@ def company_trainee_directory_page():
                                         ui.label('Software Developer • 3 years experience').classes('body-text brand-slate')
                                     
                                     with ui.row().classes('gap-2'):
-                                        ui.icon('bookmark_border', size='1.5rem').classes('icon-secondary cursor-pointer hover:text-blue-600')
-                                        ui.icon('share', size='1.5rem').classes('icon-secondary cursor-pointer hover:text-blue-600')
+                                        pass  # Skills/tags icons were removed
                                 
                                 with ui.row().classes('items-center gap-4 mb-3'):
                                     with ui.row().classes('items-center'):
-                                        ui.icon('location_on', size='1rem').classes('icon-secondary')
+                                        pass  # Location icon was removed
                                         ui.label('Nairobi, Kenya').classes('caption brand-slate ml-1')
                                     
                                     with ui.row().classes('items-center'):
-                                        ui.icon('school', size='1rem').classes('icon-secondary')
+                                        pass  # Experience icon was removed
+
                                         ui.label('Moringa School').classes('caption brand-slate ml-1')
                                     
                                     with ui.row().classes('items-center'):
-                                        ui.icon('star', size='1rem').classes('icon-warning')
+
                                         ui.label('4.8 (24 reviews)').classes('caption brand-slate ml-1')
                                 
                                 # Skills

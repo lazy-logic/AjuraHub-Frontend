@@ -1,5 +1,5 @@
 """
-Employer Dashboard page for TalentConnect Africa with brand guidelines.
+Employer Dashboard page for Dompell Africa with brand guidelines.
 """
 
 from nicegui import ui
@@ -71,6 +71,44 @@ def employer_dashboard_page():
                 background: #0055B8 !important;
                 color: white !important;
             }
+            
+            /* ==========================
+               Table Brand Enforcement
+               ========================== */
+            table, .q-table, .q-table * {
+                font-family: 'Raleway', sans-serif !important;
+                color: #1A1A1A !important;
+            }
+            .q-table, table {
+                background: #FFFFFF !important;
+                border: 1px solid #e2e8f0 !important;
+                border-radius: 8px !important;
+                box-shadow: 0 1px 3px rgba(0,0,0,0.05) !important;
+            }
+            .q-table thead tr, thead tr {
+                background: #f8fafc !important;
+                border-bottom: 2px solid #e2e8f0 !important;
+            }
+            .q-th, thead th {
+                text-transform: uppercase !important;
+                letter-spacing: 0.5px !important;
+                font-weight: 700 !important;
+                font-size: 11px !important;
+                color: #475569 !important;
+                padding: 10px 12px !important;
+            }
+            .q-td, tbody td {
+                font-size: 13px !important;
+                color: #334155 !important;
+                padding: 12px !important;
+                border-bottom: 1px solid #f1f5f9 !important;
+            }
+            .q-tr:hover, tbody tr:hover { background: #f8fafc !important; }
+            tbody tr:last-child .q-td, tbody tr:last-child td { border-bottom: none !important; }
+            .q-table a, table a { color: #0055B8 !important; text-decoration: none !important; }
+            .q-table a:hover, table a:hover { text-decoration: underline !important; }
+            .q-table .q-btn, table .q-btn { color: #0055B8 !important; }
+            .q-table__bottom, .q-table__separator { border-color: #e2e8f0 !important; }
         </style>
     ''')
 
@@ -91,8 +129,8 @@ def _create_classic_employer_sidenav():
         with ui.column().classes('flex-1'):
             # Brand Header
             with ui.row().classes('flex items-center gap-3 p-6').style('border-bottom: 1px solid rgba(0, 85, 184, 0.1);'):
-                # ui.icon('hub', size='2rem').style('color: #0055B8 !important;')
-                # ui.label('TalentConnect').classes('sub-heading brand-charcoal')
+
+                # ui.label('Dompell').classes('sub-heading brand-charcoal')
             
                 # Navigation Menu
                 with ui.column().classes('p-6 gap-2'):
@@ -119,7 +157,7 @@ def _classic_nav_link(text: str, icon: str, active: bool = False):
         link_class += ' active'
     
     with ui.row().classes(link_class):
-        ui.icon(icon, size='1.2rem')
+
         ui.label(text).classes('body-text')
 
 
@@ -135,7 +173,7 @@ def _create_classic_overview_cards():
 def _classic_overview_card(title: str, value: str, icon: str):
     """Creates a classic overview card following brand guidelines."""
     with ui.card().classes('classic-card p-6 text-center'):
-        ui.icon(icon).classes('text-4xl brand-primary mb-3')
+
         ui.label(value).classes('heading-2 brand-charcoal')
         ui.label(title).classes('caption brand-slate mb-2')
 

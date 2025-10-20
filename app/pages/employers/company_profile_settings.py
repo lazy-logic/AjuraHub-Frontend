@@ -113,27 +113,27 @@ def company_profile_settings_page():
                     
                     with ui.column().classes('w-full'):
                         with ui.row().classes('nav-item active'):
-                            ui.icon('business', size='1.2rem')
+
                             ui.label('Company Profile').classes('ml-3')
                         
                         with ui.row().classes('nav-item'):
-                            ui.icon('notifications', size='1.2rem')
+
                             ui.label('Notifications').classes('ml-3')
                         
                         with ui.row().classes('nav-item'):
-                            ui.icon('security', size='1.2rem')
+
                             ui.label('Privacy & Security').classes('ml-3')
                         
                         with ui.row().classes('nav-item'):
-                            ui.icon('payment', size='1.2rem')
+
                             ui.label('Billing').classes('ml-3')
                         
                         with ui.row().classes('nav-item'):
-                            ui.icon('api', size='1.2rem')
+
                             ui.label('API & Integrations').classes('ml-3')
                         
                         with ui.row().classes('nav-item'):
-                            ui.icon('help', size='1.2rem')
+
                             ui.label('Help & Support').classes('ml-3')
 
             # Right content - Settings forms
@@ -142,7 +142,7 @@ def company_profile_settings_page():
                 with ui.card().classes('settings-section'):
                     with ui.row().classes('flex items-center justify-between mb-6'):
                         with ui.row().classes('flex items-center'):
-                            ui.icon('business', size='2rem').classes('brand-primary')
+
                             ui.label('Company Profile').classes('sub-heading brand-charcoal ml-3')
                         ui.button('Edit Profile').props('outlined').classes('px-4 py-2').style('border-color: #0055B8; color: #0055B8; font-family: "Raleway", sans-serif; font-weight: 600;')
                     
@@ -173,7 +173,7 @@ def company_profile_settings_page():
                 # Company Logo & Branding
                 with ui.card().classes('settings-section'):
                     with ui.row().classes('flex items-center mb-6'):
-                        ui.icon('image', size='2rem').classes('brand-primary')
+
                         ui.label('Branding & Media').classes('sub-heading brand-charcoal ml-3')
                     
                     with ui.row().classes('gap-8'):
@@ -193,7 +193,7 @@ def company_profile_settings_page():
                 with ui.card().classes('settings-section'):
                     with ui.row().classes('flex items-center justify-between mb-6'):
                         with ui.row().classes('flex items-center'):
-                            ui.icon('location_on', size='2rem').classes('brand-primary')
+
                             ui.label('Office Locations').classes('sub-heading brand-charcoal ml-3')
                         ui.button('Add Office').classes('px-4 py-2').style('background-color: #0055B8; color: white; font-family: "Raleway", sans-serif; font-weight: 600;')
                     
@@ -215,7 +215,7 @@ def company_profile_settings_page():
                 # Hiring Preferences
                 with ui.card().classes('settings-section'):
                     with ui.row().classes('flex items-center mb-6'):
-                        ui.icon('work', size='2rem').classes('brand-primary')
+
                         ui.label('Hiring Preferences').classes('sub-heading brand-charcoal ml-3')
                     
                     with ui.grid(columns=2).classes('gap-6'):
@@ -236,7 +236,7 @@ def company_profile_settings_page():
                 # Account Actions
                 with ui.card().classes('settings-section'):
                     with ui.row().classes('flex items-center mb-6'):
-                        ui.icon('admin_panel_settings', size='2rem').classes('text-red-500')
+
                         ui.label('Account Management').classes('sub-heading brand-charcoal ml-3')
                     
                     with ui.column().classes('gap-4'):

@@ -1,5 +1,5 @@
 """
-Institution Dashboard page for TalentConnect Africa with brand guidelines.
+Institution Dashboard page for Dompell Africa with brand guidelines.
 """
 
 from nicegui import ui
@@ -71,6 +71,45 @@ def institution_dashboard_page():
                 background: #0055B8 !important;
                 color: white !important;
             }
+            /* Table Styling */
+            .data-table {
+                width: 100%;
+                border-collapse: collapse;
+                background: white;
+            }
+            .data-table thead {
+                background: #F2F7FB;
+                border-bottom: 2px solid #0055B8;
+            }
+            .data-table th {
+                padding: 16px;
+                text-align: left;
+                font-size: 14px;
+                font-weight: 600;
+                color: #1A1A1A;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+            }
+            .data-table td {
+                padding: 16px;
+                border-bottom: 1px solid #E5E7EB;
+                font-size: 14px;
+                color: #4D4D4D;
+            }
+            .data-table tbody tr:hover {
+                background: #F8FAFC;
+                cursor: pointer;
+            }
+            .status-badge {
+                padding: 4px 12px;
+                border-radius: 12px;
+                font-size: 12px;
+                font-weight: 600;
+                text-transform: uppercase;
+            }
+            .status-active { background: #DCFCE7; color: #166534; }
+            .status-pending { background: #FEF3C7; color: #92400E; }
+            .status-archived { background: #F3F4F6; color: #6B7280; }
         </style>
     ''')
 
@@ -91,17 +130,18 @@ def _create_classic_institution_sidenav():
         with ui.column().classes('flex-1'):
             # Brand Header
             with ui.row().classes('flex items-center gap-3 p-6').style('border-bottom: 1px solid rgba(0, 85, 184, 0.1);'):
-                # ui.icon('hub', size='2rem').style('color: #0055B8 !important;')
-                # ui.label('TalentConnect').classes('sub-heading brand-charcoal')
+                ui.label('Institution Portal').classes('sub-heading brand-charcoal')
             
-                # Navigation Menu
-                with ui.column().classes('p-6 gap-2'):
-                    _classic_nav_link('Dashboard', 'dashboard', active=True)
-                    _classic_nav_link('Programs', 'school')
-                    _classic_nav_link('Applications', 'assignment')
-                    _classic_nav_link('Analytics', 'bar_chart')
-                    _classic_nav_link('Trainees', 'group')
-                    _classic_nav_link('Settings', 'settings')
+            # Navigation Menu
+            with ui.column().classes('p-6 gap-2'):
+                _classic_nav_link('Dashboard', 'dashboard', '/institution/dashboard', active=True)
+                _classic_nav_link('Programs', 'school', '/institution/programs')
+                _classic_nav_link('Create Program', 'add_circle', '/institution/program/create')
+                _classic_nav_link('Applications', 'assignment', '/institution/applications')
+                _classic_nav_link('Students', 'group', '/institution/students')
+                _classic_nav_link('Analytics', 'bar_chart', '/institution/analytics')
+                _classic_nav_link('Onboarding', 'person_add', '/institution/onboarding/profile')
+                _classic_nav_link('Settings', 'settings', '/institution/settings')
             
         # User Profile Section
         with ui.card().classes('m-6 p-4 classic-card'):
@@ -113,17 +153,19 @@ def _create_classic_institution_sidenav():
                     ui.label('Institution Account').classes('caption brand-slate')
                 ui.button().props('icon=more_vert flat round size=sm').classes('brand-slate')
 
-def _classic_nav_link(text: str, icon: str, active: bool = False):
+def _classic_nav_link(text: str, icon: str, route: str = None, active: bool = False):
     """Creates a classic navigation link following brand guidelines."""
     link_class = 'classic-nav-link brand-charcoal'
     if active:
         link_class += ' active'
     
-    with ui.row().classes(link_class):
-        ui.icon(icon, size='1.2rem')
+    def navigate():
+        if route:
+            ui.navigate.to(route)
+    
+    with ui.row().classes(link_class).on('click', navigate):
+        ui.icon(icon).classes('text-xl')
         ui.label(text).classes('body-text')
-
-
 
 def _create_classic_overview_cards():
     """Creates classic overview cards following brand guidelines."""
@@ -136,7 +178,7 @@ def _create_classic_overview_cards():
 def _classic_overview_card(title: str, value: str, icon: str):
     """Creates a classic overview card following brand guidelines."""
     with ui.card().classes('classic-card p-6 text-center'):
-        ui.icon(icon).classes('text-4xl brand-primary mb-3')
+
         ui.label(value).classes('heading-2 brand-charcoal')
         ui.label(title).classes('caption brand-slate mb-2')
 
@@ -151,17 +193,18 @@ def _create_classic_main_content():
                 ui.button('Review Applications', icon='assignment').classes('w-full py-3 rounded button-label').style('background: rgba(0, 85, 184, 0.1); color: #0055B8;')
                 ui.button('Generate Reports', icon='bar_chart').classes('w-full py-3 rounded button-label').style('background: rgba(0, 85, 184, 0.1); color: #0055B8;')
 
-        # Programs Summary (2/3 width)
+        # Programs Summary Table (2/3 width)
         with ui.card().classes('lg:col-span-2 classic-card p-0'):
             with ui.row().classes('justify-between items-center px-6 py-4 w-full').style('border-bottom: 1px solid rgba(0, 85, 184, 0.1);'):
                 ui.label('Programs Summary').classes('sub-heading brand-charcoal')
-                ui.button('View All Programs', icon='arrow_forward').props('flat').classes('brand-primary button-label')
+                ui.button('View All Programs', icon='arrow_forward', on_click=lambda: ui.navigate.to('/institution/programs')).props('flat').classes('brand-primary button-label')
             
             # Programs List
             with ui.column().classes('p-6 gap-4'):
-                _classic_program_item('Digital Marketing', 'Active', 45, '2 days ago')
-                _classic_program_item('Data Science', 'Active', 32, '5 days ago')
+                _classic_program_item('Digital Marketing Bootcamp', 'Active', 45, '2 days ago')
+                _classic_program_item('Data Science Intensive', 'Active', 32, '5 days ago')
                 _classic_program_item('Software Engineering', 'Archived', 60, '1 month ago')
+                _classic_program_item('UI/UX Design Fundamentals', 'Pending', 0, 'Just now')
 
     # Analytics and Demographics
     with ui.row().classes('grid grid-cols-1 lg:grid-cols-2 gap-8'):
@@ -190,18 +233,18 @@ def _create_classic_main_content():
 
 def _classic_program_item(name: str, status: str, enrolled: int, last_activity: str):
     """Creates a classic program item following brand guidelines."""
-    status_colors = {
-        'Active': 'bg-green-100 text-green-800',
-        'Archived': 'bg-yellow-100 text-yellow-800',
-        'Inactive': 'bg-red-100 text-red-800'
+    status_styles = {
+        'Active': 'background: #DCFCE7; color: #166534;',
+        'Pending': 'background: #FEF3C7; color: #92400E;',
+        'Archived': 'background: #F3F4F6; color: #6B7280;'
     }
     
-    with ui.row().classes('items-center justify-between p-4 rounded-lg hover:bg-gray-50 transition-colors').style('background: rgba(0, 85, 184, 0.02);'):
+    with ui.row().classes('items-center justify-between p-4 rounded-lg hover:bg-gray-50 transition-colors').style('background: rgba(0, 85, 184, 0.02); border-bottom: 1px solid #E5E7EB;'):
         with ui.column().classes('flex-grow gap-1'):
-            ui.label(name).classes('body-text brand-charcoal')
-            ui.label(f'{enrolled} enrolled • {last_activity}').classes('caption brand-slate')
+            ui.label(name).classes('body-text brand-charcoal font-semibold')
+            ui.label(f'{enrolled} students enrolled • {last_activity}').classes('caption brand-slate')
         
-        ui.label(status).classes(f'px-3 py-1 rounded-full caption {status_colors.get(status, "bg-gray-100 text-gray-800")}')
+        ui.label(status).classes('px-3 py-1 rounded-full caption font-semibold').style(status_styles.get(status, 'background: #F3F4F6; color: #6B7280;'))
 
 def _classic_analytics_item(metric: str, value: str, description: str):
     """Creates a classic analytics item following brand guidelines."""

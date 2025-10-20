@@ -6,93 +6,116 @@ from nicegui import ui
 
 def help_and_support_page():
     """Creates the Help & Support page based on the template."""
+
     ui.add_head_html('''
-        <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
         <style>
-            /* Brand Typography */
-            body {
-                font-family: 'Raleway', sans-serif !important;
-                background: #F2F7FB !important;
-                color: #1A1A1A !important;
-                line-height: 125% !important;
+            body { font-family: 'Inter', sans-serif; background: #F7FAFC; color: #1A202C; }
+            .help-hero {
+                background: linear-gradient(135deg, #0055B8 0%, #003d8f 100%);
+                color: white;
+                padding: 64px 20px 48px 20px;
+                text-align: center;
+                border-radius: 0 0 32px 32px;
+                position: relative;
+                overflow: hidden;
             }
-            
-            /* Typography Hierarchy */
-            .heading-1 { font-size: 56px; font-weight: 700; color: #1A1A1A; line-height: 110%; letter-spacing: -0.02em; }
-            .heading-2 { font-size: 40px; font-weight: 600; color: #1A1A1A; line-height: 115%; letter-spacing: -0.01em; }
-            .heading-3 { font-size: 32px; font-weight: 500; color: #1A1A1A; line-height: 120%; }
-            .sub-heading { font-size: 24px; font-weight: 600; color: #1A1A1A; line-height: 125%; }
-            .sub-heading-2 { font-size: 18px; font-weight: 600; color: #1A1A1A; line-height: 125%; }
-            .body-text { font-size: 16px; font-weight: 400; color: #1A1A1A; line-height: 125%; }
-            .button-label { font-size: 14px; font-weight: 600; color: #1A1A1A; line-height: 125%; }
-            .form-placeholder { font-size: 14px; font-weight: 500; color: #4D4D4D; line-height: 125%; }
-            .caption { font-size: 12px; font-weight: 400; color: #4D4D4D; letter-spacing: 8%; line-height: 125%; }
-            
-            /* Brand Colors */
-            .brand-primary { color: #0055B8 !important; }
-            .brand-primary-bg { background-color: #0055B8 !important; }
-            .brand-charcoal { color: #1A1A1A !important; }
-            .brand-slate { color: #4D4D4D !important; }
-            .brand-light-mist { background-color: #F2F7FB !important; }
-            
-            /* Force brand font family but EXCLUDE icons */
-            *:not(.material-icons):not(.q-icon):not([class*="material-icons"]):not(i) {
-                font-family: 'Raleway', sans-serif !important;
-            }
-            
-            /* Ensure Material Icons work properly */
-            .material-icons, .q-icon, i.material-icons, i[class*="material-icons"] {
-                font-family: 'Material Icons' !important;
-                font-weight: normal !important;
-                font-style: normal !important;
-                font-variant: normal !important;
-                text-transform: none !important;
-                line-height: 1 !important;
-                letter-spacing: normal !important;
-                word-wrap: normal !important;
-                white-space: nowrap !important;
-                direction: ltr !important;
-                -webkit-font-smoothing: antialiased !important;
-                -moz-osx-font-smoothing: grayscale !important;
-                -webkit-font-feature-settings: 'liga' !important;
-            }
-            
-            /* Override all blue colors */
-            [class*="text-blue"], [class*="bg-blue"], [class*="border-blue"],
-            .text-indigo-600, .bg-indigo-50, .border-indigo-600 { 
-                color: #0055B8 !important; 
-                background-color: rgba(0, 85, 184, 0.1) !important;
-                border-color: #0055B8 !important;
-            }
-            
-            /* Override all gray colors */
-            [class*="text-gray"], [class*="text-slate"], .text-\[\#47709e\], .text-\[\#0d141c\] {
-                color: #4D4D4D !important;
-            }
-            
-            /* Dark text colors */
-            h1, h2, h3, h4, h5, h6, .text-\[\#0d141c\] {
-                color: #1A1A1A !important;
-            }
-            
-            /* Background colors */
-            [class*="bg-gray"], [class*="bg-slate"], .bg-\[\#e6edf4\] {
-                background-color: #F2F7FB !important;
-            }
-            
-            .bg-white { background-color: #FFFFFF !important; }
-            body { background-color: #F2F7FB !important; }
-            
-            /* Button and interactive elements */
-            .q-btn { background-color: #0055B8 !important; color: white !important; }
-            .q-btn--outline { background-color: transparent !important; border-color: #0055B8 !important; color: #0055B8 !important; }
+            .help-hero h1 { font-size: 48px; font-weight: 900; margin-bottom: 16px; letter-spacing: -0.02em; }
+            .help-hero p { font-size: 20px; font-weight: 400; opacity: 0.95; max-width: 700px; margin: 0 auto; }
+            .faq-section { max-width: 900px; margin: 48px auto 0 auto; padding: 0 20px; }
+            .faq-title { font-size: 32px; font-weight: 800; color: #1A202C; margin-bottom: 24px; text-align: center; }
+            .faq-accordion { background: white; border-radius: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); margin-bottom: 16px; }
+            .faq-question { font-size: 18px; font-weight: 700; color: #0055B8; padding: 20px 28px; cursor: pointer; border-bottom: 1px solid #E2E8F0; }
+            .faq-answer { font-size: 16px; color: #2D3748; padding: 0 28px 20px 28px; display: none; }
+            .faq-accordion.active .faq-answer { display: block; }
+            .faq-accordion.active .faq-question { background: #F0F6FF; }
+            .contact-section { max-width: 900px; margin: 64px auto 0 auto; padding: 0 20px; }
+            .contact-title { font-size: 28px; font-weight: 800; color: #1A202C; margin-bottom: 16px; }
+            .contact-card { background: white; border-radius: 16px; box-shadow: 0 2px 12px rgba(0,0,0,0.04); padding: 32px; }
+            .contact-label { font-size: 16px; font-weight: 700; color: #0055B8; margin-bottom: 6px; }
+            .contact-value { font-size: 16px; color: #2D3748; margin-bottom: 12px; }
         </style>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                document.querySelectorAll('.faq-question').forEach(function(q) {
+                    q.addEventListener('click', function() {
+                        var acc = this.parentElement;
+                        acc.classList.toggle('active');
+                    });
+                });
+            });
+        </script>
     ''')
 
-    with ui.column().classes('relative flex h-auto min-h-screen w-full flex-col brand-light-mist pt-20'):
-        with ui.column().classes('layout-content-container flex flex-col max-w-[960px] flex-1 px-4 md:px-10 py-8 mx-auto'):
-            _create_faq_content()
+    # Hero Section
+    ui.html('''
+    <section class="help-hero">
+        <h1>Help & Support</h1>
+        <p>Find answers to common questions, get support, and contact our team. We're here to help you succeed on Dompell!</p>
+    </section>
+    ''', sanitize=lambda s: s)
+
+    # FAQ Section
+    ui.html('''
+    <section class="faq-section">
+        <div class="faq-title">Frequently Asked Questions</div>
+        <div class="faq-accordion">
+            <div class="faq-question">How do I reset my password?</div>
+            <div class="faq-answer">Go to the login page, click on "Forgot Password?", and follow the instructions to reset your password via email.</div>
+        </div>
+        <div class="faq-accordion">
+            <div class="faq-question">How can I contact support?</div>
+            <div class="faq-answer">You can use the contact form below or email us directly at <a href="mailto:support@dompell.com">support@dompell.com</a>.</div>
+        </div>
+        <div class="faq-accordion">
+            <div class="faq-question">How do I update my profile information?</div>
+            <div class="faq-answer">After logging in, go to your profile page and click "Edit Profile" to update your information.</div>
+        </div>
+        <div class="faq-accordion">
+            <div class="faq-question">Where can I find resources for employers or institutions?</div>
+            <div class="faq-answer">Visit the Resources section in your dashboard for guides, tips, and best practices tailored to employers and institutions.</div>
+        </div>
+        <div class="faq-accordion">
+            <div class="faq-question">How do I delete my account?</div>
+            <div class="faq-answer">To delete your account, please contact our support team at <a href="mailto:support@dompell.com">support@dompell.com</a> and we will assist you with the process.</div>
+        </div>
+        <div class="faq-accordion">
+            <div class="faq-question">Can I change my email address?</div>
+            <div class="faq-answer">Yes, you can change your email address in your account settings. Go to your profile, select "Account Settings", and update your email.</div>
+        </div>
+        <div class="faq-accordion">
+            <div class="faq-question">How do I report a problem or bug?</div>
+            <div class="faq-answer">If you encounter a problem or bug, please use the "Report a Problem" feature in your dashboard or email us at <a href="mailto:support@dompell.com">support@dompell.com</a>.</div>
+        </div>
+        <div class="faq-accordion">
+            <div class="faq-question">Is Dompell available outside Ghana?</div>
+            <div class="faq-answer">Dompell is based in Ghana and primarily serves users in Ghana, but we welcome users from across Africa. Some features may be limited outside Ghana.</div>
+        </div>
+        <div class="faq-accordion">
+            <div class="faq-question">How do I become a verified employer?</div>
+            <div class="faq-answer">To become a verified employer, complete your company profile and submit the required documents. Our team will review and verify your information within 2 business days.</div>
+        </div>
+        <div class="faq-accordion">
+            <div class="faq-question">What should I do if I don't receive a verification email?</div>
+            <div class="faq-answer">Check your spam or junk folder. If you still don't see the email, contact us at <a href="mailto:support@dompell.com">support@dompell.com</a> for assistance.</div>
+        </div>
+    </section>
+    ''', sanitize=lambda s: s)
+
+    # Contact Section
+    ui.html('''
+    <section class="contact-section">
+        <div class="contact-title">Contact Us</div>
+        <div class="contact-card">
+            <div class="contact-label">Email</div>
+            <div class="contact-value"><a href="mailto:support@dompell.com">support@dompell.com</a></div>
+            <div class="contact-label">Phone</div>
+            <div class="contact-value">+233275320000</div>
+            <div class="contact-label">Office Hours</div>
+            <div class="contact-value">Monday - Friday, 9:00am - 5:00pm (GMT, Ghana)</div>
+        </div>
+    </section>
+    ''', sanitize=lambda s: s)
 
 
 
@@ -125,12 +148,12 @@ def _create_faq_content():
             ui.label("If you can't find the answer you're looking for, please don't hesitate to reach out to our support team.").classes('body-text brand-slate mb-6')
             with ui.row().classes('grid grid-cols-1 md:grid-cols-2 gap-6 w-full'):
                 with ui.row().classes('items-center gap-4 p-6 rounded-xl w-full transition-all cursor-pointer').style('background-color: #F2F7FB !important;'):
-                    ui.icon('email').classes('text-2xl').style('color: #0055B8 !important;')
+
                     with ui.column().classes('gap-1'):
                         ui.label('Send us an email').classes('sub-heading-2').style('color: #1A1A1A !important;')
                         ui.link('support@talentconnectafrica.com', 'mailto:support@talentconnectafrica.com').classes('button-label transition-all').style('color: #4D4D4D !important;')
                 with ui.row().classes('items-center gap-4 p-6 rounded-xl w-full transition-all cursor-pointer').style('background-color: #0055B8 !important;'):
-                    ui.icon('chat', color='white').classes('text-2xl')
+
                     with ui.column().classes('gap-1'):
                         ui.label('Chat with us').classes('sub-heading-2 text-white')
                         ui.label('Available Mon-Fri, 9am-5pm').classes('button-label text-white opacity-90')

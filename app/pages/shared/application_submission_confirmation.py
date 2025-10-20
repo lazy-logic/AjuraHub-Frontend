@@ -160,7 +160,7 @@ def application_submission_confirmation_page():
         # Success banner
         with ui.row().classes('w-full max-w-5xl mx-auto px-6 mb-8'):
             with ui.element('div').classes('success-banner w-full'):
-                ui.icon('check_circle', size='4rem').classes('mb-4')
+
                 ui.label('Application Submitted Successfully!').classes('heading-2 mb-4')
                 ui.label('Thank you for applying. We\'ve received your application and will review it carefully.').classes('body-text opacity-90')
 
@@ -171,7 +171,7 @@ def application_submission_confirmation_page():
                 # Application summary
                 with ui.card().classes('confirmation-card'):
                     with ui.row().classes('flex items-center mb-6'):
-                        ui.icon('assignment', size='2rem').classes('brand-primary')
+
                         ui.label('Application Summary').classes('sub-heading brand-charcoal ml-3')
                     
                     with ui.element('div').classes('application-summary'):
@@ -200,7 +200,7 @@ def application_submission_confirmation_page():
                 # Application timeline
                 with ui.card().classes('confirmation-card'):
                     with ui.row().classes('flex items-center mb-6'):
-                        ui.icon('timeline', size='2rem').classes('brand-primary')
+
                         ui.label('Application Process Timeline').classes('sub-heading brand-charcoal ml-3')
                     
                     # Timeline items
@@ -232,7 +232,7 @@ def application_submission_confirmation_page():
                 # Documents submitted
                 with ui.card().classes('confirmation-card'):
                     with ui.row().classes('flex items-center mb-6'):
-                        ui.icon('folder_open', size='2rem').classes('brand-primary')
+
                         ui.label('Documents Submitted').classes('sub-heading brand-charcoal ml-3')
                     
                     for doc in [
@@ -242,11 +242,11 @@ def application_submission_confirmation_page():
                         ('Certificates.pdf', 'PDF Document', '856 KB')
                     ]:
                         with ui.row().classes('items-center p-3 border border-gray-200 rounded-lg mb-2'):
-                            ui.icon('insert_drive_file', size='1.5rem').classes('brand-primary mr-4')
+
                             with ui.column().classes('flex-1'):
                                 ui.label(doc[0]).classes('body-text font-semibold brand-charcoal')
                                 ui.label(f'{doc[1]} • {doc[2]}').classes('caption brand-slate')
-                            ui.icon('check_circle', size='1.5rem').classes('text-green-600')
+
 
             # Right column - Next steps & support
             with ui.column().classes('w-96'):
@@ -256,21 +256,21 @@ def application_submission_confirmation_page():
                     
                     with ui.element('div').classes('next-step'):
                         with ui.row().classes('items-start'):
-                            ui.icon('email', size='2rem').classes('brand-primary mr-4 mt-1')
+
                             with ui.column():
                                 ui.label('Email Confirmation').classes('body-text font-semibold brand-charcoal mb-1')
                                 ui.label('You\'ll receive an email confirmation with your application details within 5 minutes.').classes('caption brand-slate')
                     
                     with ui.element('div').classes('next-step'):
                         with ui.row().classes('items-start'):
-                            ui.icon('visibility', size='2rem').classes('brand-primary mr-4 mt-1')
+
                             with ui.column():
                                 ui.label('Application Review').classes('body-text font-semibold brand-charcoal mb-1')
                                 ui.label('Our HR team will review your application within 2-3 business days.').classes('caption brand-slate')
                     
                     with ui.element('div').classes('next-step'):
                         with ui.row().classes('items-start'):
-                            ui.icon('notifications', size='2rem').classes('brand-primary mr-4 mt-1')
+
                             with ui.column():
                                 ui.label('Status Updates').classes('body-text font-semibold brand-charcoal mb-1')
                                 ui.label('We\'ll keep you updated on your application status via email and SMS.').classes('caption brand-slate')
@@ -295,19 +295,19 @@ def application_submission_confirmation_page():
                         ui.label('TechStart Solutions').classes('body-text font-semibold brand-charcoal mb-2')
                         
                         with ui.row().classes('items-center mb-2'):
-                            ui.icon('person', size='1rem').classes('brand-slate mr-2')
+
                             ui.label('Jane Doe, HR Manager').classes('caption brand-slate')
                         
                         with ui.row().classes('items-center mb-2'):
-                            ui.icon('email', size='1rem').classes('brand-slate mr-2')
+
                             ui.label('careers@techstart.co.ke').classes('caption brand-slate')
                         
                         with ui.row().classes('items-center mb-2'):
-                            ui.icon('phone', size='1rem').classes('brand-slate mr-2')
+
                             ui.label('+254 712 345 678').classes('caption brand-slate')
                         
                         with ui.row().classes('items-center'):
-                            ui.icon('location_on', size='1rem').classes('brand-slate mr-2')
+
                             ui.label('Nairobi, Kenya').classes('caption brand-slate')
 
                 # Help & Support
@@ -337,7 +337,7 @@ def application_submission_confirmation_page():
                             with ui.column().classes('flex-1'):
                                 ui.label(opportunity[0]).classes('body-text font-semibold brand-charcoal')
                                 ui.label(opportunity[1]).classes('caption brand-slate')
-                            ui.icon('arrow_forward', size='1rem').classes('brand-primary')
+
 
         # Action buttons
         with ui.row().classes('w-full max-w-6xl mx-auto px-6 mt-8 mb-12'):

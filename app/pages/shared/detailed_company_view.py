@@ -206,7 +206,7 @@ def detailed_company_view_page():
                 # Company overview
                 with ui.card().classes('company-card'):
                     with ui.row().classes('flex items-center mb-6'):
-                        ui.icon('business', size='2rem').classes('brand-primary')
+
                         ui.label('About TechStart Solutions').classes('sub-heading brand-charcoal ml-3')
                     
                     ui.label('''TechStart Solutions is a leading software development company specializing in web and mobile applications for businesses across East Africa. We pride ourselves on innovation, quality, and fostering talent development in the tech ecosystem.
@@ -229,7 +229,7 @@ Founded in 2018, we've grown from a small startup to a team of 150+ passionate d
                 with ui.card().classes('company-card'):
                     with ui.row().classes('flex items-center justify-between mb-6'):
                         with ui.row().classes('items-center'):
-                            ui.icon('work', size='2rem').classes('brand-primary')
+
                             ui.label('Open Positions (12)').classes('sub-heading brand-charcoal ml-3')
                         
                         ui.select(['All Positions', 'Full-time', 'Part-time', 'Contract', 'Remote'], value='All Positions').classes('w-48')
@@ -270,11 +270,11 @@ Founded in 2018, we've grown from a small startup to a team of 150+ passionate d
                                     
                                     with ui.row().classes('items-center gap-4 mb-2'):
                                         with ui.row().classes('items-center'):
-                                            ui.icon('location_on', size='1rem').classes('brand-slate mr-1')
+
                                             ui.label(job['location']).classes('caption brand-slate')
                                         
                                         with ui.row().classes('items-center'):
-                                            ui.icon('payments', size='1rem').classes('brand-slate mr-1')
+
                                             ui.label(job['salary']).classes('caption brand-slate')
                                     
                                     with ui.row().classes('items-center gap-4'):
@@ -297,13 +297,13 @@ Founded in 2018, we've grown from a small startup to a team of 150+ passionate d
                 # Company gallery
                 with ui.card().classes('company-card'):
                     with ui.row().classes('flex items-center mb-6'):
-                        ui.icon('photo_library', size='2rem').classes('brand-primary')
+
                         ui.label('Office & Team Photos').classes('sub-heading brand-charcoal ml-3')
                     
                     with ui.row().classes('gap-4'):
                         for i in range(6):
                             with ui.element('div').classes('gallery-image w-32 h-24 bg-gray-200 flex items-center justify-center'):
-                                ui.icon('image', size='2rem').classes('text-gray-400')
+                                pass  # Image placeholder (icon was removed)
 
             # Right column - Company details
             with ui.column().classes('w-80'):
@@ -314,35 +314,35 @@ Founded in 2018, we've grown from a small startup to a team of 150+ passionate d
                     with ui.column().classes('gap-4'):
                         # Industry
                         with ui.row().classes('items-center'):
-                            ui.icon('category', size='1.5rem').classes('brand-slate mr-3')
+
                             with ui.column():
                                 ui.label('Industry').classes('caption brand-slate')
                                 ui.label('Software Development').classes('body-text brand-charcoal')
                         
                         # Company size
                         with ui.row().classes('items-center'):
-                            ui.icon('groups', size='1.5rem').classes('brand-slate mr-3')
+
                             with ui.column():
                                 ui.label('Company Size').classes('caption brand-slate')
                                 ui.label('101-200 employees').classes('body-text brand-charcoal')
                         
                         # Founded
                         with ui.row().classes('items-center'):
-                            ui.icon('event', size='1.5rem').classes('brand-slate mr-3')
+
                             with ui.column():
                                 ui.label('Founded').classes('caption brand-slate')
                                 ui.label('2018').classes('body-text brand-charcoal')
                         
                         # Headquarters
                         with ui.row().classes('items-center'):
-                            ui.icon('location_city', size='1.5rem').classes('brand-slate mr-3')
+
                             with ui.column():
                                 ui.label('Headquarters').classes('caption brand-slate')
                                 ui.label('Nairobi, Kenya').classes('body-text brand-charcoal')
                         
                         # Website
                         with ui.row().classes('items-center'):
-                            ui.icon('language', size='1.5rem').classes('brand-slate mr-3')
+
                             with ui.column():
                                 ui.label('Website').classes('caption brand-slate')
                                 ui.label('www.techstart.co.ke').classes('body-text brand-primary cursor-pointer')
@@ -353,19 +353,19 @@ Founded in 2018, we've grown from a small startup to a team of 150+ passionate d
                     
                     with ui.column().classes('gap-3'):
                         with ui.row().classes('items-center'):
-                            ui.icon('email', size='1.5rem').classes('brand-slate mr-3')
+
                             with ui.column():
                                 ui.label('Email').classes('caption brand-slate')
                                 ui.label('careers@techstart.co.ke').classes('body-text brand-charcoal')
                         
                         with ui.row().classes('items-center'):
-                            ui.icon('phone', size='1.5rem').classes('brand-slate mr-3')
+
                             with ui.column():
                                 ui.label('Phone').classes('caption brand-slate')
                                 ui.label('+254 712 345 678').classes('body-text brand-charcoal')
                         
                         with ui.row().classes('items-center'):
-                            ui.icon('location_on', size='1.5rem').classes('brand-slate mr-3')
+
                             with ui.column():
                                 ui.label('Address').classes('caption brand-slate')
                                 ui.label('Westlands, Nairobi').classes('body-text brand-charcoal')
@@ -380,7 +380,7 @@ Founded in 2018, we've grown from a small startup to a team of 150+ passionate d
                         with ui.column().classes('ml-4'):
                             with ui.element('div').classes('rating-stars mb-1'):
                                 for i in range(5):
-                                    ui.icon('star', size='1rem').classes('rating-star filled' if i < 5 else 'rating-star')
+                                    pass  # Star icon was removed
                             ui.label('Based on 47 reviews').classes('caption brand-slate')
                     
                     # Individual reviews
@@ -412,7 +412,7 @@ Founded in 2018, we've grown from a small startup to a team of 150+ passionate d
                             
                             with ui.element('div').classes('rating-stars mb-2'):
                                 for i in range(5):
-                                    ui.icon('star', size='1rem').classes('rating-star filled' if i < review['rating'] else 'rating-star')
+                                    pass  # Star icon was removed
                             
                             ui.label(review['comment']).classes('caption brand-slate')
                     
@@ -424,13 +424,14 @@ Founded in 2018, we've grown from a small startup to a team of 150+ passionate d
                     
                     with ui.row().classes('gap-3 justify-center'):
                         with ui.button().props('flat round').classes('text-blue-600'):
-                            ui.icon('facebook', size='2rem')
+                            pass  # Facebook icon was removed
                         with ui.button().props('flat round').classes('text-blue-400'):  # Twitter
-                            ui.icon('alternate_email', size='2rem')
+                            pass  # Twitter icon was removed
                         with ui.button().classes('flat round text-blue-700'):  # LinkedIn
-                            ui.icon('business', size='2rem')
+                            pass  # LinkedIn icon was removed
                         with ui.button().props('flat round').classes('text-pink-600'):  # Instagram
-                            ui.icon('camera_alt', size='2rem')
+                            pass  # Instagram icon was removed
+
 
         # Related companies section
         with ui.row().classes('w-full max-w-7xl mx-auto px-6 mt-8 mb-12'):

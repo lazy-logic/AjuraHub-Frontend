@@ -107,6 +107,44 @@ def company_onboarding_roles_page():
             background-color: #0055B8;
             color: white;
         }
+        
+        /* ==========================
+           Table Brand Enforcement
+           ========================== */
+        table, .q-table, .q-table * {
+            font-family: 'Raleway', sans-serif !important;
+            color: #1A1A1A !important;
+        }
+        .q-table, table {
+            background: #FFFFFF !important;
+            border: 1px solid #e2e8f0 !important;
+            border-radius: 8px !important;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05) !important;
+        }
+        .q-table thead tr, thead tr {
+            background: #f8fafc !important;
+            border-bottom: 2px solid #e2e8f0 !important;
+        }
+        .q-th, thead th {
+            text-transform: uppercase !important;
+            letter-spacing: 0.5px !important;
+            font-weight: 700 !important;
+            font-size: 11px !important;
+            color: #475569 !important;
+            padding: 10px 12px !important;
+        }
+        .q-td, tbody td {
+            font-size: 13px !important;
+            color: #334155 !important;
+            padding: 12px !important;
+            border-bottom: 1px solid #f1f5f9 !important;
+        }
+        .q-tr:hover, tbody tr:hover { background: #f8fafc !important; }
+        tbody tr:last-child .q-td, tbody tr:last-child td { border-bottom: none !important; }
+        .q-table a, table a { color: #0055B8 !important; text-decoration: none !important; }
+        .q-table a:hover, table a:hover { text-decoration: underline !important; }
+        .q-table .q-btn, table .q-btn { color: #0055B8 !important; }
+        .q-table__bottom, .q-table__separator { border-color: #e2e8f0 !important; }
     </style>
     ''')
 
@@ -120,7 +158,7 @@ def company_onboarding_roles_page():
                 with ui.row().classes('flex items-center mb-6'):
                     with ui.row().classes('flex items-center'):
                         with ui.element('div').classes('progress-step step-completed'):
-                            ui.icon('check', size='1.2rem')
+                            ui.label('1')
                         ui.label('Profile Creation').classes('body-text brand-charcoal')
                     
                     ui.element('div').classes('flex-1 h-0.5 bg-blue-500 mx-4')
@@ -137,7 +175,7 @@ def company_onboarding_roles_page():
                 # Hiring Preferences
                 with ui.card().classes('form-section'):
                     with ui.row().classes('flex items-center mb-6'):
-                        ui.icon('work', size='2rem').classes('brand-primary')
+
                         ui.label('Hiring Preferences').classes('sub-heading brand-charcoal ml-3')
                     
                     with ui.grid(columns=2).classes('gap-6'):
@@ -160,7 +198,7 @@ def company_onboarding_roles_page():
                 # Skills & Competencies
                 with ui.card().classes('form-section'):
                     with ui.row().classes('flex items-center mb-6'):
-                        ui.icon('psychology', size='2rem').classes('brand-primary')
+
                         ui.label('Skills & Competencies').classes('sub-heading brand-charcoal ml-3')
                     
                     ui.label('Select the key skills your company typically looks for:').classes('body-text brand-slate mb-4')
@@ -186,7 +224,7 @@ def company_onboarding_roles_page():
                 # Department & Roles
                 with ui.card().classes('form-section'):
                     with ui.row().classes('flex items-center mb-6'):
-                        ui.icon('groups', size='2rem').classes('brand-primary')
+
                         ui.label('Departments & Roles').classes('sub-heading brand-charcoal ml-3')
                     
                     with ui.grid(columns=2).classes('gap-6'):
@@ -223,31 +261,31 @@ def company_onboarding_roles_page():
                                     ui.label(f'Trainee Name {i+1}').classes('body-text font-semibold brand-charcoal')
                                     ui.label('Software Development').classes('caption brand-slate')
                                     with ui.row().classes('mt-2 gap-1'):
-                                        ui.chip('Python', size='sm').classes('bg-blue-100 text-blue-800 text-xs')
-                                        ui.chip('React', size='sm').classes('bg-blue-100 text-blue-800 text-xs')
-                                ui.icon('arrow_forward', size='1.5rem').classes('brand-primary cursor-pointer')
+                                        ui.chip('Python', removable=False).classes('bg-blue-100 text-blue-800 text-xs')
+                                        ui.chip('React', removable=False).classes('bg-blue-100 text-blue-800 text-xs')
+
 
                 # Hiring Tips
                 with ui.card().classes('form-section'):
                     with ui.row().classes('flex items-center mb-4'):
-                        ui.icon('tips_and_updates', size='2rem').classes('text-amber-500')
+
                         ui.label('Hiring Tips').classes('sub-heading brand-charcoal ml-3')
                     
                     with ui.column().classes('gap-3'):
                         with ui.row().classes('flex items-start'):
-                            ui.icon('check_circle', size='1.2rem').classes('text-green-500 mt-1')
+
                             ui.label('Be specific about required skills').classes('body-text brand-slate ml-2')
                         
                         with ui.row().classes('flex items-start'):
-                            ui.icon('check_circle', size='1.2rem').classes('text-green-500 mt-1')
+
                             ui.label('Consider cultural fit alongside technical skills').classes('body-text brand-slate ml-2')
                         
                         with ui.row().classes('flex items-start'):
-                            ui.icon('check_circle', size='1.2rem').classes('text-green-500 mt-1')
+
                             ui.label('Provide clear growth opportunities').classes('body-text brand-slate ml-2')
                         
                         with ui.row().classes('flex items-start'):
-                            ui.icon('check_circle', size='1.2rem').classes('text-green-500 mt-1')
+
                             ui.label('Engage with training institutions').classes('body-text brand-slate ml-2')
 
         # Action buttons

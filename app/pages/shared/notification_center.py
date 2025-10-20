@@ -1,5 +1,5 @@
 """
-Notification Center - TalentConnect Africa
+Notification Center - Dompell Africa
 Comprehensive notification center with filtering, categorization, and real-time updates using brand guidelines.
 """
 
@@ -125,7 +125,7 @@ def notification_center_page():
                 with ui.row().classes('gap-3'):
                     ui.button('Mark All Read').props('outlined').classes('px-4 py-2').style('border-color: #0055B8; color: #0055B8; font-family: "Raleway", sans-serif; font-weight: 600;')
                     with ui.button('Settings').props('flat').classes('brand-slate'):
-                        ui.icon('settings', size='1.5rem')
+                        pass  # Settings icon was removed
 
         # Main content
         with ui.row().classes('w-full max-w-6xl mx-auto px-6 gap-8'):
@@ -149,7 +149,7 @@ def notification_center_page():
                             with ui.element('div').classes(f'filter-tab {"active" if active else ""} w-full'):
                                 with ui.row().classes('items-center justify-between w-full'):
                                     with ui.row().classes('items-center'):
-                                        ui.icon(icon, size='1rem').classes('mr-2')
+
                                         ui.label(name).classes('caption font-semibold')
                                     ui.label(str(count)).classes('caption')
 
@@ -213,7 +213,7 @@ def notification_center_page():
                                     'message': 'message',
                                     'system': 'info'
                                 }
-                                ui.icon(icon_map[notification['type']], size='1.5rem')
+
                             
                             # Notification content
                             with ui.column().classes('flex-1'):

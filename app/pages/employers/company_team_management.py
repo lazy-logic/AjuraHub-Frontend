@@ -126,7 +126,7 @@ def company_team_management_page():
                         with ui.column():
                             ui.label(stat).classes('caption brand-slate uppercase')
                             ui.label(value).classes('heading-2 brand-charcoal')
-                        ui.icon(icon, size='2.5rem').classes('brand-primary')
+
 
         # Main content
         with ui.column().classes('w-full max-w-6xl mx-auto px-6'):
@@ -164,7 +164,7 @@ def company_team_management_page():
                             # Status
                             with ui.column().classes('items-center'):
                                 with ui.row().classes('items-center'):
-                                    ui.icon('circle', size='0.8rem').classes(f"status-{member['status'].lower()}")
+
                                     ui.label(member['status']).classes('caption brand-slate ml-1')
                                 ui.label(f"Last active: {member['last_active']}").classes('caption brand-slate')
                             
@@ -223,7 +223,7 @@ def company_team_management_page():
                                 with ui.column().classes('gap-1'):
                                     for permission in role_info['permissions']:
                                         with ui.row().classes('items-center'):
-                                            ui.icon('check', size='1rem').classes('text-green-500')
+
                                             ui.label(permission).classes('caption brand-slate ml-2')
                             
                             ui.button('Edit Role').props('outlined').style('border-color: #0055B8; color: #0055B8; font-family: "Raleway", sans-serif; font-weight: 600;')
@@ -260,7 +260,7 @@ def company_team_management_page():
                     {'action': 'James Wilson accepted invitation', 'time': '1 week ago', 'icon': 'check_circle'}
                 ]:
                     with ui.row().classes('items-center p-3 border-b border-gray-100 last:border-b-0'):
-                        ui.icon(activity['icon'], size='1.5rem').classes('brand-primary mr-3')
+
                         with ui.column().classes('flex-1'):
                             ui.label(activity['action']).classes('body-text brand-charcoal')
                             ui.label(activity['time']).classes('caption brand-slate')
