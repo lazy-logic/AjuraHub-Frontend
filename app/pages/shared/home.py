@@ -1,16 +1,28 @@
+import asyncio
+from typing import Dict, Optional
+
 from nicegui import ui
+
+from app.services.api_service import api_service
 
 def home_page():
     """Creates the new home page for TalentConnect Africa."""
+
+    metric_labels: Dict[str, ui.label] = {}
 
     with ui.column().classes('w-full brand-light-mist brand-charcoal'):
         with ui.element('main').classes('flex-grow'):
             _create_new_hero_section()
             _create_new_about_section()
             _create_new_features_section()
-            _create_why_choose_us_section()
+            _create_why_choose_us_section(metric_labels)
             _create_how_it_works_section()
             _create_cta_section()
+
+    async def load_metrics():
+        await _populate_home_metrics(metric_labels)
+
+    ui.timer(0.1, lambda: asyncio.create_task(load_metrics()), once=True)
 
 
 def _create_new_hero_section():
@@ -249,7 +261,7 @@ def _how_it_works_step(number: str, title: str, description: str, icon: str):
         ui.label(title).classes('sub-heading-2 brand-charcoal mb-2')
         ui.label(description).classes('button-label brand-slate')
 
-def _create_why_choose_us_section():
+def _create_why_choose_us_section(metric_labels: Dict[str, ui.label]):
     with ui.element('section').classes('py-24 bg-gray-900'):
         with ui.column().classes('mx-auto max-w-7xl px-6'):
             # Section header
@@ -260,10 +272,10 @@ def _create_why_choose_us_section():
             
             # Stats bar - redesigned
             with ui.row().classes('grid grid-cols-2 md:grid-cols-4 gap-8 mb-16 py-8 max-w-6xl mx-auto px-4'):
-                _why_stat_redesigned('50,000+', 'Active Users', 'people')
-                _why_stat_redesigned('5,000+', 'Companies', 'business')
-                _why_stat_redesigned('15+', 'Countries', 'public')
-                _why_stat_redesigned('98%', 'Success Rate', 'trending_up')
+                metric_labels['users'] = _why_stat_redesigned('Registered Users')
+                metric_labels['employers'] = _why_stat_redesigned('Employer Accounts')
+                metric_labels['trainees'] = _why_stat_redesigned('Trainee Profiles')
+                metric_labels['organizations'] = _why_stat_redesigned('Organizations Onboarded')
             
             # Three main feature cards
             with ui.row().classes('grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto px-4'):
@@ -271,10 +283,11 @@ def _create_why_choose_us_section():
                 _why_feature_detailed('trending_up', 'Career Development', 'Access exclusive training programs, mentorship opportunities, and career resources. We provide the tools and support you need to grow professionally and achieve your career goals.')
                 _why_feature_detailed('support_agent', 'Dedicated Support', 'Our expert team is available 24/7 to assist you. From profile optimization to interview preparation, we\'re with you every step of your career journey.')
 
-def _why_stat_redesigned(value: str, label: str, icon: str):
+def _why_stat_redesigned(label: str) -> ui.label:
     with ui.column().classes('text-center px-4'):
-        ui.label(value).classes('heading-2 text-white mb-1')
+        value_label = ui.label('--').classes('heading-2 text-white mb-1')
         ui.label(label).classes('button-label text-gray-400')
+        return value_label
 
 def _why_feature_detailed(icon: str, title: str, description: str):
     with ui.card().classes('bg-gray-800 p-8 border border-gray-700 rounded-lg hover:border-blue-400 hover:shadow-xl transition-all'):
@@ -304,3 +317,88 @@ def _create_cta_section():
                     ui.label('Secure Platform').classes('button-label text-white')
                 with ui.row().classes('items-center gap-2'):
                     ui.label('24/7 Support').classes('button-label text-white')
+
+
+async def _populate_home_metrics(metric_labels: Dict[str, ui.label]):
+    """Fetch live metrics for the home page and update the UI labels."""
+
+    async def fetch_count(name: str, requester) -> Optional[int]:
+        def make_request() -> Optional[int]:
+            try:
+                response = requester()
+                return _extract_count_from_response(response)
+            except Exception as exc:  # noqa: BLE001
+                print(f"[HOME_METRICS] Failed to fetch {name}: {exc}")
+                return None
+
+        return await asyncio.to_thread(make_request)
+
+    requests_map = {
+        'users': lambda: api_service.get_all_users(params={'page': 1, 'limit': 500}),
+        'employers': lambda: api_service.get_all_employers(params={'page': 1, 'limit': 500}),
+        'trainees': lambda: api_service.get_all_trainees(params={'page': 1, 'limit': 500}),
+        'organizations': lambda: api_service.get_all_organizations(params={'page': 1, 'limit': 500}),
+    }
+
+    results = await asyncio.gather(
+        *(fetch_count(name, requester) for name, requester in requests_map.items())
+    )
+
+    for (name, _), count in zip(requests_map.items(), results):
+        label = metric_labels.get(name)
+        if not label:
+            continue
+        label.text = _format_metric(count) if count is not None else '--'
+
+
+def _extract_count_from_response(response) -> Optional[int]:
+    """Extract a count from typical Dompell API list responses."""
+    if response is None:
+        return None
+
+    try:
+        if not hasattr(response, 'ok') or not response.ok:  # e.g., requests.Response
+            status = getattr(response, 'status_code', 'unknown')
+            print(f"[HOME_METRICS] Non-200 response ({status})")
+            return None
+
+        payload = response.json()
+    except Exception as exc:  # noqa: BLE001
+        print(f"[HOME_METRICS] Error parsing response JSON: {exc}")
+        return None
+
+    if isinstance(payload, dict):
+        meta = payload.get('meta')
+        if isinstance(meta, dict):
+            for key in ('total', 'count', 'totalCount'):
+                value = meta.get(key)
+                if isinstance(value, int):
+                    return value
+
+        for key in ('count', 'total', 'totalCount'):
+            value = payload.get(key)
+            if isinstance(value, int):
+                return value
+
+        data = payload.get('data')
+        if isinstance(data, list):
+            return len(data)
+        if isinstance(data, dict):
+            if 'items' in data and isinstance(data['items'], list):
+                return len(data['items'])
+            for key in ('count', 'total', 'totalCount'):
+                value = data.get(key)
+                if isinstance(value, int):
+                    return value
+
+    if isinstance(payload, list):
+        return len(payload)
+
+    return None
+
+
+def _format_metric(value: Optional[int]) -> str:
+    """Format metrics with thousand separators."""
+    if value is None:
+        return '--'
+    return f"{value:,}"

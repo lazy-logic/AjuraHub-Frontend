@@ -162,17 +162,18 @@ class ApiService:
 
     # ===== USER ENDPOINTS =====
 
-    def get_all_users(self, headers: Optional[Dict] = None) -> requests.Response:
+    def get_all_users(self, params: Optional[Dict] = None, headers: Optional[Dict] = None) -> requests.Response:
         """
         Get all users (admin/authorized access required).
         
         Args:
+            params: Query parameters (e.g., pagination, search filters)
             headers: Authorization headers
             
         Returns:
             API response with users list
         """
-        return self._make_request('GET', '/users/all', headers=headers)
+        return self._make_request('GET', '/users/all', params=params, headers=headers)
 
     def get_user_profile(self, user_id: str, headers: Optional[Dict] = None) -> requests.Response:
         """
@@ -249,17 +250,18 @@ class ApiService:
         return self._make_request('POST', f'/organization/create/{user_id}', 
                                 data=org_data, headers=headers)
 
-    def get_all_organizations(self, headers: Optional[Dict] = None) -> requests.Response:
+    def get_all_organizations(self, params: Optional[Dict] = None, headers: Optional[Dict] = None) -> requests.Response:
         """
         Get all organizations.
         
         Args:
+            params: Query parameters (e.g., pagination, filters)
             headers: Authorization headers
             
         Returns:
             API response with organizations list
         """
-        return self._make_request('GET', '/organization', headers=headers)
+        return self._make_request('GET', '/organization', params=params, headers=headers)
 
     def get_organization(self, org_id: str, headers: Optional[Dict] = None) -> requests.Response:
         """
@@ -300,6 +302,44 @@ class ApiService:
             API response with programs list
         """
         return self._make_request('GET', f'/organization/programs/{org_id}', headers=headers)
+
+    # ===== TRAINEE PROFILE ENDPOINTS =====
+
+    def get_trainee_profile_by_user(self, user_id: str, headers: Optional[Dict] = None) -> requests.Response:
+        """
+        Retrieve a trainee profile using the associated user ID.
+        """
+        return self._make_request('GET', f'/trainee/{user_id}', headers=headers)
+
+    def get_all_trainees(self, params: Optional[Dict] = None, headers: Optional[Dict] = None) -> requests.Response:
+        """Retrieve all trainee profiles."""
+        return self._make_request('GET', '/trainee', params=params, headers=headers)
+
+    def get_trainee_experience(self, trainee_profile_id: str,
+                               headers: Optional[Dict] = None) -> requests.Response:
+        """Retrieve all experience records for a trainee profile."""
+        return self._make_request('GET', f'/trainee/experience/{trainee_profile_id}', headers=headers)
+
+    def get_trainee_education(self, trainee_profile_id: str,
+                              headers: Optional[Dict] = None) -> requests.Response:
+        """Retrieve all education records for a trainee profile."""
+        return self._make_request('GET', f'/trainee/education/{trainee_profile_id}', headers=headers)
+
+    def get_trainee_certifications(self, trainee_profile_id: str,
+                                   headers: Optional[Dict] = None) -> requests.Response:
+        """Retrieve all certifications for a trainee profile."""
+        return self._make_request('GET', f'/trainee/certification/{trainee_profile_id}', headers=headers)
+
+    def get_trainee_portfolio(self, trainee_profile_id: str,
+                              headers: Optional[Dict] = None) -> requests.Response:
+        """Retrieve all portfolio projects for a trainee profile."""
+        return self._make_request('GET', f'/trainee/portfolio/{trainee_profile_id}', headers=headers)
+
+    # ===== EMPLOYER ENDPOINTS =====
+
+    def get_all_employers(self, params: Optional[Dict] = None, headers: Optional[Dict] = None) -> requests.Response:
+        """Retrieve all employer profiles."""
+        return self._make_request('GET', '/employer', params=params, headers=headers)
 
     # ===== TRAINING PROGRAMS ENDPOINTS =====
 
@@ -377,3 +417,4 @@ class ApiService:
 
 # Create a singleton instance of the API service
 api_service = ApiService()
+
