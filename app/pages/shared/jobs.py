@@ -66,6 +66,22 @@ def jobs_page():
             @media (max-width: 900px) {
                 .jobs-main { padding: 0 8px; }
             }
+            .unified-field .q-field__control {
+                border-radius: 12px !important;
+                border: 1px solid rgba(15, 23, 42, 0.14) !important;
+                min-height: 48px !important;
+                padding: 0 14px !important;
+                background: #ffffff !important;
+            }
+            .unified-field .q-field__control:focus-within {
+                border-color: #0055B8 !important;
+                box-shadow: 0 0 0 3px rgba(0, 85, 184, 0.12) !important;
+            }
+            .unified-field .q-field__native,
+            .unified-field .q-field__input,
+            .unified-field .q-select__dropdown-icon {
+                min-height: 48px !important;
+            }
         </style>
     ''')
 
@@ -75,18 +91,21 @@ def jobs_page():
         <h1>Jobs & Opportunities</h1>
         <p>Discover the latest jobs and career opportunities across Africa. Use filters to find your perfect match and apply instantly.</p>
     </section>
-    ''', sanitize=lambda s: s)
+    ''')
 
     with ui.column().classes("jobs-main"):
         # Modern search and filters
-        with ui.card().classes("p-6 mb-8 bg-white shadow-lg rounded-xl border-2 border-slate-100"):
+        with ui.card().classes("p-6 mb-8 bg-white shadow-lg rounded-xl border border-slate-100"):
             with ui.row().classes("gap-4 items-center w-full flex-wrap"):
-                search_input = ui.input(placeholder="Job Title, Keywords, or Company").classes("flex-1 border-2 rounded-lg").props("outlined")
-                location_input = ui.input(placeholder="Location (e.g., Accra, Ghana)").classes("flex-1 border-2 rounded-lg").props("outlined")
-                job_type_select = ui.select(["All Types", "Full-time", "Part-time", "Internship", "Contract"], value="All Types").classes("flex-1 min-w-[150px] border-2 rounded-lg").props("outlined dense")
-                experience_select = ui.select(["All Levels", "Entry Level", "Mid Level", "Senior Level"], value="All Levels").classes("flex-1 min-w-[150px] border-2 rounded-lg").props("outlined dense")
-                remote_select = ui.select(["All", "Remote Only", "On-site Only", "Hybrid"], value="All").classes("flex-1 min-w-[150px] border-2 rounded-lg").props("outlined dense")
-                ui.button("Search Jobs", icon="search").classes("px-6 py-3 button-label rounded-lg transition-all").style("background-color: #0055B8 !important; color: white !important;")
+                field_classes = "flex-1 min-w-[200px] unified-field"
+                select_classes = "flex-1 min-w-[150px] unified-field"
+
+                search_input = ui.input(placeholder="Job Title, Keywords, or Company").classes(field_classes).props("outlined dense")
+                location_input = ui.input(placeholder="Location (e.g., Accra, Ghana)").classes(field_classes).props("outlined dense")
+                job_type_select = ui.select(["All Types", "Full-time", "Part-time", "Internship", "Contract"], value="All Types").classes(select_classes).props("outlined dense")
+                experience_select = ui.select(["All Levels", "Entry Level", "Mid Level", "Senior Level"], value="All Levels").classes(select_classes).props("outlined dense")
+                remote_select = ui.select(["All", "Remote Only", "On-site Only", "Hybrid"], value="All").classes(select_classes).props("outlined dense")
+                ui.button("Search Jobs", icon="search").classes("h-12 px-6 button-label rounded-lg transition-all").style("background-color: #0055B8 !important; color: white !important; box-shadow: none !important;")
         # Results header
         with ui.row().classes("items-center justify-between mb-8"):
             ui.label(f"{len(SAMPLE_JOBS)} jobs found").classes("sub-heading-2 brand-slate")

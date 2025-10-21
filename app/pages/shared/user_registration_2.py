@@ -82,11 +82,11 @@ def user_registration_2_page():
 
                 # --- Progress Bar ---
                 with ui.row().classes('w-full items-center justify-center mb-8'):
-                    ui.html('<div class="step-indicator step-completed">✓</div>', sanitize=lambda s: s)
-                    ui.html('<div class="step-connector completed"></div>', sanitize=lambda s: s)
-                    ui.html('<div class="step-indicator step-active">2</div>', sanitize=lambda s: s)
-                    ui.html('<div class="step-connector"></div>', sanitize=lambda s: s)
-                    ui.html('<div class="step-indicator step-inactive">3</div>', sanitize=lambda s: s)
+                    ui.html('<div class="step-indicator step-completed">✓</div>')
+                    ui.html('<div class="step-connector completed"></div>')
+                    ui.html('<div class="step-indicator step-active">2</div>')
+                    ui.html('<div class="step-connector"></div>')
+                    ui.html('<div class="step-indicator step-inactive">3</div>')
 
                 # --- Form Sections ---
                 with ui.stepper().props('vertical flat').classes('w-full no-shadow bg-transparent') as stepper:

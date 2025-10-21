@@ -215,7 +215,7 @@ def _create_classic_dashboard_content():
                                     </div>
                                 </div>
                             </div>
-                        ''', sanitize=lambda s: s)
+                        ''')
                     
                     with ui.column().classes('gap-3'):
                         _classic_skill_progress_item('JavaScript Mastery', 90, '#0055B8')
@@ -272,7 +272,7 @@ def _classic_skill_progress_item(skill, percentage, color):
                     <div class="h-2 rounded-full transition-all duration-300" 
                          style="width: {percentage}%; background-color: {color};"></div>
                 </div>
-            ''', sanitize=lambda s: s)
+            ''')
 
 
 def _classic_job_card(title, company, location, salary, skills):
@@ -288,8 +288,8 @@ def _classic_job_card(title, company, location, salary, skills):
             ui.label(company).classes('body-text brand-primary')
             
             with ui.row().classes('items-center gap-4 caption brand-slate'):
-                ui.html(f'<i class="material-icons text-sm">location_on</i> {location}', sanitize=lambda s: s)
-                ui.html(f'<i class="material-icons text-sm">attach_money</i> {salary}', sanitize=lambda s: s)
+                ui.html(f'<i class="material-icons text-sm">location_on</i> {location}')
+                ui.html(f'<i class="material-icons text-sm">attach_money</i> {salary}')
             
             # Skills Tags
             with ui.row().classes('gap-2 flex-wrap'):

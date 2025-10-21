@@ -599,7 +599,7 @@ def redesigned_candidate_dashboard():
         # Dialog for viewing files
         with ui.dialog() as file_dialog, ui.card().style('min-width: 80%; max-width: 95%;'):
             dialog_title = ui.label('File Viewer').classes('text-2xl font-bold mb-4')
-            dialog_content = ui.html('', sanitize=lambda s: s).classes('w-full')
+            dialog_content = ui.html('').classes('w-full')
             with ui.row().classes('w-full justify-end mt-4'):
                 ui.button('Close', on_click=file_dialog.close).classes('btn-secondary')
 

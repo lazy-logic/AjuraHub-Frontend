@@ -117,16 +117,21 @@ def auth_page(initial_tab: str = 'login', role: str = 'candidate'):
             .auth-form-container { width: 100%; }
             @media (min-width: 900px) { .auth-form-container { width: 50%; }
             }
+
+            /* Explicit spacing for auth forms without relying on utility frameworks */
+            .signup-form { display: flex; flex-direction: column; }
+            .signup-form .q-field { margin-top: 20px; }
+            .signup-form .q-field:first-of-type { margin-top: 16px; }
+            .signup-form .helper-text { margin: 8px 0 4px 0; }
+            .signup-form .strength-track { margin: 8px 0; }
+            .signup-form .section-spacer { margin-top: 24px; }
+            .signup-form .role-tabs { margin-top: 12px; margin-bottom: 8px; }
         </style>
     ''')
 
     with ui.column().classes('w-full py-16 px-8 min-h-screen flex items-center justify-center bg-[#F2F7FB]'):
-        # Small page title
-        with ui.row().classes('justify-center mb-6'):
-            ui.label('Sign in or create your Dompell account').classes('text-sm text-gray-600 raleway-font')
-
-        # Centered forms (no hero)
-        with ui.column().classes('w-full max-w-lg mx-auto'):
+        with ui.column().classes('w-full max-w-lg mx-auto gap-6'):
+            ui.label('Sign in or create your Dompell account').classes('text-sm text-gray-600 text-center raleway-font')
             # Main auth card
             with ui.card().classes('auth-card w-full p-0 mx-auto'):
                 with ui.tabs().props(f'model-value="{initial_tab}"').classes('w-full') as tabs:
@@ -255,7 +260,7 @@ def _create_login_form():
             state["is_submitting"] = False
             submit_button.props('loading=false')
 
-    with ui.column().classes('w-full px-8 py-10 gap-5'):
+    with ui.column().classes('w-full px-8 py-10 gap-5 signup-form'):
         # Subtle progress bar (visual only)
         progress = ui.element('div').classes('submit-progress').style('opacity: 0;')
         ui.label('Welcome Back!').classes('text-2xl font-semibold text-gray-800 text-center raleway-font')
@@ -447,28 +452,35 @@ def _create_signup_form(role='candidate'):
             state["is_submitting"] = False
             submit_button.props('loading=false')
 
-    with ui.column().classes('w-full px-8 py-10 gap-5'):
+    with ui.column().classes('w-full px-8 py-10 gap-5 signup-form'):
         # Subtle progress bar (visual only)
         progress = ui.element('div').classes('submit-progress').style('opacity: 0;')
         ui.label('Create Your Account').classes('text-2xl font-semibold text-gray-800 text-center raleway-font')
 
-        with ui.column().classes('w-full gap-3'):
-            ui.label('I am a:').classes('text-sm font-medium text-gray-700 raleway-font')
-            with ui.tabs().props(f'model-value={role.lower()}').classes('w-full role-tabs') as user_type_tabs:
-                ui.tab('trainee', 'Trainee/Candidate').classes('flex-1 role-tab')
-                ui.tab('employer', 'Employer').classes('flex-1 role-tab')
-                ui.tab('institution', 'Institution').classes('flex-1 role-tab')
-            user_type_tabs.props('active-class="role-active"')
-            
+        with ui.column().classes('w-full gap-4'):
+            role_options = {
+                'trainee': 'Trainee/Candidate',
+                'employer': 'Employer',
+                'institution': 'Institution'
+            }
+            initial_role_key = role.lower()
+            if initial_role_key == 'candidate':
+                initial_role_key = 'trainee'
+            if initial_role_key not in role_options:
+                initial_role_key = 'trainee'
+            role_select = ui.select(
+                options=role_options,
+                value=initial_role_key,
+                label='I am a...'
+            ).props('outlined dense').classes('w-full modern-input')
+
             def on_role_change(e):
-                role_mapping = {
-                    'trainee': 'TRAINEE', 
-                    'employer': 'EMPLOYER', 
-                    'institution': 'INSTITUTION'
-                }
-                state['role'] = role_mapping.get(e.value, 'TRAINEE')
-            
-            user_type_tabs.on('update:model-value', on_role_change)
+                mapped_role = role_mapping.get(e.value, 'TRAINEE')
+                state['role'] = mapped_role
+
+            role_select.on('update:model-value', on_role_change)
+            # Ensure state aligns with the displayed selection
+            state['role'] = role_mapping.get(initial_role_key, 'TRAINEE')
 
         def update_name(value):
             state['name'] = value
@@ -525,20 +537,20 @@ def _create_signup_form(role='candidate'):
             .props('outlined dense').classes('w-full modern-input')
         email_chip = ui.label('').classes('text-xs raleway-font')
         
-        password_input = ui.input(placeholder='Create Password', password=True, on_change=lambda e: update_password(e.value))\
+        password_input = ui.input(placeholder='Create Password', password=True, password_toggle_button=True, on_change=lambda e: update_password(e.value))\
             .props('outlined dense').classes('w-full modern-input')
         # Password requirements helper text
-        ui.label('Password must be at least 8 characters with uppercase, lowercase, number, and special character (@$!%*?&)').classes('text-xs text-gray-600')
+        password_helper = ui.label('Password must be at least 8 characters with uppercase, lowercase, number, and special character (@$!%*?&)').classes('text-xs text-gray-600 helper-text')
         # Visual-only password strength meter
-        strength_track = ui.element('div').style('height: 8px; background:#E2E8F0; border-radius: 6px; overflow:hidden;')
-        strength_bar = ui.element('div').style('height:100%; width:0%; background:linear-gradient(90deg,#ef4444,#f59e0b,#10b981); transition:width .25s ease;')
-        strength_label = ui.label('Password strength').classes('text-xs text-gray-500 mt-1')
+        with ui.element('div').classes('strength-track').style('height: 8px; background:#E2E8F0; border-radius: 6px; overflow:hidden;'):
+            strength_bar = ui.element('div').classes('strength-bar').style('height:100%; width:0%; background:linear-gradient(90deg,#ef4444,#f59e0b,#10b981); transition:width .25s ease;')
+        strength_label = ui.label('Password strength').classes('text-xs text-gray-500 mt-1 raleway-font')
         
         confirm_password_input = ui.input(placeholder='Confirm Password', password=True, password_toggle_button=True, on_change=lambda e: update_confirm_password(e.value))\
             .props('outlined dense').classes('w-full modern-input')
         confirm_chip = ui.label('').classes('text-xs raleway-font')
 
-        with ui.row().classes('w-full items-center mt-3'):
+        with ui.row().classes('w-full items-center section-spacer'):
             terms_checkbox = ui.checkbox('I agree to the Terms and Privacy Policy.').bind_value(state, 'terms_agreed')
 
         submit_button = ui.button('Create Account', on_click=handle_signup).classes('w-full h-12 gradient-btn text-white mt-5')
@@ -596,6 +608,7 @@ def _create_signup_form(role='candidate'):
 
         def update_password(value):
             state['password'] = value
+            is_valid_password = False
             if value:
                 if len(value) < 8:
                     password_input.props('error error-message="Password must be at least 8 characters long"')
@@ -603,14 +616,18 @@ def _create_signup_form(role='candidate'):
                     password_input.props('error error-message="Password must contain uppercase, lowercase, number, and special character"')
                 else:
                     password_input.props('error=false')
+                    is_valid_password = True
             else:
                 password_input.props('error=false')
+            password_helper.set_visibility(not is_valid_password)
             # Update strength bar
             s = compute_strength(value or '')
-            pct = [0, 20, 40, 60, 80, 100][s]
-            strength_bar.style(f'width:{pct}%;')
+            pct = [0, 25, 50, 75, 90, 100][s]
+            color = '#ef4444' if s <= 2 else ('#f59e0b' if s == 3 else ('#22c55e' if s == 4 else '#16a34a'))
+            strength_bar.style(f'height:100%; width:{pct}%; background:{color}; transition:width .25s ease;')
             strength_label.text = 'Weak' if s <= 2 else ('Fair' if s == 3 else ('Good' if s == 4 else 'Strong'))
-            strength_label.classes('text-xs ' + ('text-red-600' if s <= 2 else ('text-amber-600' if s == 3 else 'text-green-600')))
+            label_color = 'text-red-600' if s <= 2 else ('text-amber-600' if s == 3 else 'text-green-600')
+            strength_label.classes(f'text-xs mt-1 raleway-font {label_color}')
             # Validate confirm against new password
             if state['confirmPassword']:
                 if value != state['confirmPassword']:

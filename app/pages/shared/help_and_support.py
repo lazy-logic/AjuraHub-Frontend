@@ -53,7 +53,7 @@ def help_and_support_page():
         <h1>Help & Support</h1>
         <p>Find answers to common questions, get support, and contact our team. We're here to help you succeed on Dompell!</p>
     </section>
-    ''', sanitize=lambda s: s)
+    ''')
 
     # FAQ Section
     ui.html('''
@@ -100,7 +100,7 @@ def help_and_support_page():
             <div class="faq-answer">Check your spam or junk folder. If you still don't see the email, contact us at <a href="mailto:support@dompell.com">support@dompell.com</a> for assistance.</div>
         </div>
     </section>
-    ''', sanitize=lambda s: s)
+    ''')
 
     # Contact Section
     ui.html('''
@@ -115,7 +115,7 @@ def help_and_support_page():
             <div class="contact-value">Monday - Friday, 9:00am - 5:00pm (GMT, Ghana)</div>
         </div>
     </section>
-    ''', sanitize=lambda s: s)
+    ''')
 
 
 

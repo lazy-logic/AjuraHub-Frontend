@@ -100,8 +100,8 @@ def edit_staff_details_page():
                     with ui.row().classes('items-center gap-4'):
                         ui.button(icon='arrow_back').classes('p-2')
                         with ui.column():
-                            ui.html('<h1 class="heading-2 brand-charcoal mb-2">Edit Staff Details</h1>', sanitize=lambda s: s)
-                            ui.html('<p class="body-text brand-slate">Manage staff profile, roles, and permissions</p>', sanitize=lambda s: s)
+                            ui.html('<h1 class="heading-2 brand-charcoal mb-2">Edit Staff Details</h1>')
+                            ui.html('<p class="body-text brand-slate">Manage staff profile, roles, and permissions</p>')
                 
                 with ui.row().classes('gap-3'):
                     ui.button('Reset Changes', icon='refresh').classes('bg-gray-200 text-gray-700 px-4 py-2')
@@ -114,12 +114,12 @@ def edit_staff_details_page():
                 # Basic Information
                 with ui.card().classes('w-full mb-6 staff-card'):
                     with ui.card_section().classes('p-6 form-section'):
-                        ui.html('<h3 class="sub-heading brand-charcoal mb-4">Basic Information</h3>', sanitize=lambda s: s)
+                        ui.html('<h3 class="sub-heading brand-charcoal mb-4">Basic Information</h3>')
                         
                         with ui.row().classes('w-full gap-6 mb-6'):
                             # Avatar upload
                             with ui.column().classes('items-center'):
-                                ui.html('<div class="avatar-upload"><i class="material-icons text-gray-400 text-4xl">person</i></div>', sanitize=lambda s: s)
+                                ui.html('<div class="avatar-upload"><i class="material-icons text-gray-400 text-4xl">person</i></div>')
                                 ui.button('Upload Photo', icon='camera_alt').classes('mt-2 bg-blue-600 text-white px-4 py-2')
                             
                             # Basic details
@@ -137,7 +137,7 @@ def edit_staff_details_page():
                 # Professional Information
                 with ui.card().classes('w-full mb-6 staff-card'):
                     with ui.card_section().classes('p-6'):
-                        ui.html('<h3 class="sub-heading brand-charcoal mb-4">Professional Information</h3>', sanitize=lambda s: s)
+                        ui.html('<h3 class="sub-heading brand-charcoal mb-4">Professional Information</h3>')
                         
                         with ui.row().classes('w-full gap-4 mb-4'):
                             ui.select(['Engineering', 'Product', 'Design', 'Marketing', 'Sales'], 
@@ -156,9 +156,9 @@ def edit_staff_details_page():
                 # Skills & Expertise
                 with ui.card().classes('w-full mb-6 staff-card'):
                     with ui.card_section().classes('p-6'):
-                        ui.html('<h3 class="sub-heading brand-charcoal mb-4">Skills & Expertise</h3>', sanitize=lambda s: s)
+                        ui.html('<h3 class="sub-heading brand-charcoal mb-4">Skills & Expertise</h3>')
                         
-                        ui.html('<div class="body-text brand-slate mb-3">Technical Skills</div>', sanitize=lambda s: s)
+                        ui.html('<div class="body-text brand-slate mb-3">Technical Skills</div>')
                         with ui.row().classes('flex-wrap gap-2 mb-4'):
                             skills = ['Python', 'JavaScript', 'React', 'Node.js', 'AWS', 'Docker', 'Kubernetes']
                             for skill in skills:
@@ -166,7 +166,7 @@ def edit_staff_details_page():
                         
                         ui.input(placeholder='Add new skill...').classes('w-full mb-4')
                         
-                        ui.html('<div class="body-text brand-slate mb-3">Certifications</div>', sanitize=lambda s: s)
+                        ui.html('<div class="body-text brand-slate mb-3">Certifications</div>')
                         with ui.column().classes('space-y-2'):
                             certifications = [
                                 'AWS Certified Solutions Architect',
@@ -175,7 +175,7 @@ def edit_staff_details_page():
                             ]
                             for cert in certifications:
                                 with ui.row().classes('w-full items-center justify-between p-3 bg-gray-50 rounded-lg'):
-                                    ui.html(f'<div class="body-text brand-charcoal">{cert}</div>', sanitize=lambda s: s)
+                                    ui.html(f'<div class="body-text brand-charcoal">{cert}</div>')
                                     ui.button(icon='delete').classes('text-red-600 p-1')
             
             # Sidebar - Roles and Permissions
@@ -183,13 +183,13 @@ def edit_staff_details_page():
                 # Current Role
                 with ui.card().classes('w-full mb-6 staff-card'):
                     with ui.card_section().classes('p-6'):
-                        ui.html('<h3 class="sub-heading brand-charcoal mb-4">Current Role</h3>', sanitize=lambda s: s)
+                        ui.html('<h3 class="sub-heading brand-charcoal mb-4">Current Role</h3>')
                         
                         with ui.row().classes('items-center gap-3 mb-4'):
 
                             with ui.column():
-                                ui.html('<div class="body-text brand-charcoal font-medium">Team Lead</div>', sanitize=lambda s: s)
-                                ui.html('<div class="caption brand-slate">Engineering Department</div>', sanitize=lambda s: s)
+                                ui.html('<div class="body-text brand-charcoal font-medium">Team Lead</div>')
+                                ui.html('<div class="caption brand-slate">Engineering Department</div>')
                         
                         ui.select(['Team Member', 'Team Lead', 'Manager', 'Director', 'Admin'], 
                                  label='Change Role', value='Team Lead').classes('w-full')
@@ -197,7 +197,7 @@ def edit_staff_details_page():
                 # Permissions
                 with ui.card().classes('w-full mb-6 staff-card'):
                     with ui.card_section().classes('p-6'):
-                        ui.html('<h3 class="sub-heading brand-charcoal mb-4">Permissions</h3>', sanitize=lambda s: s)
+                        ui.html('<h3 class="sub-heading brand-charcoal mb-4">Permissions</h3>')
                         
                         permission_groups = [
                             {
@@ -228,16 +228,16 @@ def edit_staff_details_page():
                         
                         for group in permission_groups:
                             with ui.column().classes('permission-item mb-3'):
-                                ui.html(f'<div class="body-text brand-charcoal font-medium mb-2">{group["title"]}</div>', sanitize=lambda s: s)
+                                ui.html(f'<div class="body-text brand-charcoal font-medium mb-2">{group["title"]}</div>')
                                 for perm_name, enabled in group['permissions']:
                                     with ui.row().classes('w-full items-center justify-between'):
-                                        ui.html(f'<div class="caption brand-slate">{perm_name}</div>', sanitize=lambda s: s)
+                                        ui.html(f'<div class="caption brand-slate">{perm_name}</div>')
                                         ui.switch().classes('').props(f'value={str(enabled).lower()}')
                 
                 # Activity Log
                 with ui.card().classes('w-full staff-card'):
                     with ui.card_section().classes('p-6'):
-                        ui.html('<h3 class="sub-heading brand-charcoal mb-4">Recent Activity</h3>', sanitize=lambda s: s)
+                        ui.html('<h3 class="sub-heading brand-charcoal mb-4">Recent Activity</h3>')
                         
                         activities = [
                             {'action': 'Updated profile photo', 'time': '2 hours ago'},
@@ -250,8 +250,8 @@ def edit_staff_details_page():
                             with ui.row().classes('w-full items-start gap-3 mb-3'):
 
                                 with ui.column():
-                                    ui.html(f'<div class="caption brand-charcoal">{activity["action"]}</div>', sanitize=lambda s: s)
-                                    ui.html(f'<div class="caption brand-slate text-xs">{activity["time"]}</div>', sanitize=lambda s: s)
+                                    ui.html(f'<div class="caption brand-charcoal">{activity["action"]}</div>')
+                                    ui.html(f'<div class="caption brand-slate text-xs">{activity["time"]}</div>')
 
         # Action buttons
         with ui.row().classes('w-full justify-end gap-3 mt-6 pt-6 border-t'):

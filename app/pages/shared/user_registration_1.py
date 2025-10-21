@@ -184,7 +184,7 @@ def user_registration_1_page():
                 # Terms Agreement
                 with ui.row().classes('w-full items-center gap-2 mt-4'):
                     ui.checkbox().bind_value(state, 'terms_agreed')
-                    ui.html('<div class="caption">I agree to the <a href="/terms">Terms of Service</a> and <a href="/privacy">Privacy Policy</a>.</div>', sanitize=lambda s: s)
+                    ui.html('<div class="caption">I agree to the <a href="/terms">Terms of Service</a> and <a href="/privacy">Privacy Policy</a>.</div>')
 
                 # Submit Button
                 ui.button('Create Account', on_click=handle_register).classes('w-full h-14 gradient-btn text-base mt-6')

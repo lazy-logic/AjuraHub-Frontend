@@ -41,7 +41,7 @@ def about_page():
             # Background image
             ui.image('https://images.pexels.com/photos/9301758/pexels-photo-9301758.jpeg?auto=compress&cs=tinysrgb&w=1080&h=850&dpr=1').classes('absolute inset-0 w-full h-full object-cover opacity-40')
             # Semi-transparent dark overlay for contrast
-            ui.html('<div style="position:absolute;inset:0;width:100%;height:100%;background:rgba(10,20,40,0.55);z-index:1;"></div>', sanitize=lambda s: s)
+            ui.html('<div style="position:absolute;inset:0;width:100%;height:100%;background:rgba(10,20,40,0.55);z-index:1;"></div>')
             # Content
             with ui.column().classes('relative z-10 max-w-3xl mx-auto text-center py-24 px-4'):
                 ui.label('About Us').classes('hero-text text-white mb-6').style('font-size:clamp(40px,8vw,80px);font-weight:900;letter-spacing:-0.03em;line-height:1.05;')
@@ -56,7 +56,7 @@ def about_page():
                     ui.image('https://images.pexels.com/photos/8554068/pexels-photo-8554068.jpeg?auto=compress&w=600').classes('rounded-2xl shadow-xl w-full h-80 object-cover')
                 with ui.column().classes('gap-6 order-1 md:order-2'):
                     ui.label('Our Story').classes('heading-2 brand-charcoal mb-4')
-                    ui.html('<div class="w-16 h-1 brand-primary-bg mb-8"></div>', sanitize=lambda s: s)
+                    ui.html('<div class="w-16 h-1 brand-primary-bg mb-8"></div>')
                     ui.label('Dompell was born from a simple yet powerful vision: to unlock the immense potential of Africa\'s workforce by connecting talented professionals with opportunities that match their skills and aspirations.').classes('body-text brand-slate')
                     ui.label('Founded in 2024, we recognized that while Africa is home to millions of skilled and ambitious professionals, many face barriers in accessing quality employment opportunities. At the same time, employers struggle to find the right talent to drive their businesses forward.').classes('body-text brand-slate')
                     ui.label('We set out to bridge this gap by creating a comprehensive platform that serves trainees, employers, and educational institutions across the continent.').classes('body-text brand-slate')
@@ -71,7 +71,7 @@ def about_page():
                     <rect width="100" height="100" fill="url(#dots-wwd-flat)"/>
                 </svg>
             </div>
-            ''', sanitize=lambda s: s)
+            ''')
             ui.label('What We Do').classes('heading-1 text-white text-center mb-4').style('font-size: 48px; font-weight: 900;')
             ui.label('Empowering trainees, employers, and institutions with opportunity, growth, and connection.').classes('sub-heading-2 text-white text-center mb-20').style('font-size: 22px; font-weight: 600;')
             with ui.row().classes('grid grid-cols-1 md:grid-cols-3 gap-12 max-w-6xl mx-auto z-10'):
@@ -100,8 +100,8 @@ def _create_about_hero():
     """Hero section for About page"""
     with ui.element('section').classes('py-24 brand-primary-bg text-white relative overflow-hidden'):
         # Decorative elements
-        ui.html('<div class="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>', sanitize=lambda s: s)
-        ui.html('<div class="absolute bottom-0 left-0 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>', sanitize=lambda s: s)
+        ui.html('<div class="absolute top-0 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>')
+        ui.html('<div class="absolute bottom-0 left-0 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>')
         
         with ui.column().classes('mx-auto max-w-4xl px-6 text-center relative z-10'):
             ui.label('About Us').classes('heading-1 text-white mb-6')
@@ -133,7 +133,7 @@ def _create_our_story():
     with ui.element('section').classes('py-24 brand-light-mist'):
         with ui.column().classes('mx-auto max-w-6xl px-6'):
             ui.label('Our Story').classes('heading-2 brand-charcoal text-center mb-6')
-            ui.html('<div class="w-16 h-1 brand-primary-bg mx-auto mb-12"></div>', sanitize=lambda s: s)
+            ui.html('<div class="w-16 h-1 brand-primary-bg mx-auto mb-12"></div>')
             
             with ui.column().classes('space-y-6'):
                 ui.label('TalentConnect Africa was born from a simple yet powerful vision: to unlock the immense potential of Africa\'s workforce by connecting talented professionals with opportunities that match their skills and aspirations.').classes('body-text brand-slate text-center')
@@ -170,7 +170,7 @@ def _create_our_values():
     with ui.element('section').classes('py-24 bg-white text-gray-900'):
         with ui.column().classes('mx-auto max-w-7xl px-6'):
         
-            ui.html('<div class="w-16 h-1 brand-primary-bg mx-auto mb-16"></div>', sanitize=lambda s: s)
+            ui.html('<div class="w-16 h-1 brand-primary-bg mx-auto mb-16"></div>')
             with ui.row().classes('grid grid-cols-1 md:grid-cols-2 gap-8 px-4 md:px-16'):
                 _mission_vision_card_dark(
                     'Our Mission',
@@ -183,9 +183,10 @@ def _create_our_values():
 
 # Card for Mission & Vision in dark section
 def _mission_vision_card_dark(title: str, description: str):
-    with ui.card().classes('bg-gray-800 border border-blue-400 rounded-xl p-8 text-center'):
-        ui.html(f'<div class="heading-2 text-white mb-4" style="font-size: 28px; font-weight: 800;">{title}</div>', sanitize=lambda s: s)
-        ui.label(description).classes('body-text text-gray-200').style('font-size: 16px; font-weight: 500; line-height: 1.5;')
+    with ui.card().classes('bg-gray-800 border border-blue-400 rounded-xl px-8 py-6'):
+        with ui.column().classes('w-full text-left'):
+            ui.label(title).classes('heading-2 text-white mb-4').style('font-size: 28px; font-weight: 800;')
+            ui.label(description).classes('body-text text-gray-200').style('font-size: 16px; font-weight: 500; line-height: 1.5;')
 
 
 def _value_card(icon: str, title: str, description: str):

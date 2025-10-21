@@ -34,7 +34,7 @@ def contact_page():
         <h1>Contact Us</h1>
         <p>We'd love to hear from you! Reach out to our team for support, partnership, or general inquiries.</p>
     </section>
-    ''', sanitize=lambda s: s)
+    ''')
 
     # Contact Info Section
     ui.html('''
@@ -51,7 +51,7 @@ def contact_page():
             <div class="contact-value">Monday - Friday, 9:00am - 5:00pm (GMT, Ghana)</div>
         </div>
     </section>
-    ''', sanitize=lambda s: s)
+    ''')
 
     # Map Section (Ghana)
     ui.html('''
@@ -59,4 +59,4 @@ def contact_page():
         <div class="map-title">Our Location (Ghana)</div>
         <iframe class="map-embed" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3971.993964024052!2d-0.1869646846759642!3d5.614818395929095!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfdf9b1b1b1b1b1b%3A0x1b1b1b1b1b1b1b1b!2sAccra%2C%20Ghana!5e0!3m2!1sen!2sgh!4v1660000000000!5m2!1sen!2sgh" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </section>
-    ''', sanitize=lambda s: s)
+    ''')

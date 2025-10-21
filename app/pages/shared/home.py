@@ -87,13 +87,13 @@ def _create_new_hero_section():
                 <rect width="100" height="100" fill="url(#dots)"/>
             </svg>
         </div>
-        ''', sanitize=lambda s: s)
+        ''')
         
         with ui.row().classes('w-full max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-16 px-6 relative z-10'):
             # Left side content
             with ui.column().classes('text-left space-y-8 fade-in-up'):
                 # Accent line
-                ui.html('<div class="w-20 h-2 brand-primary-bg rounded-full mb-6 accent-line"></div>', sanitize=lambda s: s)
+                ui.html('<div class="w-20 h-2 brand-primary-bg rounded-full mb-6 accent-line"></div>')
                 
                 ui.label('Connecting African Talent').classes('hero-text brand-charcoal mb-2')
                 ui.label('to Global Opportunities').classes('hero-text brand-primary mb-6')
@@ -150,7 +150,7 @@ def _create_new_about_section():
                 <rect width="100" height="100" fill="url(#dots2)"/>
             </svg>
         </div>
-        ''', sanitize=lambda s: s)
+        ''')
         with ui.row().classes('mx-auto max-w-7xl px-6 grid grid-cols-1 md:grid-cols-2 gap-20 items-center relative z-10'):
             # Left: Modern image grid
             with ui.column().classes('gap-6 relative order-2 md:order-1'):
@@ -206,7 +206,7 @@ def _create_new_features_section():
 def _new_feature_card(icon: str, title: str, items: list, button_text: str):
     with ui.card().classes('relative flex flex-col items-center p-5 bg-gradient-to-br from-white to-gray-50 rounded-xl border-2 border-gray-100 hover:border-emerald-300 hover:shadow-xl transition-all duration-300 overflow-hidden'):
         # Decorative corner element
-        ui.html('<div class="absolute top-0 right-0 w-16 h-16 bg-blue-50 rounded-bl-full"></div>', sanitize=lambda s: s)
+        ui.html('<div class="absolute top-0 right-0 w-16 h-16 bg-blue-50 rounded-bl-full"></div>')
         
         # Icon removed
         with ui.row().classes('relative z-10 mb-3 w-full justify-center'):
@@ -228,7 +228,7 @@ def _create_how_it_works_section():
         with ui.column().classes('mx-auto max-w-7xl px-6'):
             # Section header
             with ui.column().classes('text-center mb-16'):
-                ui.html('<div class="w-16 h-1 brand-primary-bg mx-auto mb-6"></div>', sanitize=lambda s: s)
+                ui.html('<div class="w-16 h-1 brand-primary-bg mx-auto mb-6"></div>')
                 ui.label('How It Works').classes('heading-2 brand-charcoal mb-4')
                 ui.label('Three simple steps to launch your career').classes('sub-heading-2 brand-slate')
             
@@ -254,7 +254,7 @@ def _create_why_choose_us_section():
         with ui.column().classes('mx-auto max-w-7xl px-6'):
             # Section header
             with ui.column().classes('text-center mb-12'):
-                ui.html('<div class="w-16 h-1 brand-primary-bg mx-auto mb-6"></div>', sanitize=lambda s: s)
+                ui.html('<div class="w-16 h-1 brand-primary-bg mx-auto mb-6"></div>')
                 ui.label('Why Choose TalentConnect Africa').classes('heading-2 text-white mb-4')
                 ui.label('We connect talented professionals with leading companies across Africa, providing a secure, efficient, and supportive platform for career growth. Our commitment to quality, safety, and success sets us apart.').classes('sub-heading-2 text-gray-300 max-w-4xl mx-auto')
             
@@ -284,8 +284,8 @@ def _why_feature_detailed(icon: str, title: str, description: str):
 def _create_cta_section():
     with ui.element('section').classes('py-24 brand-primary-bg text-white relative overflow-hidden'):
         # Decorative elements
-        ui.html('<div class="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>', sanitize=lambda s: s)
-        ui.html('<div class="absolute bottom-0 left-0 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>', sanitize=lambda s: s)
+        ui.html('<div class="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>')
+        ui.html('<div class="absolute bottom-0 left-0 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>')
         
         with ui.column().classes('mx-auto max-w-4xl px-6 text-center relative z-10'):
             

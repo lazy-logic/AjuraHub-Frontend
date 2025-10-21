@@ -119,8 +119,8 @@ def admin_onboarding_page():
             with ui.card_section().classes('p-8'):
                 with ui.row().classes('w-full items-center justify-between'):
                     with ui.column():
-                        ui.html('<h1 class="heading-2 mb-2">Welcome to TalentConnect Africa Admin</h1>', sanitize=lambda s: s)
-                        ui.html('<p class="body-text opacity-90">Let\'s get your admin account set up and configure the system for your organization</p>', sanitize=lambda s: s)
+                        ui.html('<h1 class="heading-2 mb-2">Welcome to TalentConnect Africa Admin</h1>')
+                        ui.html('<p class="body-text opacity-90">Let\'s get your admin account set up and configure the system for your organization</p>')
                     
 
         
@@ -129,7 +129,7 @@ def admin_onboarding_page():
             with ui.column().classes('w-80'):
                 with ui.card().classes('w-full onboarding-card'):
                     with ui.card_section().classes('p-6'):
-                        ui.html('<h3 class="sub-heading brand-charcoal mb-6">Setup Progress</h3>', sanitize=lambda s: s)
+                        ui.html('<h3 class="sub-heading brand-charcoal mb-6">Setup Progress</h3>')
                         
                         # Progress steps
                         steps = [
@@ -144,26 +144,26 @@ def admin_onboarding_page():
                             with ui.column().classes('w-full'):
                                 with ui.row().classes('w-full items-center gap-4'):
                                     step_class = f'step-indicator step-{step["status"]}'
-                                    ui.html(f'<div class="{step_class}">{i + 1}</div>', sanitize=lambda s: s)
+                                    ui.html(f'<div class="{step_class}">{i + 1}</div>')
                                     
                                     with ui.column().classes('flex-grow'):
-                                        ui.html(f'<div class="body-text brand-charcoal font-medium">{step["title"]}</div>', sanitize=lambda s: s)
-                                        ui.html(f'<div class="caption brand-slate">{step["description"]}</div>', sanitize=lambda s: s)
+                                        ui.html(f'<div class="body-text brand-charcoal font-medium">{step["title"]}</div>')
+                                        ui.html(f'<div class="caption brand-slate">{step["description"]}</div>')
                                 
                                 if i < len(steps) - 1:
                                     connector_class = 'step-connector completed' if step['status'] == 'completed' else 'step-connector'
-                                    ui.html(f'<div class="{connector_class}"></div>', sanitize=lambda s: s)
+                                    ui.html(f'<div class="{connector_class}"></div>')
                 
                 # Quick stats
                 with ui.card().classes('w-full mt-6 onboarding-card'):
                     with ui.card_section().classes('p-6'):
-                        ui.html('<h3 class="sub-heading brand-charcoal mb-4">Quick Setup</h3>', sanitize=lambda s: s)
+                        ui.html('<h3 class="sub-heading brand-charcoal mb-4">Quick Setup</h3>')
                         
-                        ui.html('<div class="body-text brand-slate mb-3">Completion: 40%</div>', sanitize=lambda s: s)
+                        ui.html('<div class="body-text brand-slate mb-3">Completion: 40%</div>')
                         ui.linear_progress(0.4).classes('w-full mb-4')
                         
-                        ui.html('<div class="caption brand-slate mb-2">Estimated time remaining:</div>', sanitize=lambda s: s)
-                        ui.html('<div class="body-text brand-charcoal font-medium">15 minutes</div>', sanitize=lambda s: s)
+                        ui.html('<div class="caption brand-slate mb-2">Estimated time remaining:</div>')
+                        ui.html('<div class="body-text brand-charcoal font-medium">15 minutes</div>')
             
             # Main content area
             with ui.column().classes('flex-grow'):
@@ -171,13 +171,13 @@ def admin_onboarding_page():
                 with ui.card().classes('w-full mb-6 onboarding-card'):
                     with ui.card_section().classes('p-6'):
                         with ui.row().classes('w-full items-center justify-between mb-6'):
-                            ui.html('<h2 class="heading-2 brand-charcoal">Organization Configuration</h2>', sanitize=lambda s: s)
-                            ui.html('<div class="caption brand-slate">Step 2 of 5</div>', sanitize=lambda s: s)
+                            ui.html('<h2 class="heading-2 brand-charcoal">Organization Configuration</h2>')
+                            ui.html('<div class="caption brand-slate">Step 2 of 5</div>')
                         
                         # Organization details form
                         with ui.column().classes('space-y-6'):
                             # Basic organization info
-                            ui.html('<h3 class="sub-heading brand-charcoal mb-4">Organization Details</h3>', sanitize=lambda s: s)
+                            ui.html('<h3 class="sub-heading brand-charcoal mb-4">Organization Details</h3>')
                             
                             with ui.row().classes('w-full gap-6 mb-4'):
                                 ui.input(label='Organization Name', placeholder='e.g., TechCorp Solutions').classes('flex-1')
@@ -193,7 +193,7 @@ def admin_onboarding_page():
                                        placeholder='Brief description of your organization...').classes('w-full mb-6')
                             
                             # Contact information
-                            ui.html('<h3 class="sub-heading brand-charcoal mb-4">Primary Contact Information</h3>', sanitize=lambda s: s)
+                            ui.html('<h3 class="sub-heading brand-charcoal mb-4">Primary Contact Information</h3>')
                             
                             with ui.row().classes('w-full gap-6 mb-4'):
                                 ui.input(label='Primary Email', value='admin@company.com').classes('flex-1')
@@ -212,7 +212,7 @@ def admin_onboarding_page():
                 # System preferences
                 with ui.card().classes('w-full mb-6 onboarding-card'):
                     with ui.card_section().classes('p-6'):
-                        ui.html('<h3 class="sub-heading brand-charcoal mb-4">System Preferences</h3>', sanitize=lambda s: s)
+                        ui.html('<h3 class="sub-heading brand-charcoal mb-4">System Preferences</h3>')
                         
                         preferences = [
                             {
@@ -247,8 +247,8 @@ def admin_onboarding_page():
                             with ui.column().classes(f'{item_class} mb-4'):
                                 with ui.row().classes('w-full items-center justify-between'):
                                     with ui.column().classes('flex-grow'):
-                                        ui.html(f'<div class="body-text brand-charcoal font-medium">{pref["title"]}</div>', sanitize=lambda s: s)
-                                        ui.html(f'<div class="caption brand-slate">{pref["description"]}</div>', sanitize=lambda s: s)
+                                        ui.html(f'<div class="body-text brand-charcoal font-medium">{pref["title"]}</div>')
+                                        ui.html(f'<div class="caption brand-slate">{pref["description"]}</div>')
                                     
                                     if pref['control'] == 'select':
                                         ui.select(pref['options'], value=pref['options'][0]).classes('w-48')
@@ -272,8 +272,8 @@ def admin_onboarding_page():
 
                     
                     with ui.column().classes('flex-grow'):
-                        ui.html('<h3 class="sub-heading brand-charcoal">Need Help?</h3>', sanitize=lambda s: s)
-                        ui.html('<p class="body-text brand-slate">Our support team is ready to assist you with the setup process.</p>', sanitize=lambda s: s)
+                        ui.html('<h3 class="sub-heading brand-charcoal">Need Help?</h3>')
+                        ui.html('<p class="body-text brand-slate">Our support team is ready to assist you with the setup process.</p>')
                     
                     with ui.row().classes('gap-3'):
                         ui.button('Contact Support', icon='support_agent').classes('bg-blue-600 text-white px-4 py-2')

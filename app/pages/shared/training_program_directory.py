@@ -113,7 +113,7 @@ def training_program_directory_page():
         <h1>Training Programs</h1>
         <p>Discover professional training programs from leading institutions across Africa. Filter by type, duration, and level to find your perfect program.</p>
     </section>
-    ''', sanitize=lambda s: s)
+    ''')
 
     with ui.column().classes("programs-main"):
         # Modern search and filters

@@ -110,7 +110,7 @@ def user_settings_profile_management_page():
         # Header
         with ui.row().classes('w-full max-w-6xl mx-auto px-6 mb-8'):
             with ui.row().classes('w-full items-center justify-between'):
-                ui.html('<h1 class="heading-2 brand-charcoal">User Settings & Profile</h1>', sanitize=lambda s: s)
+                ui.html('<h1 class="heading-2 brand-charcoal">User Settings & Profile</h1>')
                 ui.button('Save All Changes', icon='save').classes('bg-blue-600 text-white px-6 py-3')
         
         # Main content
@@ -133,19 +133,19 @@ def user_settings_profile_management_page():
                         item_class = 'nav-item active' if item['active'] else 'nav-item'
                         with ui.row().classes(f'{item_class} w-full items-center gap-3'):
 
-                            ui.html(f'<div class="body-text">{item["label"]}</div>', sanitize=lambda s: s)
+                            ui.html(f'<div class="body-text">{item["label"]}</div>')
             
             # Main content area
             with ui.column().classes('flex-grow p-8'):
                 # Profile Information Section (active)
                 with ui.card().classes('w-full mb-6 settings-card'):
                     with ui.card_section().classes('p-6'):
-                        ui.html('<h2 class="sub-heading brand-charcoal mb-6">Profile Information</h2>', sanitize=lambda s: s)
+                        ui.html('<h2 class="sub-heading brand-charcoal mb-6">Profile Information</h2>')
                         
                         with ui.row().classes('w-full gap-8 mb-8'):
                             # Profile avatar
                             with ui.column().classes('items-center'):
-                                ui.html('<div class="profile-avatar"><i class="material-icons text-gray-400 text-4xl">person</i></div>', sanitize=lambda s: s)
+                                ui.html('<div class="profile-avatar"><i class="material-icons text-gray-400 text-4xl">person</i></div>')
                                 ui.button('Change Photo', icon='camera_alt').classes('mt-3 bg-blue-600 text-white px-4 py-2')
                                 ui.button('Remove', icon='delete').classes('mt-2 text-red-600 px-4 py-2')
                             
@@ -166,7 +166,7 @@ def user_settings_profile_management_page():
                         with ui.row().classes('w-full gap-8'):
                             # Location
                             with ui.column().classes('flex-1'):
-                                ui.html('<h3 class="sub-heading brand-charcoal mb-4">Location</h3>', sanitize=lambda s: s)
+                                ui.html('<h3 class="sub-heading brand-charcoal mb-4">Location</h3>')
                                 ui.select(['United States', 'Canada', 'United Kingdom', 'South Africa'], 
                                          label='Country', value='United States').classes('w-full mb-3')
                                 ui.input(label='City', value='San Francisco').classes('w-full mb-3')
@@ -175,7 +175,7 @@ def user_settings_profile_management_page():
                             
                             # Professional Links
                             with ui.column().classes('flex-1'):
-                                ui.html('<h3 class="sub-heading brand-charcoal mb-4">Professional Links</h3>', sanitize=lambda s: s)
+                                ui.html('<h3 class="sub-heading brand-charcoal mb-4">Professional Links</h3>')
                                 ui.input(label='LinkedIn Profile', placeholder='https://linkedin.com/in/username').classes('w-full mb-3')
                                 ui.input(label='GitHub Profile', placeholder='https://github.com/username').classes('w-full mb-3')
                                 ui.input(label='Portfolio Website', placeholder='https://yoursite.com').classes('w-full')
@@ -183,28 +183,28 @@ def user_settings_profile_management_page():
                 # Security & Privacy Section
                 with ui.card().classes('w-full mb-6 settings-card'):
                     with ui.card_section().classes('p-6'):
-                        ui.html('<h2 class="sub-heading brand-charcoal mb-6">Security & Privacy</h2>', sanitize=lambda s: s)
+                        ui.html('<h2 class="sub-heading brand-charcoal mb-6">Security & Privacy</h2>')
                         
                         # Password settings
                         with ui.column().classes('mb-6'):
-                            ui.html('<h3 class="sub-heading brand-charcoal mb-4">Password & Authentication</h3>', sanitize=lambda s: s)
+                            ui.html('<h3 class="sub-heading brand-charcoal mb-4">Password & Authentication</h3>')
                             
                             with ui.row().classes('w-full items-center justify-between p-4 bg-gray-50 rounded-lg mb-3'):
                                 with ui.column():
-                                    ui.html('<div class="body-text brand-charcoal font-medium">Password</div>', sanitize=lambda s: s)
-                                    ui.html('<div class="caption brand-slate">Last changed 2 months ago</div>', sanitize=lambda s: s)
+                                    ui.html('<div class="body-text brand-charcoal font-medium">Password</div>')
+                                    ui.html('<div class="caption brand-slate">Last changed 2 months ago</div>')
                                 ui.button('Change Password', icon='lock').classes('bg-blue-600 text-white px-4 py-2')
                             
                             with ui.row().classes('w-full items-center justify-between p-4 bg-gray-50 rounded-lg mb-3'):
                                 with ui.column():
-                                    ui.html('<div class="body-text brand-charcoal font-medium">Two-Factor Authentication</div>', sanitize=lambda s: s)
-                                    ui.html('<div class="caption brand-slate">Add extra security to your account</div>', sanitize=lambda s: s)
+                                    ui.html('<div class="body-text brand-charcoal font-medium">Two-Factor Authentication</div>')
+                                    ui.html('<div class="caption brand-slate">Add extra security to your account</div>')
                                 ui.switch().classes('')
                             
                             with ui.row().classes('w-full items-center justify-between p-4 bg-gray-50 rounded-lg'):
                                 with ui.column():
-                                    ui.html('<div class="body-text brand-charcoal font-medium">Login Alerts</div>', sanitize=lambda s: s)
-                                    ui.html('<div class="caption brand-slate">Get notified of suspicious activity</div>', sanitize=lambda s: s)
+                                    ui.html('<div class="body-text brand-charcoal font-medium">Login Alerts</div>')
+                                    ui.html('<div class="caption brand-slate">Get notified of suspicious activity</div>')
                                 ui.switch().classes('').props('value=true')
                         
                         # Privacy settings
@@ -226,17 +226,17 @@ def user_settings_profile_management_page():
                             }
                         ]
                         
-                        ui.html('<h3 class="sub-heading brand-charcoal mb-4">Privacy Controls</h3>', sanitize=lambda s: s)
+                        ui.html('<h3 class="sub-heading brand-charcoal mb-4">Privacy Controls</h3>')
                         for option in privacy_options:
                             with ui.column().classes('privacy-option mb-4'):
-                                ui.html(f'<div class="body-text brand-charcoal font-medium mb-1">{option["title"]}</div>', sanitize=lambda s: s)
-                                ui.html(f'<div class="caption brand-slate mb-3">{option["description"]}</div>', sanitize=lambda s: s)
+                                ui.html(f'<div class="body-text brand-charcoal font-medium mb-1">{option["title"]}</div>')
+                                ui.html(f'<div class="caption brand-slate mb-3">{option["description"]}</div>')
                                 ui.select(option['options'], value=option['options'][1]).classes('w-48')
                 
                 # Notification Preferences
                 with ui.card().classes('w-full mb-6 settings-card'):
                     with ui.card_section().classes('p-6'):
-                        ui.html('<h2 class="sub-heading brand-charcoal mb-6">Notification Preferences</h2>', sanitize=lambda s: s)
+                        ui.html('<h2 class="sub-heading brand-charcoal mb-6">Notification Preferences</h2>')
                         
                         notification_categories = [
                             {
@@ -267,24 +267,24 @@ def user_settings_profile_management_page():
                         
                         for category in notification_categories:
                             with ui.column().classes('mb-6'):
-                                ui.html(f'<h3 class="sub-heading brand-charcoal mb-4">{category["title"]}</h3>', sanitize=lambda s: s)
+                                ui.html(f'<h3 class="sub-heading brand-charcoal mb-4">{category["title"]}</h3>')
                                 
                                 # Header row
                                 with ui.row().classes('w-full items-center mb-3'):
-                                    ui.html('<div class="body-text brand-slate font-medium" style="width: 60%;">Notification Type</div>', sanitize=lambda s: s)
-                                    ui.html('<div class="body-text brand-slate font-medium" style="width: 20%;">Email</div>', sanitize=lambda s: s)
-                                    ui.html('<div class="body-text brand-slate font-medium" style="width: 20%;">Push</div>', sanitize=lambda s: s)
+                                    ui.html('<div class="body-text brand-slate font-medium" style="width: 60%;">Notification Type</div>')
+                                    ui.html('<div class="body-text brand-slate font-medium" style="width: 20%;">Email</div>')
+                                    ui.html('<div class="body-text brand-slate font-medium" style="width: 20%;">Push</div>')
                                 
                                 for item_name, email_enabled, push_enabled in category['items']:
                                     with ui.row().classes('notification-item w-full items-center'):
-                                        ui.html(f'<div class="body-text brand-charcoal" style="width: 60%;">{item_name}</div>', sanitize=lambda s: s)
+                                        ui.html(f'<div class="body-text brand-charcoal" style="width: 60%;">{item_name}</div>')
                                         ui.switch().classes('').props(f'value={str(email_enabled).lower()}').style('width: 20%;')
                                         ui.switch().classes('').props(f'value={str(push_enabled).lower()}').style('width: 20%;')
                 
                 # Account actions
                 with ui.card().classes('w-full settings-card'):
                     with ui.card_section().classes('p-6'):
-                        ui.html('<h2 class="sub-heading brand-charcoal mb-6">Account Actions</h2>', sanitize=lambda s: s)
+                        ui.html('<h2 class="sub-heading brand-charcoal mb-6">Account Actions</h2>')
                         
                         with ui.row().classes('w-full gap-4'):
                             ui.button('Export Data', icon='download').classes('bg-green-600 text-white px-6 py-3')

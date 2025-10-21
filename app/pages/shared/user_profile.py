@@ -208,7 +208,7 @@ def user_profile_page():
         with ui.row().classes('profile-header w-full'):
             # Avatar
             initials = ''.join([word[0].upper() for word in name.split()[:2]])
-            ui.html(f'<div class="profile-avatar">{initials}</div>', sanitize=lambda s: s)
+            ui.html(f'<div class="profile-avatar">{initials}</div>')
             
             # Name and basic info
             with ui.column().classes('flex-1'):
@@ -217,16 +217,16 @@ def user_profile_page():
                 
                 # Verification badge
                 if verified:
-                    ui.html('<span class="inline-flex items-center gap-1 px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-semibold"><span class="material-icons" style="font-size: 16px;">verified</span> Verified</span>', sanitize=lambda s: s)
+                    ui.html('<span class="inline-flex items-center gap-1 px-3 py-1 bg-green-100 text-green-700 rounded-full text-sm font-semibold"><span class="material-icons" style="font-size: 16px;">verified</span> Verified</span>')
                 else:
-                    ui.html('<span class="inline-flex items-center gap-1 px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-sm font-semibold"><span class="material-icons" style="font-size: 16px;">warning</span> Not Verified</span>', sanitize=lambda s: s)
+                    ui.html('<span class="inline-flex items-center gap-1 px-3 py-1 bg-yellow-100 text-yellow-700 rounded-full text-sm font-semibold"><span class="material-icons" style="font-size: 16px;">warning</span> Not Verified</span>')
             
             # Edit button
             if not edit_mode['active']:
                 ui.button('Edit Profile', on_click=lambda: toggle_edit_mode()).classes('edit-button')
         
         # Profile information sections
-        ui.html('<div class="section-title">Profile Information</div>', sanitize=lambda s: s)
+        ui.html('<div class="section-title">Profile Information</div>')
         
         # Basic info
         with ui.column().classes('w-full'):
@@ -251,7 +251,7 @@ def user_profile_page():
             <div class="info-label">{label}</div>
             <div class="info-value">{value}</div>
         </div>
-        ''', sanitize=lambda s: s)
+        ''')
     
     def toggle_edit_mode():
         """Toggle edit mode"""
@@ -297,7 +297,7 @@ def user_profile_page():
     
     def render_trainee_section(data: Dict[str, Any]):
         """Render trainee-specific sections"""
-        ui.html('<div class="section-title mt-8">Professional Information</div>', sanitize=lambda s: s)
+        ui.html('<div class="section-title mt-8">Professional Information</div>')
         with ui.column().classes('w-full'):
             info_row('Skills', data.get('skills', 'Not specified'))
             info_row('Experience', data.get('experience', 'Not specified'))
@@ -305,7 +305,7 @@ def user_profile_page():
     
     def render_employer_section(data: Dict[str, Any]):
         """Render employer-specific sections"""
-        ui.html('<div class="section-title mt-8">Company Information</div>', sanitize=lambda s: s)
+        ui.html('<div class="section-title mt-8">Company Information</div>')
         with ui.column().classes('w-full'):
             info_row('Company Name', data.get('companyName', 'Not specified'))
             info_row('Industry', data.get('industry', 'Not specified'))
@@ -313,7 +313,7 @@ def user_profile_page():
     
     def render_institution_section(data: Dict[str, Any]):
         """Render institution-specific sections"""
-        ui.html('<div class="section-title mt-8">Institution Information</div>', sanitize=lambda s: s)
+        ui.html('<div class="section-title mt-8">Institution Information</div>')
         with ui.column().classes('w-full'):
             info_row('Institution Name', data.get('institutionName', 'Not specified'))
             info_row('Type', data.get('institutionType', 'Not specified'))

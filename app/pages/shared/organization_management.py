@@ -282,7 +282,7 @@ def organization_management_page():
         with ui.column().classes('w-full'):
             # Header
             with ui.row().classes('org-header w-full'):
-                ui.html('<div class="page-title">Organizations</div>', sanitize=lambda s: s)
+                ui.html('<div class="page-title">Organizations</div>')
                 ui.button('Create Organization', on_click=lambda: change_view('create')).classes('btn-primary')
             
             # Loading state
@@ -295,13 +295,13 @@ def organization_management_page():
             # Empty state
             if not state['organizations']:
                 with ui.column().classes('empty-state'):
-                    ui.html('<div class="empty-state-title">No Organizations Yet</div>', sanitize=lambda s: s)
+                    ui.html('<div class="empty-state-title">No Organizations Yet</div>')
                     ui.label('Create your first organization to get started').classes('text-lg mb-6')
                     ui.button('Create Organization', on_click=lambda: change_view('create')).classes('btn-primary')
                 return
             
             # Organizations list
-            ui.html(f'<div class="section-title">{len(state["organizations"])} Organizations</div>', sanitize=lambda s: s)
+            ui.html(f'<div class="section-title">{len(state["organizations"])} Organizations</div>')
             
             for org in state['organizations']:
                 render_organization_card(org)
@@ -319,15 +319,15 @@ def organization_management_page():
             with ui.row().classes('w-full justify-between items-start'):
                 # Organization info
                 with ui.column().classes('flex-1'):
-                    ui.html(f'<div class="org-name">{org_name}</div>', sanitize=lambda s: s)
+                    ui.html(f'<div class="org-name">{org_name}</div>')
                     
                     # Type badge
                     badge_class = 'badge-employer' if org_type == 'employer' else 'badge-institution'
-                    ui.html(f'<span class="badge {badge_class}">{org_type.upper()}</span>', sanitize=lambda s: s)
+                    ui.html(f'<span class="badge {badge_class}">{org_type.upper()}</span>')
                     
-                    ui.html(f'<div class="org-detail">📍 Location: {org_location}</div>', sanitize=lambda s: s)
-                    ui.html(f'<div class="org-detail">🌐 Website: {org_website}</div>', sanitize=lambda s: s)
-                    ui.html(f'<div class="org-detail">📝 {org_description}</div>', sanitize=lambda s: s)
+                    ui.html(f'<div class="org-detail">📍 Location: {org_location}</div>')
+                    ui.html(f'<div class="org-detail">🌐 Website: {org_website}</div>')
+                    ui.html(f'<div class="org-detail">📝 {org_description}</div>')
                 
                 # Action buttons
                 with ui.column().classes('gap-2'):
@@ -349,19 +349,19 @@ def organization_management_page():
         with ui.column().classes('w-full'):
             # Header
             with ui.row().classes('org-header w-full'):
-                ui.html('<div class="page-title">Create Organization</div>', sanitize=lambda s: s)
+                ui.html('<div class="page-title">Create Organization</div>')
                 ui.button('Back to List', on_click=lambda: change_view('list')).classes('btn-secondary')
             
             # Form
             with ui.card().classes('org-card w-full max-w-3xl'):
-                ui.html('<div class="section-title">Organization Details</div>', sanitize=lambda s: s)
+                ui.html('<div class="section-title">Organization Details</div>')
                 
                 # Organization name
-                ui.html('<div class="form-label">Organization Name *</div>', sanitize=lambda s: s)
+                ui.html('<div class="form-label">Organization Name *</div>')
                 ui.input('Enter organization name', placeholder='e.g., TechCorp Solutions').classes('w-full mb-4').bind_value(form_data, 'name')
                 
                 # Type
-                ui.html('<div class="form-label">Organization Type *</div>', sanitize=lambda s: s)
+                ui.html('<div class="form-label">Organization Type *</div>')
                 ui.select(
                     ['employer', 'institution'],
                     value='employer',
@@ -369,23 +369,23 @@ def organization_management_page():
                 ).classes('w-full mb-4').bind_value(form_data, 'type')
                 
                 # Description
-                ui.html('<div class="form-label">Description</div>', sanitize=lambda s: s)
+                ui.html('<div class="form-label">Description</div>')
                 ui.textarea('Brief description of the organization', placeholder='Tell us about your organization...').classes('w-full mb-4').bind_value(form_data, 'description')
                 
                 # Website
-                ui.html('<div class="form-label">Website</div>', sanitize=lambda s: s)
+                ui.html('<div class="form-label">Website</div>')
                 ui.input('Website URL', placeholder='https://example.com').classes('w-full mb-4').bind_value(form_data, 'website')
                 
                 # Location
-                ui.html('<div class="form-label">Location</div>', sanitize=lambda s: s)
+                ui.html('<div class="form-label">Location</div>')
                 ui.input('City, Country', placeholder='e.g., Lagos, Nigeria').classes('w-full mb-4').bind_value(form_data, 'location')
                 
                 # Industry
-                ui.html('<div class="form-label">Industry</div>', sanitize=lambda s: s)
+                ui.html('<div class="form-label">Industry</div>')
                 ui.input('Industry/Sector', placeholder='e.g., Technology, Education').classes('w-full mb-4').bind_value(form_data, 'industry')
                 
                 # Size
-                ui.html('<div class="form-label">Organization Size</div>', sanitize=lambda s: s)
+                ui.html('<div class="form-label">Organization Size</div>')
                 ui.select(
                     ['1-10', '11-50', '51-200', '201-500', '500+'],
                     value='11-50',
@@ -417,29 +417,29 @@ def organization_management_page():
         with ui.column().classes('w-full'):
             # Header
             with ui.row().classes('org-header w-full'):
-                ui.html('<div class="page-title">Edit Organization</div>', sanitize=lambda s: s)
+                ui.html('<div class="page-title">Edit Organization</div>')
                 ui.button('Back to List', on_click=lambda: change_view('list')).classes('btn-secondary')
             
             # Form (similar to create form)
             with ui.card().classes('org-card w-full max-w-3xl'):
-                ui.html('<div class="section-title">Organization Details</div>', sanitize=lambda s: s)
+                ui.html('<div class="section-title">Organization Details</div>')
                 
-                ui.html('<div class="form-label">Organization Name *</div>', sanitize=lambda s: s)
+                ui.html('<div class="form-label">Organization Name *</div>')
                 ui.input('Organization name').classes('w-full mb-4').bind_value(form_data, 'name')
                 
-                ui.html('<div class="form-label">Description</div>', sanitize=lambda s: s)
+                ui.html('<div class="form-label">Description</div>')
                 ui.textarea('Description').classes('w-full mb-4').bind_value(form_data, 'description')
                 
-                ui.html('<div class="form-label">Website</div>', sanitize=lambda s: s)
+                ui.html('<div class="form-label">Website</div>')
                 ui.input('Website URL').classes('w-full mb-4').bind_value(form_data, 'website')
                 
-                ui.html('<div class="form-label">Location</div>', sanitize=lambda s: s)
+                ui.html('<div class="form-label">Location</div>')
                 ui.input('Location').classes('w-full mb-4').bind_value(form_data, 'location')
                 
-                ui.html('<div class="form-label">Industry</div>', sanitize=lambda s: s)
+                ui.html('<div class="form-label">Industry</div>')
                 ui.input('Industry').classes('w-full mb-4').bind_value(form_data, 'industry')
                 
-                ui.html('<div class="form-label">Size</div>', sanitize=lambda s: s)
+                ui.html('<div class="form-label">Size</div>')
                 ui.select(['1-10', '11-50', '51-200', '201-500', '500+']).classes('w-full mb-6').bind_value(form_data, 'size')
                 
                 # Actions

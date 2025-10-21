@@ -309,16 +309,16 @@ def _create_hero_section(tab_name: str):
         # Background image
         ui.image('https://images.pexels.com/photos/9301758/pexels-photo-9301758.jpeg?auto=compress&cs=tinysrgb&w=1080&h=850&dpr=1').classes('absolute inset-0 w-full h-full object-cover').style('opacity:0.35;z-index:0;')
         # Semi-transparent overlay
-        ui.html('<div style="position:absolute;inset:0;width:100%;height:100%;background:rgba(10,20,40,0.55);z-index:1;"></div>', sanitize=lambda s: s)
+        ui.html('<div style="position:absolute;inset:0;width:100%;height:100%;background:rgba(10,20,40,0.55);z-index:1;"></div>')
         with ui.element('div').classes('hero-content').style('position:relative;z-index:2;'):
-            ui.html('<h1 class="hero-title">How Dompell Works</h1>', sanitize=lambda s: s)
+            ui.html('<h1 class="hero-title">How Dompell Works</h1>')
             # Different subtitles based on tab
             subtitles = {
                 'trainees': 'Discover how to build your profile, explore opportunities, and advance your career across Africa.',
                 'employers': 'Learn how to find top talent, post opportunities, and build your dream team across Africa.',
                 'institutions': 'See how to register programs, onboard students, and track their success across Africa.'
             }
-            ui.html(f'<p class="hero-subtitle">{subtitles.get(tab_name, subtitles["trainees"])}</p>', sanitize=lambda s: s)
+            ui.html(f'<p class="hero-subtitle">{subtitles.get(tab_name, subtitles["trainees"])}</p>')
 
 
 def _create_content_for_tab(tab_name: str):
@@ -363,9 +363,9 @@ def _journey_step(number: str, title: str, text: str):
     with ui.element('div').classes('process-card'):
         # Card Top - Gradient header with number and title
         with ui.element('div').classes('card-top'):
-            ui.html(f'<div class="process-number">{number}</div>', sanitize=lambda s: s)
-            ui.html(f'<h3 class="process-title">{title}</h3>', sanitize=lambda s: s)
+            ui.html(f'<div class="process-number">{number}</div>')
+            ui.html(f'<h3 class="process-title">{title}</h3>')
         
         # Card Content - Description
         with ui.element('div').classes('card-content'):
-            ui.html(f'<p class="process-description">{text}</p>', sanitize=lambda s: s)
+            ui.html(f'<p class="process-description">{text}</p>')

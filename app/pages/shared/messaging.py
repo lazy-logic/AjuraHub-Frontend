@@ -143,9 +143,9 @@ def _create_chat_window():
             with ui.row().classes('flex items-start gap-3'):
                 ui.image('https://lh3.googleusercontent.com/aida-public/AB6AXuD7eC4atG7Zcyfp5HuI5eQ9cnnrLMIvpqzWzjdKfqRiks--5l6NyOLsZTY50I4QycQyFp9dAP5lFvc5BsLVsWBetLzaNc3vfQ9-xagGQ4a4auEQo4iNEDexj_f8GivEmhvk7TPZijTgSzU3xQPameRi_4qQV-npS4YKUrTWx3jnarh-dAg22qhJvwqeeTM6GhXEYixAwP4rOoBrvP1KJkPTx72cLNsBmq0q5WD0wzp52EEPyPufGMZywt8BzQxaatjFWk5ilJ9O9g').classes('size-10 rounded-full')
                 with ui.row().classes('items-center gap-2 p-3 rounded-xl rounded-tl-none bg-white'):
-                    ui.html('<span class="h-2 w-2 bg-slate-400 rounded-full animate-pulse [animation-delay:-0.3s]"></span>', sanitize=lambda s: s)
-                    ui.html('<span class="h-2 w-2 bg-slate-400 rounded-full animate-pulse [animation-delay:-0.15s]"></span>', sanitize=lambda s: s)
-                    ui.html('<span class="h-2 w-2 bg-slate-400 rounded-full animate-pulse"></span>', sanitize=lambda s: s)
+                    ui.html('<span class="h-2 w-2 bg-slate-400 rounded-full animate-pulse [animation-delay:-0.3s]"></span>')
+                    ui.html('<span class="h-2 w-2 bg-slate-400 rounded-full animate-pulse [animation-delay:-0.15s]"></span>')
+                    ui.html('<span class="h-2 w-2 bg-slate-400 rounded-full animate-pulse"></span>')
 
         # Message Input
         with ui.row().classes('p-6 w-full').style('background-color: #FFFFFF !important; border-top: 2px solid rgba(77, 77, 77, 0.2) !important;'):

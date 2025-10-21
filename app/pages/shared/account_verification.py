@@ -347,7 +347,7 @@ def account_verification_page():
                 background: rgba(0, 85, 184, 0.05) !important;
                 border: 1px solid rgba(0, 85, 184, 0.15) !important;
                 border-radius: 12px !important;
-                padding: 16px !important;
+                padding: 24px !important;
                 margin: 16px 0 !important;
             }
             .resend-timer {
@@ -358,6 +358,14 @@ def account_verification_page():
             .resend-available {
                 color: #0055B8 !important;
                 font-weight: 600 !important;
+            }
+            .code-entry-panel {
+                width: 100%;
+                border: 1px solid rgba(0, 85, 184, 0.12) !important;
+                border-radius: 16px !important;
+                padding: 24px !important;
+                background: #ffffff !important;
+                box-shadow: 0 6px 18px rgba(15, 23, 42, 0.08);
             }
             a { color: #0055B8 !important; text-decoration: none; }
         </style>
@@ -376,13 +384,14 @@ def account_verification_page():
         </script>
     ''')
 
-    with ui.column().classes('w-full py-16 px-8 min-h-screen flex items-center justify-center'):
+    with ui.column().classes('w-full py-16 px-4 md:px-8 min-h-screen flex items-center justify-center'):
         with ui.card().classes('auth-card w-full max-w-lg p-0 mx-auto'):
-            with ui.column().classes('w-full px-8 py-10 gap-4 items-center'):
+            with ui.column().classes('w-full px-6 md:px-8 py-6 gap-6 items-center'):
 
                 # Header Section
-                ui.icon('verified', size='48px').classes('text-blue-600 mb-4')
-                ui.label('Verify Your Account').classes('sub-heading brand-charcoal text-center mb-2')
+                with ui.column().classes('items-center gap-2'):
+                    ui.icon('verified', size='48px').classes('text-blue-600')
+                    ui.label('Verify Your Account').classes('sub-heading brand-charcoal text-center')
                 
                 # Initialize browser storage during page load (not in event handlers)
                 user_email = app.storage.user.get('verification_email', 'your email address')
@@ -407,120 +416,97 @@ def account_verification_page():
                 if user_email == 'your email address':
                     user_email = app.storage.browser.get('verification_email', 'your email address')
                 
-                ui.label('Check your email for a verification code').classes('body-text brand-slate text-center mb-2')
-                ui.label(f"Code sent to: {user_email}").classes('body-text brand-charcoal font-bold text-center mb-6')
+                with ui.column().classes('w-full text-center gap-2'):
+                    ui.label('Check your email for a verification code').classes('body-text brand-slate')
+                    ui.label(f"Code sent to: {user_email}").classes('body-text brand-charcoal font-bold')
 
                 # Verification Instructions
-                with ui.column().classes('verification-info w-full mb-6'):
+                with ui.column().classes('verification-info w-full gap-3 items-start text-left'):
                     ui.label('📧 Verification Instructions').classes('body-text font-bold brand-charcoal mb-2')
                     ui.label('• Check your email inbox for a 6-digit verification code').classes('text-sm brand-slate mb-1')
                     ui.label('• Check your spam/junk folder if you don\'t see the email').classes('text-sm brand-slate mb-1')
                     ui.label('• The code expires in 15 minutes for security').classes('text-sm brand-slate mb-1')
                     ui.label('• Enter all 6 digits to verify your account').classes('text-sm brand-slate')
 
-                # Code Entry Section
-                ui.label('Enter your 6-digit verification code:').classes('body-text brand-charcoal font-semibold text-center mb-4')
-                
-                # Single Input Approach - More Reliable
-                with ui.column().classes('w-full items-center mb-4'):
-                    # Create a single input field with formatting
-                    code_input = ui.input(
-                        placeholder='000000'
-                    ).classes('text-center text-2xl font-bold tracking-widest').props(
-                        'maxlength=6 type=text inputmode=numeric pattern=[0-9]* autocomplete=one-time-code'
-                    ).style(
-                        'width: 240px; height: 64px; font-size: 24px; letter-spacing: 8px; '
-                        'border: 2px solid rgba(0, 85, 184, 0.15); border-radius: 12px; '
-                        'text-align: center; background: white;'
-                    )
+                with ui.column().classes('code-entry-panel items-center gap-4'):
+                    ui.label('Enter your 6-digit verification code:').classes('body-text brand-charcoal font-semibold text-center w-full')
                     
-                    # Real-time validation and formatting
-                    def handle_code_input(e):
-                        try:
-                            # Get the raw input value
-                            raw_value = str(e.value) if hasattr(e, 'value') else str(e)
-                            
-                            # Clean input - only allow digits
-                            clean_value = ''.join(char for char in raw_value if char.isdigit())
-                            
-                            # Limit to 6 digits
-                            if len(clean_value) > 6:
-                                clean_value = clean_value[:6]
-                            
-                            # Update the input value if it was cleaned
-                            if clean_value != raw_value:
-                                code_input.value = clean_value
-                            
-                            # Store the value for verification
-                            code_state["single_input"] = clean_value
-                            
-                            # Update the state array for compatibility - pad to 6 characters
-                            code_state["values"] = list(clean_value) + [''] * (6 - len(clean_value))
-                            
-                            print(f"[DEBUG] Code input: '{clean_value}' (length: {len(clean_value)})")
-                            
-                        except Exception as ex:
-                            print(f"[DEBUG] Code input error: {ex}")
-                            code_state["single_input"] = ""
-                            code_state["values"] = [""] * 6
+                    # Single Input Approach - More Reliable
+                    with ui.column().classes('w-full items-center gap-2'):
+                        code_input = ui.input(
+                            placeholder='000000'
+                        ).classes('text-center text-2xl font-bold tracking-widest w-full max-w-xs').props(
+                            'maxlength=6 type=text inputmode=numeric pattern=[0-9]* autocomplete=one-time-code'
+                        ).style(
+                            'width: 100%; max-width: 260px; height: 64px; font-size: 24px; letter-spacing: 8px; '
+                            'border: 2px solid rgba(0, 85, 184, 0.15); border-radius: 12px; '
+                            'text-align: center; background: white; padding: 0 12px;'
+                        )
+                        
+                        # Real-time validation and formatting
+                        def handle_code_input(e):
+                            try:
+                                raw_value = str(e.value) if hasattr(e, 'value') else str(e)
+                                clean_value = ''.join(char for char in raw_value if char.isdigit())
+                                if len(clean_value) > 6:
+                                    clean_value = clean_value[:6]
+                                if clean_value != raw_value:
+                                    code_input.value = clean_value
+                                code_state["single_input"] = clean_value
+                                code_state["values"] = list(clean_value) + [''] * (6 - len(clean_value))
+                                print(f"[DEBUG] Code input: '{clean_value}' (length: {len(clean_value)})")
+                            except Exception as ex:
+                                print(f"[DEBUG] Code input error: {ex}")
+                                code_state["single_input"] = ""
+                                code_state["values"] = [""] * 6
+                        
+                        code_input.on_value_change(handle_code_input)
+                        
+                        ui.label('Type or paste your 6-digit code').classes('text-sm text-gray-500 text-center')
                     
-                    code_input.on_value_change(handle_code_input)
+                    verification_status = ui.column().classes('w-full gap-2')
                     
-                    # Visual feedback
-                    ui.label('Type or paste your 6-digit code').classes('text-sm text-gray-500 mt-2')
-                
+                    verify_button_id = 'verify-btn'
+                    verify_button = ui.button(
+                        'Verify Account', 
+                        on_click=handle_code_verification
+                    ).classes('w-full h-14 gradient-btn text-base font-semibold').props(f'id={verify_button_id}')
+                    
+                    with ui.row().classes('w-full justify-between items-center gap-4'):
+                        with ui.column().classes('flex-1 gap-2'):
+                            ui.label("Didn't receive the code?").classes('body-text brand-slate text-sm')
+                            
+                            resend_container = ui.row().classes('items-center gap-2')
+                            
+                            with resend_container:
+                                resend_timer = ui.label('You can resend in 60s').classes('resend-timer text-sm text-gray-500')
+                            
+                            resend_button = ui.button(
+                                'Resend Code',
+                                on_click=handle_resend_code
+                            ).classes('text-sm bg-blue-500 text-white px-4 py-2 rounded')
+                            
+                            resend_button.set_visibility(False)  # Hide initially
+                            
+                            countdown_time = 60
+                            
+                            def countdown_tick():
+                                nonlocal countdown_time
+                                if countdown_time > 0:
+                                    countdown_time -= 1
+                                    resend_timer.text = f'You can resend in {countdown_time}s'
+                                else:
+                                    resend_timer.set_visibility(False)
+                                    resend_button.set_visibility(True)
+                            
+                            ui.timer(1.0, countdown_tick, active=True)
+
                 print("[DEBUG] Single input system initialized")
                 
                 # Don't store input object - just use the state system
-                
-                # Verification Status Area (don't store in app.storage to avoid serialization issues)
-                verification_status = ui.column().classes('w-full mt-4 mb-4')
-                
-                # Action Buttons
-                verify_button_id = 'verify-btn'
-                verify_button = ui.button(
-                    'Verify Account', 
-                    on_click=handle_code_verification
-                ).classes('w-full h-14 gradient-btn text-base font-semibold mt-4').props(f'id={verify_button_id}')
-                
-                # Resend Section with Timer
-                with ui.row().classes('w-full justify-between items-center mt-6 px-4'):
-                    with ui.column().classes('flex-1'):
-                        ui.label("Didn't receive the code?").classes('body-text brand-slate text-sm')
-                        
-                        # Resend container with countdown
-                        resend_container = ui.row().classes('items-center gap-2')
-                        
-                        # Create initial timer display
-                        with resend_container:
-                            resend_timer = ui.label('You can resend in 60s').classes('resend-timer text-sm text-gray-500')
-                        
-                        # Create resend button (initially hidden)
-                        resend_button = ui.button(
-                            'Resend Code',
-                            on_click=handle_resend_code
-                        ).classes('text-sm bg-blue-500 text-white px-4 py-2 rounded')
-                        
-                        resend_button.set_visibility(False)  # Hide initially
-                        
-                        # Countdown state
-                        countdown_time = 60
-                        
-                        def countdown_tick():
-                            nonlocal countdown_time
-                            if countdown_time > 0:
-                                countdown_time -= 1
-                                resend_timer.text = f'You can resend in {countdown_time}s'
-                            else:
-                                # Show resend button, hide timer
-                                resend_timer.set_visibility(False)
-                                resend_button.set_visibility(True)
-                        
-                        # Start countdown timer
-                        ui.timer(1.0, countdown_tick, active=True)
 
                 # Help Section
-                with ui.column().classes('w-full mt-8 px-4'):
+                with ui.column().classes('w-full mt-8'):
                     with ui.expansion('Need help?', icon='help_outline').classes('w-full'):
                         ui.markdown('''
                         **Troubleshooting:**

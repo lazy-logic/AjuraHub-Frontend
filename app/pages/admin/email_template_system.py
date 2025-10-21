@@ -129,8 +129,8 @@ def email_template_system_page():
         with ui.row().classes('w-full max-w-6xl mx-auto px-6 mb-8'):
             with ui.row().classes('w-full items-center justify-between'):
                 with ui.column():
-                    ui.html('<h1 class="heading-2 brand-charcoal mb-2">Email Template System</h1>', sanitize=lambda s: s)
-                    ui.html('<p class="body-text brand-slate">Create, edit, and manage email templates for system communications</p>', sanitize=lambda s: s)
+                    ui.html('<h1 class="heading-2 brand-charcoal mb-2">Email Template System</h1>')
+                    ui.html('<p class="body-text brand-slate">Create, edit, and manage email templates for system communications</p>')
                 
                     with ui.row().classes('gap-3'):
                         ui.button('Import Templates', icon='file_upload').classes('bg-green-600 text-white px-4 py-2')
@@ -143,7 +143,7 @@ def email_template_system_page():
                     # Template categories
                     with ui.card().classes('w-full mb-6 template-card'):
                         with ui.card_section().classes('p-4'):
-                            ui.html('<h3 class="sub-heading brand-charcoal mb-4">Template Categories</h3>', sanitize=lambda s: s)
+                            ui.html('<h3 class="sub-heading brand-charcoal mb-4">Template Categories</h3>')
                             
                             categories = [
                             {'name': 'Welcome & Onboarding', 'count': 5, 'icon': 'waving_hand'},
@@ -158,13 +158,13 @@ def email_template_system_page():
                                 with ui.row().classes('w-full items-center justify-between p-3 hover:bg-gray-50 rounded-lg cursor-pointer'):
                                     with ui.row().classes('items-center gap-3'):
 
-                                        ui.html(f'<div class="body-text brand-charcoal">{category["name"]}</div>', sanitize=lambda s: s)
-                                    ui.html(f'<div class="caption brand-slate">{category["count"]}</div>', sanitize=lambda s: s)
+                                        ui.html(f'<div class="body-text brand-charcoal">{category["name"]}</div>')
+                                    ui.html(f'<div class="caption brand-slate">{category["count"]}</div>')
                     
                     # Template list
                     with ui.card().classes('w-full template-card'):
                         with ui.card_section().classes('p-4'):
-                            ui.html('<h3 class="sub-heading brand-charcoal mb-4">Templates</h3>', sanitize=lambda s: s)
+                            ui.html('<h3 class="sub-heading brand-charcoal mb-4">Templates</h3>')
                             
                             # Search
                             ui.input(placeholder='Search templates...').classes('w-full mb-4')
@@ -203,9 +203,9 @@ def email_template_system_page():
                         for template in templates:
                             item_class = 'template-item active' if template['active'] else 'template-item'
                             with ui.column().classes(f'{item_class} mb-3'):
-                                ui.html(f'<div class="body-text brand-charcoal font-medium">{template["name"]}</div>', sanitize=lambda s: s)
-                                ui.html(f'<div class="caption brand-slate">{template["category"]} • {template["status"]}</div>', sanitize=lambda s: s)
-                                ui.html(f'<div class="caption brand-slate">Last used: {template["last_used"]}</div>', sanitize=lambda s: s)
+                                ui.html(f'<div class="body-text brand-charcoal font-medium">{template["name"]}</div>')
+                                ui.html(f'<div class="caption brand-slate">{template["category"]} • {template["status"]}</div>')
+                                ui.html(f'<div class="caption brand-slate">Last used: {template["last_used"]}</div>')
             
             # Main editor area
             with ui.column().classes('flex-grow'):
@@ -242,7 +242,7 @@ def email_template_system_page():
                                 tab_class = 'p-4 border-b-2 border-blue-600 bg-blue-50' if tab['active'] else 'p-4 border-b-2 border-transparent hover:bg-gray-50'
                                 with ui.row().classes(f'{tab_class} items-center gap-2 cursor-pointer'):
 
-                                    ui.html(f'<div class="body-text">{tab["name"]}</div>', sanitize=lambda s: s)
+                                    ui.html(f'<div class="body-text">{tab["name"]}</div>')
                 
                 # Main editor content
                 with ui.row().classes('w-full gap-6'):
@@ -250,7 +250,7 @@ def email_template_system_page():
                     with ui.column().classes('flex-1'):
                         with ui.card().classes('w-full template-card'):
                             with ui.card_section().classes('p-4'):
-                                ui.html('<h3 class="sub-heading brand-charcoal mb-4">Email Content Editor</h3>', sanitize=lambda s: s)
+                                ui.html('<h3 class="sub-heading brand-charcoal mb-4">Email Content Editor</h3>')
                                 
                                 # Editor toolbar
                                 with ui.row().classes('w-full gap-2 mb-4 p-2 bg-gray-50 rounded-lg'):
@@ -285,20 +285,20 @@ Best regards,
 The TalentConnect Africa Team''').classes('w-full min-h-80')
                                 
                                 # Variable insertion
-                                ui.html('<div class="body-text brand-slate mb-2">Quick Variables:</div>', sanitize=lambda s: s)
+                                ui.html('<div class="body-text brand-slate mb-2">Quick Variables:</div>')
                                 with ui.row().classes('flex-wrap gap-2 mb-4'):
                                     variables = [
                                         '{{first_name}}', '{{last_name}}', '{{email}}', 
                                         '{{company_name}}', '{{job_title}}', '{{date}}'
                                     ]
                                     for var in variables:
-                                        ui.html(f'<span class="variable-tag">{var}</span>', sanitize=lambda s: s)
+                                        ui.html(f'<span class="variable-tag">{var}</span>')
                     
                     # Preview panel
                     with ui.column().classes('flex-1'):
                         with ui.card().classes('w-full template-card'):
                             with ui.card_section().classes('p-4'):
-                                ui.html('<h3 class="sub-heading brand-charcoal mb-4">Email Preview</h3>', sanitize=lambda s: s)
+                                ui.html('<h3 class="sub-heading brand-charcoal mb-4">Email Preview</h3>')
                                 
                                 # Preview controls
                                 with ui.row().classes('w-full gap-4 mb-4'):
@@ -310,10 +310,10 @@ The TalentConnect Africa Team''').classes('w-full min-h-80')
                                 with ui.column().classes('email-preview'):
                                     # Email header
                                     with ui.row().classes('w-full border-b pb-3 mb-4'):
-                                        ui.html('<div class="caption brand-slate">From: TalentConnect Africa &lt;noreply@talentconnect.africa&gt;</div>', sanitize=lambda s: s)
+                                        ui.html('<div class="caption brand-slate">From: TalentConnect Africa &lt;noreply@talentconnect.africa&gt;</div>')
                                     
-                                    ui.html('<div class="caption brand-slate mb-2">To: sarah.johnson@email.com</div>', sanitize=lambda s: s)
-                                    ui.html('<div class="body-text brand-charcoal font-bold mb-4">Subject: Welcome to TalentConnect Africa, Sarah!</div>', sanitize=lambda s: s)
+                                    ui.html('<div class="caption brand-slate mb-2">To: sarah.johnson@email.com</div>')
+                                    ui.html('<div class="body-text brand-charcoal font-bold mb-4">Subject: Welcome to TalentConnect Africa, Sarah!</div>')
                                     
                                     # Email body preview
                                     ui.html('''
@@ -336,14 +336,14 @@ The TalentConnect Africa Team''').classes('w-full min-h-80')
                                         <p>Best regards,<br>
                                         The TalentConnect Africa Team</p>
                                     </div>
-                                    ''', sanitize=lambda s: s)
+                                    ''')
 
         # Template statistics and actions
         with ui.row().classes('w-full gap-6 mt-8'):
             # Template statistics
             with ui.card().classes('flex-1 template-card'):
                 with ui.card_section().classes('p-6'):
-                    ui.html('<h3 class="sub-heading brand-charcoal mb-4">Template Performance</h3>', sanitize=lambda s: s)
+                    ui.html('<h3 class="sub-heading brand-charcoal mb-4">Template Performance</h3>')
                     
                     stats = [
                         {'metric': 'Emails Sent', 'value': '2,847', 'change': '+12%'},
@@ -354,10 +354,10 @@ The TalentConnect Africa Team''').classes('w-full min-h-80')
                     
                     for stat in stats:
                         with ui.row().classes('w-full items-center justify-between mb-3'):
-                            ui.html(f'<div class="body-text brand-slate">{stat["metric"]}</div>', sanitize=lambda s: s)
+                            ui.html(f'<div class="body-text brand-slate">{stat["metric"]}</div>')
                             with ui.row().classes('items-center gap-2'):
-                                ui.html(f'<div class="body-text brand-charcoal font-medium">{stat["value"]}</div>', sanitize=lambda s: s)
-                                ui.html(f'<div class="caption text-green-600">{stat["change"]}</div>', sanitize=lambda s: s)
+                                ui.html(f'<div class="body-text brand-charcoal font-medium">{stat["value"]}</div>')
+                                ui.html(f'<div class="caption text-green-600">{stat["change"]}</div>')
             
             # Action buttons
             with ui.column().classes('w-64 space-y-3'):

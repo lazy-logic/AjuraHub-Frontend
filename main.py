@@ -369,7 +369,7 @@ def contact_page():
             <h1>Contact Us</h1>
             <p>We'd love to hear from you! Reach out to our team for support, partnership, or general inquiries.</p>
         </section>
-        ''', sanitize=lambda s: s)
+        ''')
 
         # Main Section: Form + Info
         ui.html('''
@@ -396,7 +396,7 @@ def contact_page():
                 <div class="contact-value">Monday - Friday, 9:00am - 5:00pm (GMT, Ghana)</div>
             </div>
         </section>
-        ''', sanitize=lambda s: s)
+        ''')
 
         # Map Section (Ghana)
         ui.html('''
@@ -404,7 +404,7 @@ def contact_page():
             <div class="map-title">Our Location (Ghana)</div>
             <iframe class="map-embed" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3971.993964024052!2d-0.1869646846759642!3d5.614818395929095!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfdf9b1b1b1b1b1b%3A0x1b1b1b1b1b1b1b1b!2sAccra%2C%20Ghana!5e0!3m2!1sen!2sgh!4v1660000000000!5m2!1sen!2sgh" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
         </section>
-        ''', sanitize=lambda s: s)
+        ''')
     footer()
 
 
@@ -426,7 +426,7 @@ def _create_contact_info():
             _contact_item('location_on', 'Address', ['Dompell Africa Headquarters', 'Accra, Ghana'])
         
         with ui.column().classes('w-full h-64 rounded-lg overflow-hidden'):
-            ui.html('<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127641.17105267332!2d36.73809623837929!3d-1.3031976077366114!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f1172d84d49a7%3A0xf7cf0254b297924c!2sNairobi%2C%20Kenya!5e0!3m2!1sen!2sus!4v1680000000000!5m2!1sen!2sus" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>', sanitize=lambda s: s)
+            ui.html('<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127641.17105267332!2d36.73809623837929!3d-1.3031976077366114!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f1172d84d49a7%3A0xf7cf0254b297924c!2sNairobi%2C%20Kenya!5e0!3m2!1sen!2sus!4v1680000000000!5m2!1sen!2sus" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>')
 
 def _contact_item(icon: str, title: str, lines: list):
     with ui.row().classes('flex items-start gap-4'):

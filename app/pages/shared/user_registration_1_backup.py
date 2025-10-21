@@ -134,24 +134,24 @@ def user_registration_1_backup_page():
             validation_status.clear()
             with validation_status:
                 if not state["name_valid"] and state["name"]:
-                    ui.html(f'<div class="text-red-600 text-sm mb-1">• {name_msg}</div>', sanitize=lambda s: s)
+                    ui.html(f'<div class="text-red-600 text-sm mb-1">• {name_msg}</div>')
                 elif state["name_valid"] and state["name"]:
-                    ui.html(f'<div class="text-green-600 text-sm mb-1">• {name_msg}</div>', sanitize=lambda s: s)
+                    ui.html(f'<div class="text-green-600 text-sm mb-1">• {name_msg}</div>')
                 
                 if not state["email_valid"] and state["email"]:
-                    ui.html(f'<div class="text-red-600 text-sm mb-1">• {email_msg}</div>', sanitize=lambda s: s)
+                    ui.html(f'<div class="text-red-600 text-sm mb-1">• {email_msg}</div>')
                 elif state["email_valid"] and state["email"]:
-                    ui.html(f'<div class="text-green-600 text-sm mb-1">• {email_msg}</div>', sanitize=lambda s: s)
+                    ui.html(f'<div class="text-green-600 text-sm mb-1">• {email_msg}</div>')
                 
                 if not state["password_valid"] and state["password"]:
-                    ui.html(f'<div class="text-red-600 text-sm mb-1">• {password_msg}</div>', sanitize=lambda s: s)
+                    ui.html(f'<div class="text-red-600 text-sm mb-1">• {password_msg}</div>')
                 elif state["password_valid"] and state["password"]:
-                    ui.html(f'<div class="text-green-600 text-sm mb-1">• {password_msg}</div>', sanitize=lambda s: s)
+                    ui.html(f'<div class="text-green-600 text-sm mb-1">• {password_msg}</div>')
                 
                 if not state["passwords_match"] and state["confirmPassword"]:
-                    ui.html(f'<div class="text-red-600 text-sm mb-1">• {confirm_msg}</div>', sanitize=lambda s: s)
+                    ui.html(f'<div class="text-red-600 text-sm mb-1">• {confirm_msg}</div>')
                 elif state["passwords_match"] and state["confirmPassword"]:
-                    ui.html(f'<div class="text-green-600 text-sm mb-1">• {confirm_msg}</div>', sanitize=lambda s: s)
+                    ui.html(f'<div class="text-green-600 text-sm mb-1">• {confirm_msg}</div>')
     
     def on_name_change():
         """Handle name input changes"""
@@ -400,14 +400,14 @@ def user_registration_1_backup_page():
             
             # Header
             with ui.column().classes('text-center mb-8'):
-                ui.html('<h1 class="text-3xl font-bold text-gray-800 mb-2">Join Dompell Africa</h1>', sanitize=lambda s: s)
-                ui.html('<p class="text-gray-600">Create your account to get started</p>', sanitize=lambda s: s)
+                ui.html('<h1 class="text-3xl font-bold text-gray-800 mb-2">Join Dompell Africa</h1>')
+                ui.html('<p class="text-gray-600">Create your account to get started</p>')
             
             # Registration Form Card
             with ui.card().classes('p-8 w-full shadow-lg'):
                 
                 # Role Selection
-                ui.html('<h3 class="text-lg font-semibold text-gray-700 mb-4">Select Your Role</h3>', sanitize=lambda s: s)
+                ui.html('<h3 class="text-lg font-semibold text-gray-700 mb-4">Select Your Role</h3>')
                 
                 role_options = [
                     {"role": "TRAINEE", "title": "Job Seeker / Trainee", "desc": "Looking for opportunities and training", "icon": "person"},
@@ -420,8 +420,8 @@ def user_registration_1_backup_page():
                     for option in role_options:
                         with ui.card().classes('role-card flex-1 p-4 text-center ring-1 ring-gray-200 cursor-pointer').on('click', lambda r=option["role"]: select_role(r)) as card:
 
-                            ui.html(f'<div class="font-medium text-gray-800">{option["title"]}</div>', sanitize=lambda s: s)
-                            ui.html(f'<div class="text-sm text-gray-600">{option["desc"]}</div>', sanitize=lambda s: s)
+                            ui.html(f'<div class="font-medium text-gray-800">{option["title"]}</div>')
+                            ui.html(f'<div class="text-sm text-gray-600">{option["desc"]}</div>')
                         role_cards[option["role"]] = card
                 
                 # Select default role
@@ -430,7 +430,7 @@ def user_registration_1_backup_page():
                 ui.separator().classes('my-6')
                 
                 # Personal Information
-                ui.html('<h3 class="text-lg font-semibold text-gray-700 mb-4">Personal Information</h3>', sanitize=lambda s: s)
+                ui.html('<h3 class="text-lg font-semibold text-gray-700 mb-4">Personal Information</h3>')
                 
                 with ui.column().classes('w-full gap-4'):
                     # Name Input
@@ -477,11 +477,11 @@ def user_registration_1_backup_page():
                             I agree to the <a href="/terms" class="text-blue-600 hover:underline">Terms of Service</a> 
                             and <a href="/privacy" class="text-blue-600 hover:underline">Privacy Policy</a> *
                         </div>
-                        ''', sanitize=lambda s: s)
+                        ''')
                     
                     with ui.row().classes('items-start gap-3'):
                         ui.checkbox().bind_value(state, 'marketing_agreed')
-                        ui.html('<div class="text-sm text-gray-600">Send me updates and marketing communications</div>', sanitize=lambda s: s)
+                        ui.html('<div class="text-sm text-gray-600">Send me updates and marketing communications</div>')
                 
                 ui.separator().classes('my-6')
                 

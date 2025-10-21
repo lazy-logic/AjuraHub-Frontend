@@ -146,7 +146,7 @@ def employer_pricing_page():
         <h1>Employer Pricing Plans</h1>
         <p>Flexible pricing options designed to grow with your business. Find the perfect plan to connect with top talent across Africa.</p>
     </section>
-    ''', sanitize=lambda s: s)
+    ''')
     
     with ui.column().classes('w-full min-h-screen').style('background: linear-gradient(135deg, #F2F7FB 0%, #ffffff 100%);'):
         
@@ -186,7 +186,7 @@ def employer_pricing_page():
                             <span>Standard job visibility</span>
                         </li>
                     </ul>
-                    ''', sanitize=lambda s: s)
+                    ''')
                 
                 ui.button('Get Started', on_click=lambda: ui.navigate.to('/register?role=employer')).classes('w-full h-12 button-label').style('background-color: #0055B8 !important; color: white !important; border-radius: 8px; font-weight: 600;')
             

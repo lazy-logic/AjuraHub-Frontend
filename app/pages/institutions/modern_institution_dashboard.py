@@ -1545,7 +1545,7 @@ def modern_institution_dashboard():
                         </tr>
                     </tbody>
                 </table>
-                ''', sanitize=lambda s: s)
+                ''')
         
         def render_onboarding():
             """Institution onboarding and profile setup."""

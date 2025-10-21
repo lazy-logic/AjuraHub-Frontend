@@ -115,7 +115,7 @@ def candidates_success_stories_page():
         <h1>Real Stories, Real Impact</h1>
         <p>Meet the professionals who transformed their careers through Dompell Africa. Their journeys prove that with the right training and determination, anything is possible.</p>
     </section>
-    ''', sanitize=lambda s: s)
+    ''')
 
     with ui.column().classes("stories-main"):
         # Impact numbers - simple text layout
