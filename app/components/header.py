@@ -347,7 +347,7 @@ def header(current_page: str = ''):
                         <div class="flex flex-col p-2">
                             {(''.join(f'<a href="{link["path"]}" class="nav-dropdown-btn {"active" if current_page == link["path"] else ""}">{link["name"]}</a>' for link in resource_links))}
                         </div>
-                        ''')
+                        ''',sanitize=True)
 
             # Contact link removed (now available under Resources dropdown)
 
